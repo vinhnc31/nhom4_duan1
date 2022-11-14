@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/chuyen"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".ChucNang.TaiKhoan">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:background="#D32F2F"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+        <TextView
+            android:layout_marginTop="20dp"
+            android:textSize="23dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="My Account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_user"
+            android:background="@drawable/user"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="110dp"/>
+        <TextView
+            android:id="@+id/tv_user1"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="Nguyen Van loc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_emailuser"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="Loc@gmail.com"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/tttk"
+            android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+            android:padding="10dp"
+            android:textSize="18dp"
+            android:paddingLeft="20dp"
+            android:text="Thông tin tài khoản"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+            android:padding="10dp"
+            android:textSize="18dp"
+            android:paddingLeft="20dp"
+            android:text="Đơn Hàng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+            android:padding="10dp"
+            android:textSize="18dp"
+            android:paddingLeft="20dp"
+            android:text="Thông báo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/doimk"
+            android:drawableEnd="@drawable/ic_baseline_navigate_next_24"
+            android:padding="10dp"
+            android:textSize="18dp"
+            android:paddingLeft="20dp"
+            android:text="Đổi Mật Khẩu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_margin="20dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/logout"
+        android:padding="15dp"
+        android:background="@drawable/bogocloguot"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#D32F2F"
+        android:text="Log out"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</RelativeLayout>
