@@ -87,7 +87,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="25dp"
                     android:background="@drawable/bogoc"
-                    android:hint="Tài Khoản, Email.."
+                    android:hint="Email.."
                     android:padding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fpoly.VncStore.ChucNang.TaiKhoan;
@@ -40,6 +41,10 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         ed_tendn = findViewById(R.id.ed_userNamedk);
         ed_name = findViewById(R.id.ed_name);
+        findViewById(R.id.back_signup).setOnClickListener(v ->{
+            startActivity(new Intent(SignUp.this,SignIn.class));
+            finish();
+        });
         ed_sodt = findViewById(R.id.ed_sodt);
         taiKhoan = new TaiKhoan();
         ed_diachi = findViewById(R.id.ed_diachi);

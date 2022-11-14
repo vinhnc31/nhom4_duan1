@@ -55,7 +55,6 @@ public class SignIn extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         tv_dk.setOnClickListener(view -> {
             startActivity(new Intent(this, SignUp.class));
-            finish();
         });
         dialog = new ProgressDialog(this);
         btn_login.setOnClickListener(new View.OnClickListener() {

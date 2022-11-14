@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Login.SignUp">
 
+
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -39,6 +41,35 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.713" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text=" Back"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01" />
+
+    <ImageView
+        android:id="@+id/back_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_baseline_keyboard_backspace_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.014" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="650dp"
@@ -54,6 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -67,16 +99,17 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_userNamedk"
+                    android:id="@+id/ed_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@drawable/bogoc"
-                    android:hint=" Email.."
+                    android:hint="Tên người dùng"
                     android:padding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,14 +119,18 @@
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_name"
+                    android:id="@+id/ed_userNamedk"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@drawable/bogoc"
-                    android:hint="Name"
+                    android:hint=" Email.."
                     android:padding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,11 +140,14 @@
                     android:id="@+id/ed_sodt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@drawable/bogoc"
                     android:hint="Số điện thoại"
                     android:padding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,7 +157,9 @@
                     android:id="@+id/ed_diachi"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@drawable/bogoc"
                     android:hint="Địa Chỉ"
                     android:padding="12dp" />
@@ -132,7 +174,9 @@
                     android:id="@+id/ed_passWorddk"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@drawable/bogoc"
                     android:hint="PassWord"
                     android:inputType="textPassword"
@@ -149,6 +193,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="25dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@drawable/bogoc"
                     android:hint="Re-PassWord"
                     android:inputType="textPassword"
@@ -160,7 +205,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/bogoclogin"
                 android:text="Sign Up"
