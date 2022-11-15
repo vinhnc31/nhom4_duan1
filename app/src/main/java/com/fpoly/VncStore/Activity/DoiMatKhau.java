@@ -1,23 +1,20 @@
-package com.fpoly.VncStore.ChucNang;
+package com.fpoly.VncStore.Activity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fpoly.VncStore.ChucNang.TaiKhoan;
 import com.fpoly.VncStore.Login.SignIn;
+import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,59 +25,57 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-
-public class DoiMatkhauFragment extends Fragment {
+public class DoiMatKhau extends AppCompatActivity {
     EditText ed_passold, ed_pass, ed_repass;
     Button btn_doipass;
     TextView tv_back;
-    ProgressDialog dialog;
+    Loading dialog;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_doi_matkhau, container, false);
-        ed_passold = v.findViewById(R.id.ed_passold);
-        dialog = new ProgressDialog(getActivity());
-        ed_pass = v.findViewById(R.id.ed_pass);
-        ed_repass = v.findViewById(R.id.ed_repass);
-        tv_back =v.findViewById(R.id.back_tk);
-        btn_doipass = v.findViewById(R.id.btn_doipass);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_doi_mat_khau);
+        ed_passold = findViewById(R.id.ed_passold);
+        dialog = new Loading(this);
+        ed_pass = findViewById(R.id.ed_pass);
+        ed_repass = findViewById(R.id.ed_repass);
+        tv_back =findViewById(R.id.back_tk);
+        btn_doipass = findViewById(R.id.btn_doipass);
         btn_doipass.setOnClickListener(view -> {
             Doipass();
         });
         tv_back.setOnClickListener(view -> {
-            getFragmentManager().popBackStack();
+            super.onBackPressed();
+           overridePendingTransition(R.anim.enter_left_to_right,R.anim.exit_left_to_right);
         });
-        return v;
     }
     private void Doipass() {
         String passold = ed_passold.getText().toString().trim();
         String pass = ed_pass.getText().toString().trim();
         String repass = ed_repass.getText().toString().trim();
-        dialog.show();
+        dialog.showDialog();
         if (ed_passold.getText().length() == 0) {
             dialog.dismiss();
-            Toast.makeText(getActivity(), "Mật khẩu cũ không được để trống", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Mật khẩu cũ không được để trống", Toast.LENGTH_SHORT).show();
             return;
         }
         if (ed_pass.getText().length() == 0) {
             dialog.dismiss();
-            Toast.makeText(getActivity(), "Mật khẩu mới không được để trống", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Mật khẩu mới không được để trống", Toast.LENGTH_SHORT).show();
             return;
         }
         if (ed_repass.getText().length() == 0) {
             dialog.dismiss();
-            Toast.makeText(getActivity(), "Vui lòng nhập đủ dữ liệu", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập đủ dữ liệu", Toast.LENGTH_SHORT).show();
             return;
         }
         if (ed_pass.getText().length() < 6) {
             dialog.dismiss();
-            Toast.makeText(getActivity(), "Mật khẩu mới phải lớn hơn 6 kí tự ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Mật khẩu mới phải lớn hơn 6 kí tự ", Toast.LENGTH_SHORT).show();
             return;
         }
         if (!pass.equals(repass)) {
             dialog.dismiss();
-            Toast.makeText(getActivity(), "Nhập lại mật khẩu không đúng", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Nhập lại mật khẩu không đúng", Toast.LENGTH_SHORT).show();
             return;
         }
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -94,11 +89,12 @@ public class DoiMatkhauFragment extends Fragment {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             dialog.dismiss();
-                                            Toast.makeText(getActivity(), "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(getActivity(), SignIn.class));
-                                            getActivity().finish();
+                                            Toast.makeText(DoiMatKhau.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
+                                            FirebaseAuth.getInstance().signOut();
+                                            startActivity(new Intent(DoiMatKhau.this,SignIn.class));
+                                            finishAffinity();
                                         } else {
-                                            Dialog dialog = new Dialog(getActivity());
+                                            Dialog dialog = new Dialog(DoiMatKhau.this);
                                             dialog.setContentView(R.layout.dialog_xacnhan);
                                             EditText ed_email = dialog.findViewById(R.id.ed_emailxn);
                                             EditText ed_pass1 = dialog.findViewById(R.id.ed_passxn);
@@ -118,11 +114,9 @@ public class DoiMatkhauFragment extends Fragment {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         dialog.dismiss();
-                        Toast.makeText(getActivity(), "Mật khẩu cũ không đúng", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DoiMatKhau.this, "Mật khẩu cũ không đúng", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
     }
 
     private void xacnhan(String email, String Pass) {
@@ -137,7 +131,7 @@ public class DoiMatkhauFragment extends Fragment {
                         if (task.isSuccessful()) {
                             Doipass();
                         } else {
-                            Toast.makeText(getActivity(), "Vui lòng nhập lại Email hoặc Password của bạn", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DoiMatKhau.this, "Vui lòng nhập lại Email hoặc Password của bạn", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
