@@ -58,14 +58,16 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void dangki() {
-        name = ed_name.getText().toString();
-        email = ed_tendn.getText().toString();
         pass = ed_mk.getText().toString();
         repass = ed_repass.getText().toString();
+
+        if (validate() > 0) {
+        name = ed_name.getText().toString();
+        email = ed_tendn.getText().toString();
         sodt = Integer.parseInt(ed_sodt.getText().toString());
         diachi = ed_diachi.getText().toString();
         progressDialog.show();
-        if (validate() > 0) {
+
             auth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override

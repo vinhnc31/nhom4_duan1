@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="welcome back"
+                android:text="Welcome back"
                 android:textColor="#00BCD4"
                 android:textSize="25dp"
                 android:textStyle="bold|italic" />
@@ -80,16 +80,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 app:endIconMode="clear_text">
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_userName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="25dp"
                     android:background="@drawable/bogoc"
-                    android:hint="Tài Khoản, Email.."
+                    android:hint="Email.."
                     android:padding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -102,7 +102,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="25dp"
                     android:background="@drawable/bogoc"
-                    android:hint="PassWord"
+                    android:hint="Mật khẩu..."
                     android:inputType="textPassword"
                     android:padding="12dp" />
 
@@ -127,14 +127,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:text="Don't have on account ?" />
+                        android:text="Bạn chưa có tài khoản?" />
 
                     <TextView
                         android:id="@+id/tv_signUp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="Sign Up"
+                        android:text="Đăng kí"
                         android:textColor="#4DD0E1"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -149,7 +149,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/bogoclogin"
-                android:text="Login"
+                android:text="Đăng nhập"
                 android:textColor="@color/white" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
