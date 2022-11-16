@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">30dp</item>
+        <item name="boxCornerRadiusBottomStart">30dp</item>
+        <item name="boxCornerRadiusTopEnd">30dp</item>
+        <item name="boxCornerRadiusTopStart">30dp</item>
+        <item name="boxStrokeColor">#616060</item>
+        <item name="hintTextColor">#797979</item>
+        <item name="android:textColorHint">@color/xam</item>
+    </style>
+
+    <style name="TextInputLayout1" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">30dp</item>
+        <item name="boxCornerRadiusBottomStart">30dp</item>
+        <item name="boxCornerRadiusTopEnd">30dp</item>
+        <item name="boxCornerRadiusTopStart">30dp</item>
+        <item name="boxStrokeColor">#616060</item>
+        <item name="hintTextColor">#FFFFFF</item>
+        <item name="android:textColorHint">@color/xam</item>
+    </style>
+</resources>

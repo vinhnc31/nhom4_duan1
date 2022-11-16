@@ -6,17 +6,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-<FrameLayout
-    android:id="@+id/framelayout"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="bottom"
-        android:background="#F44336"
+        android:background="#259DED"
         app:itemIconTint="@color/mau"
         app:itemTextColor="@color/mau"
         app:menu="@menu/nav_menu" />
