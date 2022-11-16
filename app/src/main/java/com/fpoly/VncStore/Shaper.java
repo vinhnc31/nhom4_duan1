@@ -17,12 +17,12 @@ public class Shaper extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shaper);
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        },10000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        },10000);
     }
     public void nextActivity(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
