@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.fpoly.VncStore.R;
 
-public class DienThoaiActivity extends AppCompatActivity {
+public class TabletActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dien_thoai);
+        setContentView(R.layout.activity_tablet);
     }
 }

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login.SignUp">
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -39,10 +38,39 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.713" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text=" Back"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01" />
+
+    <ImageView
+        android:id="@+id/back_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_baseline_keyboard_backspace_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.014" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="650dp"
+        android:layout_height="620dp"
         android:layout_margin="20dp"
         app:cardCornerRadius="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,6 +85,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvdk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -67,96 +96,136 @@
                 android:textStyle="bold|italic" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextInputLayout3"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp"
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                app:endIconMode="clear_text">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_name"
+                    android:hint="Tên người dùng"
+                    android:drawableStart="@drawable/ic_baseline_person_24"
+                    android:layout_width="match_parent"
+                    android:drawablePadding="8dp"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                     />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="5dp"
+                android:id="@+id/TextInputLayout4"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="15dp"
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint=" Email.."
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_userNamedk"
+                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/ic_baseline_email_24"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="25dp"
-                    android:background="@drawable/bogoc"
-                    android:hint=" Email.."
-                    android:padding="12dp" />
+                    android:padding="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Loc
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextInputLayout5"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="15dp"
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ed_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="25dp"
-                    android:background="@drawable/bogoc"
-                    android:hint="Name"
-                    android:padding="12dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:hint="Số điện thoại"
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_sodt"
+                    android:maxLength="10"
+                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/ic_baseline_phone_24"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="25dp"
-                    android:background="@drawable/bogoc"
-                    android:hint="Số điện thoại"
-                    android:padding="12dp" />
+                    android:padding="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginLeft="25dp"
+                android:id="@+id/TextInputLayout6"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Địa Chỉ"
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_diachi"
+                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/ic_baseline_home_work_24"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="25dp"
-                    android:background="@drawable/bogoc"
-                    android:hint="Địa Chỉ"
-                    android:padding="12dp" />
+                    android:padding="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="PassWord"
+                android:id="@+id/TextInputLayout7"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="15dp"
+                style="@style/TextInputLayout"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_passWorddk"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="25dp"
-                    android:background="@drawable/bogoc"
-                    android:hint="PassWord"
+                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/ic_baseline_lock_24"
                     android:inputType="textPassword"
-                    android:padding="12dp" />
+                    android:padding="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="15dp"
+                style="@style/TextInputLayout"
+                android:id="@+id/TextInputLayout8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Re-PassWord"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_repassWorddk"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="25dp"
-                    android:background="@drawable/bogoc"
-                    android:hint="Re-PassWord"
+                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/ic_baseline_lock_24"
                     android:inputType="textPassword"
-                    android:padding="12dp" />
+                    android:padding="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -164,7 +233,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/bogoclogin"
                 android:text="Sign Up"
