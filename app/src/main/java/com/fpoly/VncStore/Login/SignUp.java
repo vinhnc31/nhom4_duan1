@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fpoly.VncStore.ChucNang.TaiKhoan;
@@ -30,9 +33,11 @@ public class SignUp extends AppCompatActivity {
     Button btn_dangki;
     private ProgressDialog progressDialog;
     String email, pass, repass, name, diachi;
+    TextView tv_signin;
     int sodt;
     FirebaseAuth auth;
     TaiKhoan taiKhoan;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,7 @@ public class SignUp extends AppCompatActivity {
         ed_mk = findViewById(R.id.ed_passWorddk);
         progressDialog = new ProgressDialog(this);
         ed_repass = findViewById(R.id.ed_repassWorddk);
+        tv_signin = findViewById(R.id.tv_signin1);
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             startActivity(new Intent(SignUp.this, MainActivity.class));
@@ -55,17 +61,21 @@ public class SignUp extends AppCompatActivity {
         btn_dangki.setOnClickListener(view -> {
             dangki();
         });
+        tv_signin.setOnClickListener(view -> {
+            startActivity(new Intent(SignUp.this, SignIn.class));
+            finish();
+        });
     }
 
     private void dangki() {
-        name = ed_name.getText().toString();
-        email = ed_tendn.getText().toString();
         pass = ed_mk.getText().toString();
         repass = ed_repass.getText().toString();
-        sodt = Integer.parseInt(ed_sodt.getText().toString());
-        diachi = ed_diachi.getText().toString();
-        progressDialog.show();
         if (validate() > 0) {
+            name = ed_name.getText().toString();
+            email = ed_tendn.getText().toString();
+            sodt = Integer.parseInt(ed_sodt.getText().toString());
+            diachi = ed_diachi.getText().toString();
+            progressDialog.show();
             auth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -151,7 +161,7 @@ public class SignUp extends AppCompatActivity {
             progressDialog.dismiss();
             Toast.makeText(this, "Số điện thoại không đúng định dạng", Toast.LENGTH_SHORT).show();
             return check - 1;
-        }else if (ed_sodt.getText().length()>10) {
+        } else if (ed_sodt.getText().length() > 10) {
             progressDialog.dismiss();
             Toast.makeText(this, "Số điện thoại phải nhỏ hơn 10", Toast.LENGTH_SHORT).show();
             return check - 1;
