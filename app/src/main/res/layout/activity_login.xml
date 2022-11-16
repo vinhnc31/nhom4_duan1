@@ -93,14 +93,10 @@
                     android:id="@+id/ed_userName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-<<<<<<< HEAD
                     android:layout_margin="25dp"
                     android:background="@drawable/bogoc"
                     android:hint="Email.."
-                    android:padding="12dp" />
-=======
                     android:padding="15dp" />
->>>>>>> Loc
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -118,12 +114,10 @@
                     android:id="@+id/ed_pasWord"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-<<<<<<< HEAD
+
                     android:layout_margin="25dp"
                     android:background="@drawable/bogoc"
                     android:hint="Mật khẩu..."
-=======
->>>>>>> Loc
                     android:inputType="textPassword"
                     android:padding="15dp" />
             </com.google.android.material.textfield.TextInputLayout>

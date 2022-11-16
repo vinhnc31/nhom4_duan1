@@ -27,11 +27,8 @@ public class Shaper extends AppCompatActivity {
             public void run() {
 
             }
-<<<<<<< HEAD
-        },10000);
-=======
+
         },3120);
->>>>>>> Loc
     }
     public void nextActivity(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
