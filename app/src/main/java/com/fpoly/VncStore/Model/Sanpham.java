@@ -1,24 +1,26 @@
 package com.fpoly.VncStore.Model;
 
-public class Sanpham {
+import java.io.Serializable;
+
+public class Sanpham implements Serializable {
     private int maloai;
     private String tensanpham;
     private int soluongsanpham;
     private String hinhanh;
-    private int gianiemyet;
-    private int giakhuyenmai;
+    private int giasanphamcu;
+    private int giasamphammoi;
     private String thongtinsanpham;
 
     public Sanpham() {
     }
 
-    public Sanpham(int maloai, String tensanpham, int soluongsanpham, String hinhanh, int gianiemyet, int giakhuyenmai, String thongtinsanpham) {
+    public Sanpham(int maloai, String tensanpham, int soluongsanpham, String hinhanh, int giasanphamcu, int giasamphammoi, String thongtinsanpham) {
         this.maloai = maloai;
         this.tensanpham = tensanpham;
         this.soluongsanpham = soluongsanpham;
         this.hinhanh = hinhanh;
-        this.gianiemyet = gianiemyet;
-        this.giakhuyenmai = giakhuyenmai;
+        this.giasanphamcu = giasanphamcu;
+        this.giasamphammoi = giasamphammoi;
         this.thongtinsanpham = thongtinsanpham;
     }
 
@@ -54,20 +56,20 @@ public class Sanpham {
         this.hinhanh = hinhanh;
     }
 
-    public int getGianiemyet() {
-        return gianiemyet;
+    public int getGiasanphamcu() {
+        return giasanphamcu;
     }
 
-    public void setGianiemyet(int gianiemyet) {
-        this.gianiemyet = gianiemyet;
+    public void setGiasanphamcu(int giasanphamcu) {
+        this.giasanphamcu = giasanphamcu;
     }
 
-    public int getGiakhuyenmai() {
-        return giakhuyenmai;
+    public int getGiasamphammoi() {
+        return giasamphammoi;
     }
 
-    public void setGiakhuyenmai(int giakhuyenmai) {
-        this.giakhuyenmai = giakhuyenmai;
+    public void setGiasamphammoi(int giasamphammoi) {
+        this.giasamphammoi = giasamphammoi;
     }
 
     public String getThongtinsanpham() {

@@ -1,26 +1,29 @@
 package com.fpoly.VncStore.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.fpoly.VncStore.Activity.DetailedActivity;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.Spviewhoder> {
     private List<Sanpham> sanphamList;
-private Context context;
-    public SanphamAdapter(Context context,List<Sanpham> sanphamList) {
+    private Context context;
+
+    public SanphamAdapter(Context context, List<Sanpham> sanphamList) {
         this.sanphamList = sanphamList;
         this.context = context;
     }
@@ -31,25 +34,27 @@ private Context context;
         View view = LayoutInflater.from(context).inflate(R.layout.adapter_sanpham, parent, false);
         return new Spviewhoder(view);
     }
-
+    @SuppressLint("RecyclerView")
     @Override
-    public void onBindViewHolder(@NonNull Spviewhoder holder, int position) {
+    public void onBindViewHolder(@NonNull Spviewhoder holder,int position) {
         Sanpham sp = sanphamList.get(position);
-        if (sp == null) {
-            return;
-        }
-        Glide.with(context).load(sanphamList.get(position).getHinhanh()).into(holder.imagesp);
+        Picasso.get().load(sp.getHinhanh()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(holder.imagesp);
         holder.tv_tensp.setText(sp.getTensanpham());
-        holder.tv_giamoi.setText(sp.getGiakhuyenmai());
-        holder.tv_giasp.setText(sp.getGianiemyet());
+        holder.tv_giamoi.setText(""+sp.getGiasamphammoi());
+        holder.tv_giasp.setText(""+sp.getGiasanphamcu());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(context, DetailedActivity.class);
+                intent.putExtra("detail",sanphamList.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        if (sanphamList != null) {
-            return sanphamList.size();
-        }
-        return 0;
+        return sanphamList.size();
     }
 
     public class Spviewhoder extends RecyclerView.ViewHolder {
@@ -64,8 +69,8 @@ private Context context;
             cardView = itemView.findViewById(R.id.cardsp);
             imagesp = itemView.findViewById(R.id.img_spdienthoai);
             tv_tensp = itemView.findViewById(R.id.tv_tensp);
-            tv_giasp = itemView.findViewById(R.id.tv_giatien);
-            tv_giamoi = itemView.findViewById(R.id.tv_giatiencu);
+            tv_giamoi = itemView.findViewById(R.id.tv_giatien);
+            tv_giasp = itemView.findViewById(R.id.tv_giatiencu);
         }
     }
 }

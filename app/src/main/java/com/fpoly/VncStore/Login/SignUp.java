@@ -1,18 +1,9 @@
 package com.fpoly.VncStore.Login;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-<<<<<<< HEAD
-import android.annotation.SuppressLint;
-=======
-import android.app.Dialog;
->>>>>>> Loc
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,7 +11,7 @@ import android.widget.Toast;
 
 import com.fpoly.VncStore.Activity.Loading;
 import com.fpoly.VncStore.ChucNang.TaiKhoan;
-import com.fpoly.VncStore.MainActivity;
+import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,23 +21,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp extends AppCompatActivity {
     EditText ed_tendn, ed_mk, ed_name, ed_repass, ed_sodt, ed_diachi;
     Button btn_dangki;
-<<<<<<< HEAD
-    private ProgressDialog progressDialog;
-    String email, pass, repass, name, diachi;
     TextView tv_signin;
-    int sodt;
-=======
     private Loading dialog;
     String email, pass, repass, name, diachi, sodt;
     TextView tv_dk;
->>>>>>> Loc
     FirebaseAuth auth;
     TaiKhoan taiKhoan;
     TextInputLayout textInputLayout1, textInputLayout2, textInputLayout3, textInputLayout4, textInputLayout5, textInputLayout6;
@@ -76,6 +60,7 @@ public class SignUp extends AppCompatActivity {
         dialog = new Loading(this);
         ed_repass = findViewById(R.id.ed_repassWorddk);
         tv_signin = findViewById(R.id.tv_signin1);
+        dialog = new Loading(this);
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             startActivity(new Intent(SignUp.this, MainActivity.class));
@@ -85,14 +70,11 @@ public class SignUp extends AppCompatActivity {
         btn_dangki.setOnClickListener(view -> {
             dangki();
         });
-<<<<<<< HEAD
         tv_signin.setOnClickListener(view -> {
             startActivity(new Intent(SignUp.this, SignIn.class));
             finish();
         });
-=======
         Animation();
->>>>>>> Loc
     }
 
     private void dangki() {
@@ -101,16 +83,11 @@ public class SignUp extends AppCompatActivity {
         if (validate() > 0) {
             name = ed_name.getText().toString();
             email = ed_tendn.getText().toString();
-<<<<<<< HEAD
-            sodt = Integer.parseInt(ed_sodt.getText().toString());
-            diachi = ed_diachi.getText().toString();
-            progressDialog.show();
-=======
             sodt = ed_sodt.getText().toString();
             diachi = ed_diachi.getText().toString();
             dialog.showDialog();
-
->>>>>>> Loc
+            diachi = ed_diachi.getText().toString();
+            dialog.showDialog();
             auth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -227,25 +204,22 @@ public class SignUp extends AppCompatActivity {
             Toast.makeText(SignUp.this, "RePassWord Không trùng với PassWord.",
                     Toast.LENGTH_LONG).show();
             return check - 1;
-<<<<<<< HEAD
         } else if (ed_diachi.getText().length() == 0) {
-            progressDialog.dismiss();
+            dialog.dismiss();
             Toast.makeText(this, "Địa chỉ không được để trống", Toast.LENGTH_SHORT).show();
             return check - 1;
         } else if (ed_sodt.getText().length() == 0) {
-            progressDialog.dismiss();
+            dialog.dismiss();
             Toast.makeText(this, "Số điện thoại không được để trống", Toast.LENGTH_SHORT).show();
             return check - 1;
         } else if (!ed_sodt.getText().toString().matches(phone)) {
-            progressDialog.dismiss();
+            dialog.dismiss();
             Toast.makeText(this, "Số điện thoại không đúng định dạng", Toast.LENGTH_SHORT).show();
             return check - 1;
         } else if (ed_sodt.getText().length() > 10) {
-            progressDialog.dismiss();
+            dialog.dismiss();
             Toast.makeText(this, "Số điện thoại phải nhỏ hơn 10", Toast.LENGTH_SHORT).show();
             return check - 1;
-=======
->>>>>>> Loc
         }
         return check;
     }
