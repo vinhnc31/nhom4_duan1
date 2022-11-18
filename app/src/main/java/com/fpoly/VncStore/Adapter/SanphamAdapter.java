@@ -3,6 +3,7 @@ package com.fpoly.VncStore.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,11 @@ public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.Spviewho
     public SanphamAdapter(Context context, List<Sanpham> sanphamList) {
         this.sanphamList = sanphamList;
         this.context = context;
+        Log.d("zzzz", "SanphamAdapter: size= " +sanphamList.size() );
+        for(int i =0; i<sanphamList.size(); i++)
+            Log.d("zzzzz", "SanphamAdapter: "+ sanphamList.get(i).getName());
+
+
     }
 
     @NonNull
@@ -38,10 +44,10 @@ public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.Spviewho
     @Override
     public void onBindViewHolder(@NonNull Spviewhoder holder,int position) {
         Sanpham sp = sanphamList.get(position);
-        Picasso.get().load(sp.getHinhanh()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(holder.imagesp);
-        holder.tv_tensp.setText(sp.getTensanpham());
-        holder.tv_giamoi.setText(""+sp.getGiasamphammoi());
-        holder.tv_giasp.setText(""+sp.getGiasanphamcu());
+        Picasso.get().load(sp.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(holder.imagesp);
+        holder.tv_tensp.setText(""+sp.getName());
+        holder.tv_giasp.setText(""+sp.getGia()+"Vnd");
+        holder.tv_khuyenmai.setText("Khuyến Mại:" +sp.getKhuyenmai()+"%");
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -54,7 +60,10 @@ public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.Spviewho
 
     @Override
     public int getItemCount() {
-        return sanphamList.size();
+        if (sanphamList != null){
+            return sanphamList.size();
+        }
+        return 0;
     }
 
     public class Spviewhoder extends RecyclerView.ViewHolder {
@@ -62,15 +71,15 @@ public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.Spviewho
         private ImageView imagesp;
         private TextView tv_tensp;
         private TextView tv_giasp;
-        private TextView tv_giamoi;
+        private TextView tv_khuyenmai;
 
         public Spviewhoder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardsp);
-            imagesp = itemView.findViewById(R.id.img_spdienthoai);
-            tv_tensp = itemView.findViewById(R.id.tv_tensp);
-            tv_giamoi = itemView.findViewById(R.id.tv_giatien);
-            tv_giasp = itemView.findViewById(R.id.tv_giatiencu);
+            imagesp = itemView.findViewById(R.id.img_spdienthoai1);
+            tv_tensp = itemView.findViewById(R.id.tv_tensp1);
+            tv_khuyenmai = itemView.findViewById(R.id.tv_khuyenmai);
+            tv_giasp = itemView.findViewById(R.id.tv_giatien);
         }
     }
 }

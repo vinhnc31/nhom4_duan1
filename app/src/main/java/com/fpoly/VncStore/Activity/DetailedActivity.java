@@ -16,7 +16,7 @@ import java.util.Objects;
 
 public class DetailedActivity extends AppCompatActivity {
 ImageView imageView;
-TextView tv_tensp,tv_giamoisp,tv_giacusp,tv_soluongsp;
+TextView tv_tensp,tv_giamoisp,tv_giacusp,tv_soluongsp,tv_mota,textView;
 int soluongsp = 1;
 ImageView additem,removeitem;
 Button button;
@@ -27,6 +27,10 @@ private Sanpham sanpham;
         setContentView(R.layout.activity_detailed);
         Anhxa();
         xulyxukien();
+        textView.setOnClickListener(view -> {
+            super.onBackPressed();
+            overridePendingTransition(R.anim.enter_left_to_right, R.anim.exit_left_to_right);
+        });
         additem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,14 +63,16 @@ private Sanpham sanpham;
         additem = findViewById(R.id.add_item);
         removeitem = findViewById(R.id.remove_item);
         button = findViewById(R.id.btn_addtocart);
+        tv_mota = findViewById(R.id.tv_thongtinsanpham);
+        textView = findViewById(R.id.back_tk);
     }
     public void xulyxukien(){
         if (sanpham != null){
-            Picasso.get().load(sanpham.getHinhanh()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(imageView);
-            tv_tensp.setText(""+sanpham.getTensanpham());
-            tv_giamoisp.setText(""+sanpham.getGiasamphammoi()+" Vnd");
-            tv_giacusp.setText(""+sanpham.getGiasanphamcu()+" Vnd");
-
+            Picasso.get().load(sanpham.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(imageView);
+            tv_tensp.setText(""+sanpham.getName());
+            tv_giamoisp.setText(""+sanpham.getGia()+" Vnd");
+            tv_giacusp.setText("Khuyến Mại"+sanpham.getKhuyenmai()+"%");
+             tv_mota.setText(sanpham.getMoTa());
         }
     }
 }

@@ -3,80 +3,60 @@ package com.fpoly.VncStore.Model;
 import java.io.Serializable;
 
 public class Sanpham implements Serializable {
-    private int maloai;
-    private String tensanpham;
-    private int soluongsanpham;
-    private String hinhanh;
-    private int giasanphamcu;
-    private int giasamphammoi;
-    private String thongtinsanpham;
+    private String name;
+    private String image;
+    private String Gia;
+    private String khuyenmai;
+    private String moTa;
 
     public Sanpham() {
     }
 
-    public Sanpham(int maloai, String tensanpham, int soluongsanpham, String hinhanh, int giasanphamcu, int giasamphammoi, String thongtinsanpham) {
-        this.maloai = maloai;
-        this.tensanpham = tensanpham;
-        this.soluongsanpham = soluongsanpham;
-        this.hinhanh = hinhanh;
-        this.giasanphamcu = giasanphamcu;
-        this.giasamphammoi = giasamphammoi;
-        this.thongtinsanpham = thongtinsanpham;
+    public Sanpham(String name, String image, String gia, String khuyenmai, String moTa) {
+        this.name = name;
+        this.image = image;
+        Gia = gia;
+        this.khuyenmai = khuyenmai;
+        this.moTa = moTa;
     }
 
-    public int getMaloai() {
-        return maloai;
+    public String getName() {
+        return name;
     }
 
-    public void setMaloai(int maloai) {
-        this.maloai = maloai;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTensanpham() {
-        return tensanpham;
+    public String getImage() {
+        return image;
     }
 
-    public void setTensanpham(String tensanpham) {
-        this.tensanpham = tensanpham;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public int getSoluongsanpham() {
-        return soluongsanpham;
+    public String getGia() {
+        return Gia;
     }
 
-    public void setSoluongsanpham(int soluongsanpham) {
-        this.soluongsanpham = soluongsanpham;
+    public void setGia(String gia) {
+        Gia = gia;
     }
 
-    public String getHinhanh() {
-        return hinhanh;
+    public String getKhuyenmai() {
+        return khuyenmai;
     }
 
-    public void setHinhanh(String hinhanh) {
-        this.hinhanh = hinhanh;
+    public void setKhuyenmai(String khuyenmai) {
+        this.khuyenmai = khuyenmai;
     }
 
-    public int getGiasanphamcu() {
-        return giasanphamcu;
+    public String getMoTa() {
+        return moTa;
     }
 
-    public void setGiasanphamcu(int giasanphamcu) {
-        this.giasanphamcu = giasanphamcu;
-    }
-
-    public int getGiasamphammoi() {
-        return giasamphammoi;
-    }
-
-    public void setGiasamphammoi(int giasamphammoi) {
-        this.giasamphammoi = giasamphammoi;
-    }
-
-    public String getThongtinsanpham() {
-        return thongtinsanpham;
-    }
-
-    public void setThongtinsanpham(String thongtinsanpham) {
-        this.thongtinsanpham = thongtinsanpham;
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
     }
 }
