@@ -22,28 +22,28 @@
         </activity>
         <activity
             android:name=".Activity.DienThoaiActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".Activity.TabletActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".Activity.Loading"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".Activity.PhuKienActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".Activity.LapTopActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".Activity.OpLungActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".Activity.DoiMatKhau"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".Activity.ThongTin"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".Activity.Shaper"
             android:exported="true">
@@ -55,13 +55,13 @@
         </activity>
         <activity
             android:name=".Login.SignUp"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".Login.SignIn"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".Activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
 
         <service
             android:name=".FCM.MyFirebaseMessagingService"

@@ -23,7 +23,7 @@ public class Shaper extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
+                nextActivity();
             }
 
         },3120);
