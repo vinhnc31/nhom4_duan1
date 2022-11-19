@@ -68,6 +68,7 @@
         app:layout_constraintVertical_bias="0.014" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="620dp"
         android:layout_margin="20dp"
@@ -90,7 +91,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="Sign Up"
-                android:textColor="#131EF8"
+                android:textColor="#4DD0E1"
                 android:textSize="30dp"
                 android:textStyle="bold|italic" />
 
@@ -135,7 +136,6 @@
                     android:layout_height="match_parent"
                     android:padding="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputLayout5"
@@ -237,5 +237,15 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-
+    <TextView
+        android:id="@+id/tv_signin1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="SIGN IN"
+        android:textColor="#4DD0E1"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card" />
 </androidx.constraintlayout.widget.ConstraintLayout>

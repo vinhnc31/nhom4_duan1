@@ -1,4 +1,4 @@
-package com.fpoly.VncStore;
+package com.fpoly.VncStore.Activity;
 
 
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +17,7 @@ import com.fpoly.VncStore.ChucNang.GioHang;
 import com.fpoly.VncStore.ChucNang.Home;
 import com.fpoly.VncStore.ChucNang.TaiKhoan;
 
+import com.fpoly.VncStore.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 

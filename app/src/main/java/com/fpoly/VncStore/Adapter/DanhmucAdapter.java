@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fpoly.VncStore.Activity.DienThoaiActivity;
@@ -18,7 +16,6 @@ import com.fpoly.VncStore.Activity.LapTopActivity;
 import com.fpoly.VncStore.Activity.OpLungActivity;
 import com.fpoly.VncStore.Activity.PhuKienActivity;
 import com.fpoly.VncStore.Activity.TabletActivity;
-import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.Model.Danhmuc;
 import com.fpoly.VncStore.R;
 

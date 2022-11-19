@@ -1,11 +1,7 @@
 package com.fpoly.VncStore.Login;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -15,7 +11,7 @@ import android.widget.Toast;
 
 import com.fpoly.VncStore.Activity.Loading;
 import com.fpoly.VncStore.ChucNang.TaiKhoan;
-import com.fpoly.VncStore.MainActivity;
+import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,19 +21,20 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp extends AppCompatActivity {
     EditText ed_tendn, ed_mk, ed_name, ed_repass, ed_sodt, ed_diachi;
     Button btn_dangki;
+    TextView tv_signin;
     private Loading dialog;
     String email, pass, repass, name, diachi, sodt;
     TextView tv_dk;
     FirebaseAuth auth;
     TaiKhoan taiKhoan;
     TextInputLayout textInputLayout1, textInputLayout2, textInputLayout3, textInputLayout4, textInputLayout5, textInputLayout6;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +59,8 @@ public class SignUp extends AppCompatActivity {
         ed_mk = findViewById(R.id.ed_passWorddk);
         dialog = new Loading(this);
         ed_repass = findViewById(R.id.ed_repassWorddk);
+        tv_signin = findViewById(R.id.tv_signin1);
+        dialog = new Loading(this);
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             startActivity(new Intent(SignUp.this, MainActivity.class));
@@ -70,6 +69,10 @@ public class SignUp extends AppCompatActivity {
         btn_dangki = findViewById(R.id.btn_signUp);
         btn_dangki.setOnClickListener(view -> {
             dangki();
+        });
+        tv_signin.setOnClickListener(view -> {
+            startActivity(new Intent(SignUp.this, SignIn.class));
+            finish();
         });
         Animation();
     }
@@ -84,6 +87,7 @@ public class SignUp extends AppCompatActivity {
             email = ed_tendn.getText().toString();
             sodt = Integer.parseInt(ed_sodt.getText().toString());
             diachi = ed_diachi.getText().toString();
+<<<<<<< HEAD
             progressDialog.show();
             if (validate() > 0) {
                 name = ed_name.getText().toString();
@@ -111,6 +115,36 @@ public class SignUp extends AppCompatActivity {
                                     FirebaseUser user2 = FirebaseAuth.getInstance().getCurrentUser();
                                     if (user2 == null) {
                                         return;
+=======
+            dialog.showDialog();
+            diachi = ed_diachi.getText().toString();
+            dialog.showDialog();
+            auth.createUserWithEmailAndPassword(email, pass)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
+                                FirebaseUser user1 = auth.getCurrentUser();
+                                User user = new User(sodt, name, email, diachi);
+                                dialog.dismiss();
+                                reference.child(user1.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        user1.sendEmailVerification();
+                                        startActivity(new Intent(SignUp.this, MainActivity.class));
+                                    }
+                                });
+                                FirebaseUser user2 = FirebaseAuth.getInstance().getCurrentUser();
+                                if (user2 == null) {
+                                    return;
+                                }
+                                UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(name).build();
+                                user2.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+>>>>>>> Vinh
                                     }
                                     UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
                                             .setDisplayName(name).build();
@@ -153,6 +187,7 @@ public class SignUp extends AppCompatActivity {
             btn_dangki.animate().translationX(0).setDuration(900).setStartDelay(1600).start();
         }
 
+<<<<<<< HEAD
         public int validate () {
             int check = 1;
             String phone = "(84|0[3|5|7|8|9])+([0-9]{8})";
@@ -210,6 +245,79 @@ public class SignUp extends AppCompatActivity {
                 return check - 1;
             }
             return check;
+=======
+    public int validate() {
+        int check = 1;
+        String phone = "(84|0[3|5|7|8|9])+([0-9]{8})";
+        String checkemail = "[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)";
+        if (ed_name.getText().length() == 0) {
+            dialog.dismiss();
+            Toast.makeText(SignUp.this, "Tên người dùng không được để trống.",
+                    Toast.LENGTH_LONG).show();
+            return check - 1;
+        } else if (ed_tendn.getText().length() == 0) {
+            dialog.dismiss();
+            Toast.makeText(SignUp.this, "Email không được để trống.",
+                    Toast.LENGTH_LONG).show();
+            return check - 1;
+        } else if (!ed_tendn.getText().toString().matches(checkemail)) {
+            dialog.dismiss();
+            Toast.makeText(SignUp.this, "Email không đúng định dạng.",
+                    Toast.LENGTH_LONG).show();
+            return check - 1;
+        } else if (ed_sodt.getText().length() == 0) {
+            dialog.dismiss();
+            Toast.makeText(this, "Số điện thoại không được để trống", Toast.LENGTH_SHORT).show();
+            return check - 1;
+        } else if (!ed_sodt.getText().toString().matches(phone)) {
+            dialog.dismiss();
+            Toast.makeText(this, "Số điện thoại không đúng định dạng", Toast.LENGTH_SHORT).show();
+            return check - 1;
+        } else if (ed_sodt.getText().length() > 10) {
+            dialog.dismiss();
+            Toast.makeText(this, "Số điện thoại phải nhỏ hơn 10", Toast.LENGTH_SHORT).show();
+            return check - 1;
+        } else if (ed_diachi.getText().length() == 0) {
+            dialog.dismiss();
+            Toast.makeText(this, "Địa chỉ không được để trống", Toast.LENGTH_SHORT).show();
+            return check - 1;
+        } else if (ed_mk.getText().length() == 0) {
+            dialog.dismiss();
+            Toast.makeText(SignUp.this, "Password không được để trống.",
+                    Toast.LENGTH_LONG).show();
+            return check - 1;
+        } else if (ed_mk.getText().length() < 6) {
+            dialog.dismiss();
+            Toast.makeText(SignUp.this, "Password phải lớn hơn 6 kí tự.",
+                    Toast.LENGTH_LONG).show();
+            return check - 1;
+        } else if (ed_repass.getText().length() == 0) {
+            dialog.dismiss();
+            Toast.makeText(SignUp.this, "RePassword không được để trống.",
+                    Toast.LENGTH_LONG).show();
+            return check - 1;
+        } else if (!pass.equals(repass)) {
+            dialog.dismiss();
+            Toast.makeText(SignUp.this, "RePassWord Không trùng với PassWord.",
+                    Toast.LENGTH_LONG).show();
+            return check - 1;
+        } else if (ed_diachi.getText().length() == 0) {
+            dialog.dismiss();
+            Toast.makeText(this, "Địa chỉ không được để trống", Toast.LENGTH_SHORT).show();
+            return check - 1;
+        } else if (ed_sodt.getText().length() == 0) {
+            dialog.dismiss();
+            Toast.makeText(this, "Số điện thoại không được để trống", Toast.LENGTH_SHORT).show();
+            return check - 1;
+        } else if (!ed_sodt.getText().toString().matches(phone)) {
+            dialog.dismiss();
+            Toast.makeText(this, "Số điện thoại không đúng định dạng", Toast.LENGTH_SHORT).show();
+            return check - 1;
+        } else if (ed_sodt.getText().length() > 10) {
+            dialog.dismiss();
+            Toast.makeText(this, "Số điện thoại phải nhỏ hơn 10", Toast.LENGTH_SHORT).show();
+            return check - 1;
+>>>>>>> Vinh
         }
     }
 }
