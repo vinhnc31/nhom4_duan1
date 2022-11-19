@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.fpoly.VncStore.Activity.Loading;
 import com.fpoly.VncStore.ChucNang.TaiKhoan;
-import com.fpoly.VncStore.Activity.MainActivity;
+import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,7 +59,6 @@ public class SignUp extends AppCompatActivity {
         ed_mk = findViewById(R.id.ed_passWorddk);
         dialog = new Loading(this);
         ed_repass = findViewById(R.id.ed_repassWorddk);
-        tv_signin = findViewById(R.id.tv_signin1);
         dialog = new Loading(this);
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {

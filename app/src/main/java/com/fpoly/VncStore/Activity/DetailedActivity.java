@@ -71,7 +71,7 @@ private Sanpham sanpham;
             Picasso.get().load(sanpham.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(imageView);
             tv_tensp.setText(""+sanpham.getName());
             tv_giamoisp.setText(""+sanpham.getGia()+" Vnd");
-            tv_giacusp.setText("Khuyến Mại"+sanpham.getKhuyenmai()+"%");
+            tv_giacusp.setText(""+sanpham.getKhuyenmai()+"%");
              tv_mota.setText(sanpham.getMoTa());
         }
     }

@@ -1,4 +1,4 @@
-package com.fpoly.VncStore.Activity;
+package com.fpoly.VncStore;
 
 
 import androidx.appcompat.app.AlertDialog;

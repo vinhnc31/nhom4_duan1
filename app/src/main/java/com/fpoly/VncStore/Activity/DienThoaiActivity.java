@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -35,23 +36,23 @@ import java.util.List;
 public class DienThoaiActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Spinner spinner;
-    TextView textView;
+    TextView textView,check;
     String TAG = "aaaa";
     FirebaseDatabase mdatabase;
     DatabaseReference mreference;
     FirebaseStorage mstorage;
     SanphamAdapter adapter;
+    ImageView img_check;
     List<Sanpham> list;
     ProgressBar progressBar;
     private SpinnerAdapter spadapter;
-    private final String[] listchucnang = {"Tất Cả", "Gía Cao Đến Thấp", "Gía Thấp Đến Cao"};
+    private final String[] listchucnang = {"Tất Cả", "Gíá Cao Đến Thấp", "Gíá Thấp Đến Cao"};
     private final int[] listIcon = {
             R.drawable.ic_baseline_phone_android_24,
             R.drawable.ic_baseline_trending_down_24,
             R.drawable.ic_baseline_trending_up_24,
     };
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,9 @@ public class DienThoaiActivity extends AppCompatActivity {
         spinner = findViewById(R.id.spin_sp);
         spadapter = new Adapter_Spinner(getApplicationContext(), listchucnang, listIcon);
         spinner.setAdapter(spadapter);
+        img_check=findViewById(R.id.img_check);
+        check=findViewById(R.id.tv_check);
+
         textView = findViewById(R.id.back_tk);
         progressBar = new ProgressBar(this);
         mdatabase = FirebaseDatabase.getInstance();

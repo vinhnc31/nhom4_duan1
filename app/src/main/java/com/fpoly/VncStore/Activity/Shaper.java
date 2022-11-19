@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.widget.ImageView;
 
 import com.fpoly.VncStore.Login.SignIn;
+import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.fpoly.VncStore.Activity.DoiMatKhau;
 import com.fpoly.VncStore.Activity.ThongTin;
 import com.fpoly.VncStore.Login.SignIn;
-import com.fpoly.VncStore.Activity.MainActivity;
+import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
