@@ -3,48 +3,56 @@ package com.fpoly.VncStore;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Notification;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
-import com.fpoly.VncStore.ChucNang.GioHang;
-import com.fpoly.VncStore.ChucNang.Home;
-import com.fpoly.VncStore.ChucNang.TaiKhoan;
+import com.fpoly.VncStore.ChucNang.GioHangFragment;
+import com.fpoly.VncStore.ChucNang.HomeFragment;
+import com.fpoly.VncStore.ChucNang.TaiKhoanFragment;
 
+import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
     private FragmentManager fragmentManager;
+    private List<Sanpham> sanphamList;
+    private int countProduct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
         navigationView = findViewById(R.id.tabLayout);
-        getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, new Home()).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, new HomeFragment()).addToBackStack(null).commit();
         navigationView.setOnNavigationItemSelectedListener(item -> {
             FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
             Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.home1: {
-                    fragment = new Home();
+                    fragment = new HomeFragment();
                     break;
                 }
                 case R.id.giohang: {
-                    fragment = new GioHang();
+                    fragment = new GioHangFragment();
                     break;
                 }
                 case R.id.taikhoan: {
-                    fragment = new TaiKhoan();
+                    fragment = new TaiKhoanFragment();
                     break;
                 }
             }
@@ -87,4 +95,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
 }

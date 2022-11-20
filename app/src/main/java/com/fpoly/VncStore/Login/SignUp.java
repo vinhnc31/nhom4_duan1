@@ -6,13 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fpoly.VncStore.Activity.Loading;
 import com.fpoly.VncStore.ChucNang.TaiKhoan;
-import com.fpoly.VncStore.MainActivity;
+import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,11 +30,12 @@ public class SignUp extends AppCompatActivity {
     TextView tv_signin;
     private Loading dialog;
     String email, pass, repass, name, diachi, sodt;
-    ImageView img_back;
     TextView tv_dk;
     FirebaseAuth auth;
     TaiKhoan taiKhoan;
     TextInputLayout textInputLayout1, textInputLayout2, textInputLayout3, textInputLayout4, textInputLayout5, textInputLayout6;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +59,9 @@ public class SignUp extends AppCompatActivity {
         ed_mk = findViewById(R.id.ed_passWorddk);
         dialog = new Loading(this);
         ed_repass = findViewById(R.id.ed_repassWorddk);
+        tv_signin = findViewById(R.id.tv_signin1);
         dialog = new Loading(this);
         auth = FirebaseAuth.getInstance();
-        img_back=findViewById(R.id.back_signup);
         if (auth.getCurrentUser() != null) {
             startActivity(new Intent(SignUp.this, MainActivity.class));
             finish();
@@ -70,9 +70,8 @@ public class SignUp extends AppCompatActivity {
         btn_dangki.setOnClickListener(view -> {
             dangki();
         });
-        img_back.setOnClickListener(view -> {
+        tv_signin.setOnClickListener(view -> {
             startActivity(new Intent(SignUp.this, SignIn.class));
-            overridePendingTransition(R.anim.enter_left_to_right,R.anim.exit_left_to_right);
             finish();
         });
         Animation();
