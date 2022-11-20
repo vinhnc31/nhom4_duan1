@@ -24,7 +24,8 @@ public class Shaper extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                nextActivity();
+//                nextActivity();
+                startActivity(new Intent(Shaper.this, SignIn.class));
             }
         },3120);
     }

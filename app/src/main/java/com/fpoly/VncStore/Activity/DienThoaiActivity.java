@@ -63,8 +63,8 @@ public class DienThoaiActivity extends AppCompatActivity {
         spinner = findViewById(R.id.spin_sp);
         spadapter = new Adapter_Spinner(getApplicationContext(), listchucnang, listIcon);
         spinner.setAdapter(spadapter);
-        img_check=findViewById(R.id.img_check);
-        check=findViewById(R.id.tv_check);
+//        img_check=findViewById(R.id.img_check);
+//        check=findViewById(R.id.tv_check);
 
         textView = findViewById(R.id.back_tk);
         progressBar = new ProgressBar(this);
