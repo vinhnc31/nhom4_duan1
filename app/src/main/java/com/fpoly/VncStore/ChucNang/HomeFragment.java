@@ -24,7 +24,7 @@ import java.util.List;
 import me.relex.circleindicator.CircleIndicator3;
 
 
-public class Home extends Fragment {
+public class HomeFragment extends Fragment {
     RecyclerView.Adapter adapter;
     RecyclerView recyclerView;
     ViewPager2 viewPager2;
@@ -105,4 +105,6 @@ public class Home extends Fragment {
         super.onResume();
         handler.postDelayed(runnable,3000);
     }
+
+
 }

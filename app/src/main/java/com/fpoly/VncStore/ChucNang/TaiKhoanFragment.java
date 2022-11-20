@@ -24,8 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class TaiKhoan extends Fragment {
-    public  static final String TAG = TaiKhoan.class.getName();
+public class TaiKhoanFragment extends Fragment {
+    public  static final String TAG = TaiKhoanFragment.class.getName();
     TextView user1, emailuser,logout,tttk,doimk;
     ImageView img_anh;
 

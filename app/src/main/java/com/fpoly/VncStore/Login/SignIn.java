@@ -69,7 +69,7 @@ public class SignIn extends AppCompatActivity {
         });
     }
     private void amintranstion(){
-        layout1.setTranslationY(-700);
+        layout1.setTranslationY(-1000);
         layout2.setTranslationX(-700);
         layout3.setTranslationX(700);
         //ẩn
