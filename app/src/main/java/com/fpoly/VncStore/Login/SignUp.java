@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,12 +31,11 @@ public class SignUp extends AppCompatActivity {
     TextView tv_signin;
     private Loading dialog;
     String email, pass, repass, name, diachi, sodt;
+    ImageView img_back;
     TextView tv_dk;
     FirebaseAuth auth;
     TaiKhoan taiKhoan;
     TextInputLayout textInputLayout1, textInputLayout2, textInputLayout3, textInputLayout4, textInputLayout5, textInputLayout6;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +61,7 @@ public class SignUp extends AppCompatActivity {
         ed_repass = findViewById(R.id.ed_repassWorddk);
         dialog = new Loading(this);
         auth = FirebaseAuth.getInstance();
+        img_back=findViewById(R.id.back_signup);
         if (auth.getCurrentUser() != null) {
             startActivity(new Intent(SignUp.this, MainActivity.class));
             finish();
@@ -69,8 +70,9 @@ public class SignUp extends AppCompatActivity {
         btn_dangki.setOnClickListener(view -> {
             dangki();
         });
-        tv_signin.setOnClickListener(view -> {
+        img_back.setOnClickListener(view -> {
             startActivity(new Intent(SignUp.this, SignIn.class));
+            overridePendingTransition(R.anim.enter_left_to_right,R.anim.exit_left_to_right);
             finish();
         });
         Animation();
