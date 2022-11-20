@@ -52,16 +52,17 @@
                 android:textColor="@color/red"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+
             <TextView
-                android:layout_marginLeft="10dp"
-                android:textColor="#FF0000"
-                android:background="#EDAB88"
-                android:layout_gravity="center"
                 android:id="@+id/tv_khuyenmai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="#EDAB88"
                 android:gravity="center"
                 android:text="10%"
+                android:textColor="#FF0000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
