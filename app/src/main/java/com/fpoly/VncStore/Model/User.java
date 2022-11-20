@@ -4,14 +4,13 @@ public class User {
     public User() {
     }
 
-    private int so;
-    private String ten,email,diachi;
+    private String ten,email,diachi,so;
 
-    public int getSo() {
+    public String getSo() {
         return so;
     }
 
-    public void setSo(int so) {
+    public void setSo(String so) {
         this.so = so;
     }
 
@@ -39,7 +38,7 @@ public class User {
         this.diachi = diachi;
     }
 
-    public User(int so, String ten, String email, String diachi) {
+    public User(String so, String ten, String email, String diachi) {
         this.so = so;
         this.ten = ten;
         this.email = email;
