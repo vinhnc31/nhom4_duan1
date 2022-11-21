@@ -57,11 +57,10 @@ private Sanpham sanpham;
         }
         imageView = findViewById(R.id.img_sanpham);
         tv_tensp = findViewById(R.id.tv_tensp);
-        tv_giamoisp = findViewById(R.id.tv_giamoi);
-        tv_giacusp = findViewById(R.id.tv_giacu);
+        tv_giamoisp = findViewById(R.id.tv_gia);
+        tv_giacusp = findViewById(R.id.tv_khuyenmai);
         tv_soluongsp = findViewById(R.id.tv_soluong);
-        additem = findViewById(R.id.add_item);
-        removeitem = findViewById(R.id.remove_item);
+        additem = findViewById(R.id.btn_addtocart);
         button = findViewById(R.id.btn_addtocart);
         tv_mota = findViewById(R.id.tv_thongtinsanpham);
         textView = findViewById(R.id.back_tk);

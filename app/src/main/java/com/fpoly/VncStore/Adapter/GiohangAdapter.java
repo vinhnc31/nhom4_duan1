@@ -85,7 +85,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
             tv_gia = itemView.findViewById(R.id.tv_giasp);
             tv_soluong = itemView.findViewById(R.id.tv_soluong);
             img_add = itemView.findViewById(R.id.img_add);
-            img_delete = itemView.findViewById(R.id.img_delete);
+            img_delete = itemView.findViewById(R.id.img_clear);
             img_remove = itemView.findViewById(R.id.img_remove);
             img_sanpham = itemView.findViewById(R.id.img_giohang1);
         }
