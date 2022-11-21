@@ -105,7 +105,7 @@ public class PhuKienActivity extends AppCompatActivity {
     }
 
     public void gethienthi() {
-        Query query = mreference.orderByChild("loai").equalTo("Ốp Lưng");
+        Query query = mreference.orderByChild("loai").equalTo("Phụ Kiện");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -98,10 +98,10 @@ public class SignIn extends AppCompatActivity {
     }
 
     private void onClicksingin() {
+        String email = ed_tendn.getText().toString().trim();
+        String password = ed_mk.getText().toString().trim();
+        dialog.showDialog();
         if (validate() > 0) {
-            String email = ed_tendn.getText().toString().trim();
-            String password = ed_mk.getText().toString().trim();
-            dialog.showDialog();
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
