@@ -1,7 +1,7 @@
 package com.fpoly.VncStore.Adapter;
 
-import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.ChucNang.GioHangFragment;
+import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
 import com.squareup.picasso.Picasso;

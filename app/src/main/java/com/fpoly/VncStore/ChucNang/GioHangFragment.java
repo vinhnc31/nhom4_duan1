@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fpoly.VncStore.Adapter.GiohangAdapter;
+import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.Model.Hoadon;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
@@ -44,6 +45,7 @@ public class GioHangFragment extends Fragment {
     private View v;
     private List<Sanpham> sanphamList;
     private TextView tv_giatien;
+    private MainActivity mainActivity;
     private GiohangAdapter giohangAdapter;
     private RecyclerView recyclerView;
     private EditText ed_name, ed_diachi, ed_phone;
