@@ -10,8 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fpoly.VncStore.Activity.Loading;
-import com.fpoly.VncStore.ChucNang.TaiKhoan;
-import com.fpoly.VncStore.Activity.MainActivity;
+import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,7 +31,6 @@ public class SignUp extends AppCompatActivity {
     String email, pass, repass, name, diachi, sodt;
     TextView tv_dk;
     FirebaseAuth auth;
-    TaiKhoan taiKhoan;
     TextInputLayout textInputLayout1, textInputLayout2, textInputLayout3, textInputLayout4, textInputLayout5, textInputLayout6;
 
 
@@ -54,12 +52,10 @@ public class SignUp extends AppCompatActivity {
             overridePendingTransition(R.anim.enter_left_to_right, R.anim.exit_left_to_right);
         });
         ed_sodt = findViewById(R.id.ed_sodt);
-        taiKhoan = new TaiKhoan();
         ed_diachi = findViewById(R.id.ed_diachi);
         ed_mk = findViewById(R.id.ed_passWorddk);
         dialog = new Loading(this);
         ed_repass = findViewById(R.id.ed_repassWorddk);
-        tv_signin = findViewById(R.id.tv_signin1);
         dialog = new Loading(this);
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {

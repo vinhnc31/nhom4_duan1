@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Adapter.GiohangAdapter;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
@@ -29,7 +28,6 @@ public class GioHangFragment extends Fragment {
     private RelativeLayout relativeLayout;
     private ImageView imageView;
     private View v;
-    private MainActivity mainActivity;
     private List<Sanpham> sanphamList;
     private TextView tv_giatien;
     private GiohangAdapter giohangAdapter;
