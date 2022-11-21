@@ -78,10 +78,12 @@
                 android:text="Gợi ý hôm nay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_margin="10dp"
+                android:id="@+id/recyclerView1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"
+                android:layout_margin="10dp" />
         </LinearLayout>
     </FrameLayout>
     </LinearLayout>
