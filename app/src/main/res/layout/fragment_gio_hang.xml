@@ -6,14 +6,22 @@
     android:orientation="vertical"
     tools:context=".ChucNang.GioHangFragment">
 
-    <ImageView
-        android:id="@+id/img_giohang"
+    <RelativeLayout
+        android:id="@+id/giohanggiong"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/cartnull"
-        android:visibility="gone" />
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/cartnull" />
+    </RelativeLayout>
+
 
     <RelativeLayout
+        android:id="@+id/giohang1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -51,22 +59,23 @@
                 android:textColor="@color/red"
                 android:textSize="20sp" />
         </LinearLayout>
+
         <View
             android:id="@+id/spacer"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_below="@+id/ln"
             android:layout_marginTop="10dp"
-            android:background="@color/gray"
-            android:layout_below="@+id/ln"/>
+            android:background="@color/gray" />
 
         <TextView
             android:id="@+id/tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/spacer"
             android:layout_margin="10dp"
             android:layout_marginTop="10dp"
             android:text="Thông Tin Khách Hàng"
-            android:layout_below="@+id/spacer"
             android:textColor="@color/black"
             android:textSize="25sp" />
 
@@ -121,18 +130,17 @@
             android:padding="10dp"
             android:textSize="17sp" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btn_dathang"
             android:layout_width="160dp"
             android:layout_height="60dp"
-           android:layout_centerHorizontal="true"
+            android:layout_below="@+id/edt_phone"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:background="@drawable/bogoc"
             android:text="ĐẶT HÀNG"
-            android:layout_below="@+id/edt_phone"
             android:textColor="@color/white" />
     </RelativeLayout>
-
 
 
 </LinearLayout>

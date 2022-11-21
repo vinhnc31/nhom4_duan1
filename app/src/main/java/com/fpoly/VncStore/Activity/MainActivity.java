@@ -24,24 +24,31 @@ import com.fpoly.VncStore.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
     private FragmentManager fragmentManager;
-    private List<Sanpham> sanphamList;
+   public static List<Sanpham> sanphamList = new ArrayList<Sanpham>();
     private int countProduct;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
         navigationView = findViewById(R.id.tabLayout);
+        if(sanphamList == null){
+            sanphamList = new ArrayList<>();
+        }
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, new HomeFragment()).addToBackStack(null).commit();
         navigationView.setOnNavigationItemSelectedListener(item -> {
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             Fragment fragment = null;
+
             switch (item.getItemId()) {
                 case R.id.home1: {
                     fragment = new HomeFragment();
@@ -60,10 +67,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
     }
+
     @Override
     public void onBackPressed() {
         Exit();
     }
+
     public void Exit() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_thoat, null);
@@ -82,6 +91,21 @@ public class MainActivity extends AppCompatActivity {
 
         btnHuy.setOnClickListener(v -> alertDialog.dismiss());
     }
+
+    // Thêm sản phẩm đã chọn vào giỏ hàng
+    public void addToListCartProdct(Sanpham sanpham) {
+       MainActivity.sanphamList.add(sanpham);
+    }
+
+    // Lấy ra các sản phẩm đã thêm vào giỏ hàng
+    public List<Sanpham> getListCartProduct() {
+        return sanphamList;
+    }
+
+    // Set lại số lượng của sản phẩm khi mua nhiều
+    public void setCountForProduct(int possion, int countProduct) {
+        sanphamList.get(possion).setNumProduct(countProduct);
+    }
     @Override
     protected void onPause() {
         super.onPause();
@@ -91,9 +115,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
-
 }

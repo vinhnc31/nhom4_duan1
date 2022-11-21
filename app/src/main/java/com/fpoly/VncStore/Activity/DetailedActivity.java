@@ -28,6 +28,7 @@ public class DetailedActivity extends AppCompatActivity {
     Button btn_themvagiohang;
     private Sanpham sanpham;
     private Boolean isAddToCart;
+    MainActivity mainActivity;
     List<Sanpham> sanphamList;
 
     @Override
@@ -48,6 +49,7 @@ public class DetailedActivity extends AppCompatActivity {
             sanpham = (Sanpham) object;
         }
         isAddToCart = false;
+        mainActivity = new MainActivity();
         imageView = findViewById(R.id.img_sanpham);
         tv_tensp = findViewById(R.id.tv_tensp);
         tv_khuyenmai = findViewById(R.id.tv_khuyenmai);
@@ -86,10 +88,11 @@ public class DetailedActivity extends AppCompatActivity {
                         isAddToCart = true;
                         btn_themvagiohang.setText("Đã Mua");
                         btn_themvagiohang.setBackgroundResource(R.drawable.custom_button);
+                        mainActivity.addToListCartProdct(sanpham);
                         Toast.makeText(DetailedActivity.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
+        }
     }
-}

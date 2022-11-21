@@ -1,7 +1,6 @@
 package com.fpoly.VncStore.Model;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class Sanpham implements Serializable {
     private String name;
