@@ -5,7 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
-    app:cardElevation="10dp">
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,33 +30,25 @@
             android:textColor="@color/black"
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tv_giatien"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-<<<<<<< HEAD
-            android:text="31.168.000 đ"
-            android:textColor="@color/red"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-=======
+        <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
             <TextView
                 android:id="@+id/tv_giatien"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="31.168.000"
                 android:textColor="@color/red"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:textStyle="bold" />
+
             <TextView
-                android:layout_marginLeft="2dp"
-                android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginBottom="5dp"
                 android:text="₫"
                 android:textColor="@color/red"
                 android:textSize="16sp"
@@ -74,15 +67,5 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
->>>>>>> main
-
-        <TextView
-            android:id="@+id/tv_khuyenmai"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="10%"
-            android:textSize="16sp"
-            android:textStyle="bold" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
