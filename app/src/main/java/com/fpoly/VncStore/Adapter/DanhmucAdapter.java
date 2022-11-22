@@ -1,5 +1,6 @@
 package com.fpoly.VncStore.Adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,16 +9,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fpoly.VncStore.ChucNang.DienThoaiFragment;
-import com.fpoly.VncStore.ChucNang.DoiMatkhauFragment;
-import com.fpoly.VncStore.ChucNang.LaptopFragment;
-import com.fpoly.VncStore.ChucNang.OplungFragment;
-import com.fpoly.VncStore.ChucNang.PhuKienFragment;
-import com.fpoly.VncStore.ChucNang.TabletFragment;
+import com.fpoly.VncStore.Activity.DienThoaiActivity;
+import com.fpoly.VncStore.Activity.LapTopActivity;
+import com.fpoly.VncStore.Activity.OpLungActivity;
+import com.fpoly.VncStore.Activity.PhuKienActivity;
+import com.fpoly.VncStore.Activity.TabletActivity;
 import com.fpoly.VncStore.Model.Danhmuc;
 import com.fpoly.VncStore.R;
 
@@ -47,43 +45,32 @@ public class DanhmucAdapter extends RecyclerView.Adapter<DanhmucAdapter.ViewHode
             switch (position){
                 case 0:{
                     AppCompatActivity appCompatActivity=(AppCompatActivity) view.getContext();
-                    Fragment fragment=new LaptopFragment();
-                    FragmentTransaction fragmentTransaction=appCompatActivity.getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction
-                            .setCustomAnimations(R.anim.item_last,R.anim.item_pop_last,R.anim.item_next,R.anim.item_pop_next)
-                            .replace(R.id.chuyen0, fragment).addToBackStack("uu").commit();
+                    appCompatActivity.startActivity(new Intent(appCompatActivity, LapTopActivity.class));
+                    appCompatActivity.overridePendingTransition(R.anim.zoom,R.anim.not);
                     break;
                 }
                 case 1:{
                     AppCompatActivity appCompatActivity=(AppCompatActivity) view.getContext();
-                    Fragment fragment=new DienThoaiFragment();
-                    FragmentTransaction fragmentTransaction=appCompatActivity.getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.setCustomAnimations(R.anim.item_last,R.anim.item_pop_last,R.anim.item_next,R.anim.item_pop_next)
-                            .replace(R.id.chuyen0, fragment).addToBackStack(null).commit();
+                    appCompatActivity.startActivity(new Intent(appCompatActivity, DienThoaiActivity.class));
+                    appCompatActivity.overridePendingTransition(R.anim.zoom1,R.anim.not);
                     break;
                 }
                 case 2:{
                     AppCompatActivity appCompatActivity=(AppCompatActivity) view.getContext();
-                    Fragment fragment=new PhuKienFragment();
-                    FragmentTransaction fragmentTransaction=appCompatActivity.getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.setCustomAnimations(R.anim.item_last,R.anim.item_pop_last,R.anim.item_next,R.anim.item_pop_next)
-                            .replace(R.id.chuyen0, fragment).addToBackStack(null).commit();
+                    appCompatActivity.startActivity(new Intent(appCompatActivity, PhuKienActivity.class));
+                    appCompatActivity.overridePendingTransition(R.anim.zoom2,R.anim.not);
                     break;
                 }
                 case 3:{
                     AppCompatActivity appCompatActivity=(AppCompatActivity) view.getContext();
-                    Fragment fragment=new TabletFragment();
-                    FragmentTransaction fragmentTransaction=appCompatActivity.getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.setCustomAnimations(R.anim.item_last,R.anim.item_pop_last,R.anim.item_next,R.anim.item_pop_next)
-                            .replace(R.id.chuyen0, fragment).addToBackStack(null).commit();
+                    appCompatActivity.startActivity(new Intent(appCompatActivity, TabletActivity.class));
+                    appCompatActivity.overridePendingTransition(R.anim.zoom3,R.anim.not);
                     break;
                 }
                 case 4:{
                     AppCompatActivity appCompatActivity=(AppCompatActivity) view.getContext();
-                    Fragment fragment=new OplungFragment();
-                    FragmentTransaction fragmentTransaction=appCompatActivity.getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.setCustomAnimations(R.anim.item_last,R.anim.item_pop_last,R.anim.item_next,R.anim.item_pop_next)
-                            .replace(R.id.chuyen0, fragment).addToBackStack(null).commit();
+                    appCompatActivity.startActivity(new Intent(appCompatActivity, OpLungActivity.class));
+                    appCompatActivity.overridePendingTransition(R.anim.zoom4,R.anim.not);
                     break;
                 }
 
