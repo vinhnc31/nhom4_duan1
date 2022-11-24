@@ -10,15 +10,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fpoly.VncStore.Activity.Loading;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import com.fpoly.VncStore.ChucNang.TaiKhoanFragment;
 
 
 import com.fpoly.VncStore.MainActivity;
 
-=======
+//=======
 import com.fpoly.VncStore.MainActivity;
->>>>>>> Loc
+//>>>>>>> Loc
 import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
 import com.google.android.gms.tasks.OnCompleteListener;

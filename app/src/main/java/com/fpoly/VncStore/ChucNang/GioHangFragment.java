@@ -152,16 +152,16 @@ public class GioHangFragment extends Fragment {
         HashMap<String, Object> hashMap = new HashMap<>();
         Date date = new Date(System.currentTimeMillis());
         hashMap.put("ngaymua", date.toString());
-<<<<<<< HEAD
+//<<<<<<< HEAD
         User user = new User();
         hashMap.put("tenkhachhang", ed_name.getText().toString());
         hashMap.put("diachi", ed_diachi.getText().toString());
         hashMap.put("phone", ed_phone.getText().toString());
-=======
+//=======
 //        hashMap.put("tenkhachhang", ed_name.getText().toString());
 //        hashMap.put("diachi", ed_diachi.getText().toString());
 //        hashMap.put("phone", ed_phone.getText().toString());
->>>>>>> Loc
+//>>>>>>> Loc
         int num = 0;
         for (Sanpham sanpham : MainActivity.sanphamList) {
             num = num + sanpham.getNumProduct();

@@ -66,8 +66,8 @@ public class DienThoaiActivity extends AppCompatActivity {
         spadapter = new Adapter_Spinner(getApplicationContext(), listchucnang, listIcon);
         spinner.setAdapter(spadapter);
 //<<<<<<< HEAD
-        img_check=findViewById(R.id.img_check);
-        check=findViewById(R.id.tv_check);
+//        img_check=findViewById(R.id.img_check);
+//        check=findViewById(R.id.tv_check);
 
 //=======
 //>>>>>>> d2a593c1ca1073b8a812036933cdf3329d9e93db

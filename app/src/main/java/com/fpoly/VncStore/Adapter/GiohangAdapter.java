@@ -1,9 +1,9 @@
 package com.fpoly.VncStore.Adapter;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> Loc
+//<<<<<<< HEAD
+//
+//=======
+//>>>>>>> Loc
 import com.fpoly.VncStore.ChucNang.GioHangFragment;
 import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.Model.Sanpham;

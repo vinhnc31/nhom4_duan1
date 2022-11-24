@@ -40,13 +40,10 @@ public class TabletActivity extends AppCompatActivity {
     List<Sanpham> list;
     ProgressBar progressBar;
     private SpinnerAdapter spadapter;
-<<<<<<< HEAD
 
     private final String[] listchucnang = {"Tất Cả", "Giá Cao Đến Thấp", "Giá Thấp Đến Cao"};
 
-=======
-    private final String[] listchucnang = {"Tất Cả", "Giá Cao Đến Thấp", "Giá Thấp Đến Cao"};
->>>>>>> Loc
+
     private final int[] listIcon = {
             R.drawable.ic_baseline_phone_android_24,
             R.drawable.ic_baseline_trending_down_24,
@@ -110,12 +107,12 @@ public class TabletActivity extends AppCompatActivity {
     }
 
     public void gethienthi() {
-<<<<<<< HEAD
+
         Query query = mreference.orderByChild("loai").equalTo("Ipat");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
-=======
-        mreference.addListenerForSingleValueEvent(new ValueEventListener() {
->>>>>>> Loc
+
+//        mreference.addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
