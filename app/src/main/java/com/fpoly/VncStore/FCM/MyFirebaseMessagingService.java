@@ -24,8 +24,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         System.out.println( "From: " + remoteMessage.getFrom());
-
-
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             System.out.println( "Message Notification Body: " + remoteMessage.getNotification().getBody());

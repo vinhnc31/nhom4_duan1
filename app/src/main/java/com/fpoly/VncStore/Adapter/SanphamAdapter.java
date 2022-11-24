@@ -28,6 +28,9 @@ public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.Spviewho
     public SanphamAdapter(Context context, List<Sanpham> sanphamList) {
         this.sanphamList = sanphamList;
         this.context = context;
+        Log.d("zzzz", "SanphamAdapter: size= " +sanphamList.size() );
+        for(int i =0; i<sanphamList.size(); i++)
+            Log.d("zzzzz", "SanphamAdapter: "+ sanphamList.get(i).getName());
     }
 
     @NonNull
@@ -42,10 +45,15 @@ public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.Spviewho
         Sanpham sp = sanphamList.get(position);
         Picasso.get().load(sp.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(holder.imagesp);
         holder.tv_tensp.setText(""+sp.getName());
+<<<<<<< HEAD
 
         holder.tv_giasp.setText(sp.getGia()+"VNĐ");
         holder.tv_khuyenmai.setText(sp.getKhuyenmai()+"%");
 
+=======
+        holder.tv_giasp.setText(sp.getGia()+"VNĐ");
+        holder.tv_khuyenmai.setText(sp.getKhuyenmai()+"%");
+>>>>>>> Loc
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){

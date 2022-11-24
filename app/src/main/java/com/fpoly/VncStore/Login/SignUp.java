@@ -10,11 +10,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fpoly.VncStore.Activity.Loading;
+<<<<<<< HEAD
 import com.fpoly.VncStore.ChucNang.TaiKhoanFragment;
 
 
 import com.fpoly.VncStore.MainActivity;
 
+=======
+import com.fpoly.VncStore.MainActivity;
+>>>>>>> Loc
 import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,11 +34,11 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignUp extends AppCompatActivity {
     EditText ed_tendn, ed_mk, ed_name, ed_repass, ed_sodt, ed_diachi;
     Button btn_dangki;
+    TextView tv_signin;
     private Loading dialog;
     String email, pass, repass, name, diachi, sodt;
     TextView tv_dk;
     FirebaseAuth auth;
-    TaiKhoanFragment taiKhoan;
     TextInputLayout textInputLayout1, textInputLayout2, textInputLayout3, textInputLayout4, textInputLayout5, textInputLayout6;
 
 
@@ -56,7 +60,6 @@ public class SignUp extends AppCompatActivity {
             overridePendingTransition(R.anim.enter_left_to_right, R.anim.exit_left_to_right);
         });
         ed_sodt = findViewById(R.id.ed_sodt);
-        taiKhoan = new TaiKhoanFragment();
         ed_diachi = findViewById(R.id.ed_diachi);
         ed_mk = findViewById(R.id.ed_passWorddk);
         dialog = new Loading(this);
@@ -70,6 +73,10 @@ public class SignUp extends AppCompatActivity {
         btn_dangki = findViewById(R.id.btn_signUp);
         btn_dangki.setOnClickListener(view -> {
             dangki();
+        });
+        tv_signin.setOnClickListener(view -> {
+            startActivity(new Intent(SignUp.this, SignIn.class));
+            finish();
         });
         Animation();
     }

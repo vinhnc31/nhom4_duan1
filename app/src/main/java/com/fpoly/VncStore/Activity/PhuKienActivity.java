@@ -27,7 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class PhuKienActivity extends AppCompatActivity {
@@ -41,9 +40,13 @@ public class PhuKienActivity extends AppCompatActivity {
     List<Sanpham> list;
     ProgressBar progressBar;
     private SpinnerAdapter spadapter;
+<<<<<<< HEAD
 
     private final String[] listchucnang = {"Tất Cả", "Giá Cao Đến Thấp", "Giá Thấp Đến Cao"};
 
+=======
+    private final String[] listchucnang = {"Tất Cả", "Giá Cao Đến Thấp", "Giá Thấp Đến Cao"};
+>>>>>>> Loc
     private final int[] listIcon = {
             R.drawable.ic_baseline_phone_android_24,
             R.drawable.ic_baseline_trending_down_24,
@@ -87,12 +90,12 @@ public class PhuKienActivity extends AppCompatActivity {
                         break;
                     }
                     case 1: {
-                        sapXepGiamDanTheoGia((ArrayList<Sanpham>) list);
+                        getdatatang();
                         adapter.notifyDataSetChanged();
                         break;
                     }
                     case 2: {
-                        sapXepTangDanTheoGia((ArrayList<Sanpham>) list);
+                        getdatagiam();
                         adapter.notifyDataSetChanged();
                         break;
                     }
@@ -107,8 +110,12 @@ public class PhuKienActivity extends AppCompatActivity {
     }
 
     public void gethienthi() {
+<<<<<<< HEAD
         Query query = mreference.orderByChild("loai").equalTo("Phụ Kiện");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
+=======
+        mreference.addListenerForSingleValueEvent(new ValueEventListener() {
+>>>>>>> Loc
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
@@ -129,30 +136,43 @@ public class PhuKienActivity extends AppCompatActivity {
         });
     }
 
-    public ArrayList<Sanpham> sapXepGiamDanTheoGia(ArrayList<Sanpham> list) {
-        Collections.sort(list, (sanPham, t1) -> {
-            if (Integer.parseInt(sanPham.getGia()) < Integer.parseInt(t1.getGia())) {
-                return 1;
-            } else {
-                if (sanPham.getGia() == t1.getGia()) {
-                    return 0;
-                } else return -1;
+    public void getdatatang() {
+        Query query = mreference.orderByChild("gia");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Sanpham sanpham = dataSnapshot.getValue(Sanpham.class);
+                    list.add(sanpham);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
-        return list;
     }
 
-    public ArrayList<Sanpham> sapXepTangDanTheoGia(ArrayList<Sanpham> list) {
-        Collections.sort(list, (sanPham, t1) -> {
-            if (Integer.parseInt(sanPham.getGia()) < Integer.parseInt(t1.getGia())) {
-                return -1;
-            } else {
-                if (sanPham.getGia() == t1.getGia()) {
-                    return 0;
-                } else return 1;
+    public void getdatagiam() {
+        Query query = mreference.orderByChild("gia");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Sanpham sanpham = dataSnapshot.getValue(Sanpham.class);
+                    list.add(0, sanpham);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
-        return list;
     }
-
 }
