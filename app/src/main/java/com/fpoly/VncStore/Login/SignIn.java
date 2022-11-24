@@ -28,39 +28,40 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignIn extends AppCompatActivity {
-    TextInputLayout intro1,intro2;
+    TextInputLayout intro1, intro2;
     EditText ed_tendn, ed_mk;
     Button btn_login;
-    TextView tv_dk,tv_login,tv_acc;
+    TextView tv_dk, tv_login, tv_acc;
     CardView cart;
-    ImageView img_login,layout1,layout2,layout3,imglogo;
+    ImageView img_login, layout1, layout2, layout3, imglogo;
     private FirebaseAuth auth;
     Loading dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        cart=findViewById(R.id.cart);
-        imglogo=findViewById(R.id.imagelogo);
-        layout1=findViewById(R.id.layout1);
-        layout2=findViewById(R.id.layout2);
-        layout3=findViewById(R.id.layout3);
-        intro1=findViewById(R.id.TextInputLayout1);
-        intro2=findViewById(R.id.TextInputLayout2);
+        cart = findViewById(R.id.cart);
+        imglogo = findViewById(R.id.imagelogo);
+        layout1 = findViewById(R.id.layout1);
+        layout2 = findViewById(R.id.layout2);
+        layout3 = findViewById(R.id.layout3);
+        intro1 = findViewById(R.id.TextInputLayout1);
+        intro2 = findViewById(R.id.TextInputLayout2);
         ed_tendn = findViewById(R.id.ed_userName);
         ed_mk = findViewById(R.id.ed_pasWord);
-        tv_acc=findViewById(R.id.text_acc);
+        tv_acc = findViewById(R.id.text_acc);
         btn_login = findViewById(R.id.btn_login);
         tv_dk = findViewById(R.id.tv_signUp);
-        img_login=findViewById(R.id.imagelogo);
-        tv_login=findViewById(R.id.tv_login);
+        img_login = findViewById(R.id.imagelogo);
+        tv_login = findViewById(R.id.tv_login);
         auth = FirebaseAuth.getInstance();
         tv_dk.setOnClickListener(view -> {
             startActivity(new Intent(this, SignUp.class));
-            overridePendingTransition(R.anim.enter_right_to_left,R.anim.exit_right_to_left);
+            overridePendingTransition(R.anim.enter_right_to_left, R.anim.exit_right_to_left);
         });
         amintranstion();
-        dialog=new Loading(this);
+        dialog = new Loading(this);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,8 +69,9 @@ public class SignIn extends AppCompatActivity {
             }
         });
     }
-    private void amintranstion(){
-        layout1.setTranslationY(-700);
+
+    private void amintranstion() {
+        layout1.setTranslationY(-1000);
         layout2.setTranslationX(-700);
         layout3.setTranslationX(700);
         //ẩn
@@ -96,10 +98,10 @@ public class SignIn extends AppCompatActivity {
     }
 
     private void onClicksingin() {
-        if (validate() > 0) {
         String email = ed_tendn.getText().toString().trim();
         String password = ed_mk.getText().toString().trim();
-            dialog.showDialog();
+        dialog.showDialog();
+        if (validate() > 0) {
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override

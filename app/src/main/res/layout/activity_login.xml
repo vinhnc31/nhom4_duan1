@@ -101,7 +101,7 @@
                 android:id="@+id/TextInputLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mật Khẩu"
+                android:hint="PassWord"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="15dp"
@@ -135,14 +135,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:text="Bạn Chưa có tài khoản ?" />
+                        android:text="Don't have on account ?" />
 
                     <TextView
                         android:id="@+id/tv_signUp"
                         android:layout_width="36dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
-                        android:text="Đăng kí"
+                        android:text="Sign Up"
                         android:textColor="#4DD0E1"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -157,7 +157,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/bogoclogin"
-                android:text="Đăng Nhập"
+                android:text="Login"
                 android:textColor="@color/white" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

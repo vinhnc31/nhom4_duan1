@@ -80,7 +80,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.648">
 
-        <LinearLayout
+           <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Sign Up"
+                android:text="Đăng Kí"
                 android:textColor="#4DD0E1"
                 android:textSize="30dp"
                 android:textStyle="bold|italic" />
@@ -153,6 +153,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_sodt"
                     android:maxLength="10"
+                    android:inputType="phone"
                     android:drawablePadding="8dp"
                     android:drawableStart="@drawable/ic_baseline_phone_24"
                     android:layout_width="match_parent"
@@ -184,7 +185,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="PassWord"
+                android:hint="Mật Khẩu"
                 android:id="@+id/TextInputLayout7"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="25dp"
@@ -212,7 +213,7 @@
                 android:id="@+id/TextInputLayout8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Re-PassWord"
+                android:hint="Nhập Lại Mật Khẩu"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -233,7 +234,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/bogoclogin"
-                android:text="Sign Up"
+                android:text="Đăng Kí"
                 android:textColor="@color/white" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
