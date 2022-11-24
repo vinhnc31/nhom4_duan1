@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/chuyen0"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ChucNang.Home">
+    tools:context=".ChucNang.HomeFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -14,21 +14,39 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <SearchView
-            android:layout_weight="1"
-            android:background="@drawable/mausearch"
-            android:queryHint="Search..."
+<!--        <SearchView-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/mausearch"-->
+<!--            android:queryHint="Search..."-->
+<!--            android:layout_marginLeft="8dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginBottom="8dp"-->
+<!--            android:iconifiedByDefault="false"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content" />-->
+
+        <AutoCompleteTextView
+            android:id="@+id/atc_sanpham_search"
+            android:layout_width="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:iconifiedByDefault="false"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_weight="5"
+            android:layout_height="45dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/mausearch"
+            android:completionThreshold="1"
+            android:drawableRight="@drawable/ic_baseline_search_24"
+            android:hint="Bạn tìm gì?"
+            android:padding="8dp"
+            android:textSize="15sp"/>
+
         <ImageView
             android:layout_marginRight="5dp"
             android:background="@drawable/ic_baseline_notifications_24"
-            android:layout_marginTop="10dp"
-            android:layout_width="30dp"
+            android:layout_marginTop="13dp"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
             android:layout_height="30dp"/>
     </LinearLayout>
     <FrameLayout
@@ -78,10 +96,12 @@
                 android:text="Gợi ý hôm nay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_margin="10dp"
+                android:id="@+id/recyclerView1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"
+                android:layout_margin="10dp" />
         </LinearLayout>
     </FrameLayout>
     </LinearLayout>

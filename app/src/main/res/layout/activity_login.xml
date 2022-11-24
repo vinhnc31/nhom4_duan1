@@ -86,7 +86,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="15dp"
-                android:hint="Email..."
+                android:hint="Email"
                 style="@style/TextInputLayout"
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
@@ -101,7 +101,7 @@
                 android:id="@+id/TextInputLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="Mật Khẩu"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="15dp"
@@ -139,10 +139,10 @@
 
                     <TextView
                         android:id="@+id/tv_signUp"
-                        android:layout_width="73dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
-                        android:text="Đăng kí"
+                        android:text="Đăng Ký"
                         android:textColor="#4DD0E1"
                         android:textStyle="bold" />
                 </LinearLayout>

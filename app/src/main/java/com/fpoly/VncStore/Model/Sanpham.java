@@ -9,6 +9,7 @@ public class Sanpham implements Serializable {
     private String khuyenmai;
     private String moTa;
 
+    private int numProduct = 1;
     public Sanpham() {
     }
 
@@ -40,7 +41,7 @@ public class Sanpham implements Serializable {
         return Gia;
     }
 
-    public void setGia(String gia) {
+    public void setGia(String  gia) {
         Gia = gia;
     }
 
@@ -58,5 +59,12 @@ public class Sanpham implements Serializable {
 
     public void setMoTa(String moTa) {
         this.moTa = moTa;
+    }
+    public int getNumProduct() {
+        return numProduct;
+    }
+
+    public void setNumProduct(int numProduct) {
+        this.numProduct = numProduct;
     }
 }
