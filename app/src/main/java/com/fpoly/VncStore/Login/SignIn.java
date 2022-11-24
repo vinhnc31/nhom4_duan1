@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 
 import com.fpoly.VncStore.Activity.Loading;
-import com.fpoly.VncStore.Activity.MainActivity;
+import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.R;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -125,7 +125,7 @@ public class SignIn extends AppCompatActivity {
         int check = 1;
         String checkemail = "[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)";
         if (ed_tendn.getText().length() == 0) {
-            dialog.dismiss();
+//            dialog.dismiss();
             Toast.makeText(SignIn.this, "Email không được để trống.",
                     Toast.LENGTH_LONG).show();
             return check - 1;

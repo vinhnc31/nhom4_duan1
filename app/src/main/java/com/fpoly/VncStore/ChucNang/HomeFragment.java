@@ -19,11 +19,12 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 
 import com.fpoly.VncStore.Activity.DienThoaiActivity;
-import com.fpoly.VncStore.Activity.MainActivity;
+
 import com.fpoly.VncStore.Adapter.DanhmucAdapter;
 import com.fpoly.VncStore.Adapter.PhotoAdapter;
 import com.fpoly.VncStore.Adapter.SanphamAdapter;
 import com.fpoly.VncStore.Adapter.SearchSanPhamAdapter;
+import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.Model.Danhmuc;
 import com.fpoly.VncStore.Model.Photo;
 import com.fpoly.VncStore.Model.Sanpham;

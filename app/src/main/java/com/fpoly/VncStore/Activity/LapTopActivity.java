@@ -42,7 +42,9 @@ public class LapTopActivity extends AppCompatActivity {
     List<Sanpham> list;
     ProgressBar progressBar;
     private SpinnerAdapter spadapter;
+
     private final String[] listchucnang = {"Tất Cả", "Giá Cao Đến Thấp", "Giá Thấp Đến Cao"};
+
     private final int[] listIcon = {
             R.drawable.ic_baseline_phone_android_24,
             R.drawable.ic_baseline_trending_down_24,

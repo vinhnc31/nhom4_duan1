@@ -13,7 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import com.fpoly.VncStore.Activity.MainActivity;
+import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +43,7 @@ public class DetailedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailed);
         Anhxa();
         xulyxukien();
+
         textView.setOnClickListener(view -> {
             super.onBackPressed();
             overridePendingTransition(R.anim.enter_left_to_right, R.anim.exit_left_to_right);
@@ -99,5 +101,12 @@ public class DetailedActivity extends AppCompatActivity {
                 }
             });
         }
+
+        //asknsakn
+            tv_tensp.setText(""+sanpham.getName());
+            tv_giamsp.setText(""+sanpham.getGia()+" Vnd");
+            tv_khuyenmai.setText(""+sanpham.getKhuyenmai()+"%");
+             tv_mota.setText(sanpham.getMoTa());
+
         }
     }
