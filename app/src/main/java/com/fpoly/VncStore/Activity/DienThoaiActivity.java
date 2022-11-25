@@ -123,7 +123,6 @@ public class DienThoaiActivity extends AppCompatActivity {
                 }
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -164,7 +163,6 @@ public class DienThoaiActivity extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
