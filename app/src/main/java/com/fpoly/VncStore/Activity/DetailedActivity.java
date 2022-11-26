@@ -64,8 +64,8 @@ public class DetailedActivity extends AppCompatActivity {
         if (sanpham != null) {
             Picasso.get().load(sanpham.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(imageView);
             tv_tensp.setText("" + sanpham.getName());
-            tv_giamsp.setText("Giá: " + sanpham.getGia() + "VNĐ");
-            tv_khuyenmai.setText(sanpham.getKhuyenmai() + "%");
+            tv_giamsp.setText("Giá: " + sanpham.getGia() + " VNĐ");
+            tv_khuyenmai.setText("Khuyến Mại "+sanpham.getKhuyenmai() + "%");
             tv_mota.setText(sanpham.getMoTa());
             for (int i = 0; i < sanphamList.size(); i++) {
                 // Nếu sản  phẩm đã dc add

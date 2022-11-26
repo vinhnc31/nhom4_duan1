@@ -45,7 +45,7 @@ public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.Spviewho
         Sanpham sp = sanphamList.get(position);
         Picasso.get().load(sp.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(holder.imagesp);
         holder.tv_tensp.setText(""+sp.getName());
-        holder.tv_giasp.setText(sp.getGia()+"VNĐ");
+        holder.tv_giasp.setText(sp.getGia());
         holder.tv_khuyenmai.setText(sp.getKhuyenmai()+"%");
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

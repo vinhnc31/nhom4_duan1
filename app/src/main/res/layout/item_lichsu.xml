@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="10dp"
+    android:layout_marginStart="10dp"
+    app:cardCornerRadius="15dp">
+
+    <RelativeLayout
+        android:id="@+id/rl_history"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_hitory_product_text_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Mã Đặt Hàng :"
+            android:textSize="10sp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_madathang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_hitory_product_text_order"
+            android:text="12341aaa"
+            android:layout_marginLeft="3dp"
+            android:textColor="@color/teal_200"
+            android:textSize="10sp">
+        </TextView>
+
+        <View
+            android:background="#E1E1E1"
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/tv_madathang">
+        </View>
+
+        <ImageView
+            android:background="@drawable/iphone12promax"
+            android:id="@+id/img_anhls"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/divider"
+            >
+        </ImageView>
+
+        <TextView
+            android:id="@+id/tv_tenspls"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/img_anhls"
+            android:text="Iphone 12"
+            android:textSize="10sp"
+            >
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_gials"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/img_anhls"
+            android:layout_below="@+id/tv_tenspls"
+            android:text="20.000.000 VND"
+            android:textSize="10sp"
+            android:textColor="@color/red">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_soluong1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/img_anhls"
+            android:layout_below="@+id/tv_gials"
+            android:text="Số Lượng:"
+            android:textSize="10sp"
+            >
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_soluong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/tv_soluong1"
+            android:layout_below="@+id/tv_gials"
+            android:text="1"
+            android:textSize="10sp"
+            >
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_trangthai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@+id/tv_tenspls"
+            android:layout_below="@+id/divider"
+            android:text="Đang Chờ Xác Nhận"
+            android:textSize="10sp"
+            android:textColor="@color/teal_700"
+            android:gravity="right">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_ngay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/img_anhls"
+            android:layout_below="@+id/tv_soluong"
+            android:text="Ngày Đặt: "
+            android:textSize="10sp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_ngay1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/tv_ngay"
+            android:layout_below="@+id/tv_soluong1"
+            android:text="null"
+            android:textSize="10sp">
+        </TextView>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
