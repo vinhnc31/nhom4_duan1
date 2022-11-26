@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.fpoly.VncStore.Model.Hoadon;
 import com.fpoly.VncStore.Model.Oder;
 import com.fpoly.VncStore.R;
@@ -23,10 +22,10 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
     private List<Oder> oderList;
     private Oder oder;
 
-    public LichsuAdapter(List<Hoadon> list, List<Oder> oderList, Oder oder) {
+    public void setData(List<Hoadon> list, List<Oder> oderList) {
         this.list = list;
         this.oderList = oderList;
-        this.oder = oder;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -54,6 +53,20 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
                 break;
             }
         }
+        holder.itemView.setOnClickListener(view -> {
+            for (Oder od : oderList) {
+                if (oder.getOrderNo().equals(hoadon.getOrderNo())){
+                    oder=od;
+                    break;
+                }
+            }
+            for (Hoadon hd :list){
+                if (hd.getOrderNo().equals(hd.getOrderNo())){
+                    oder.addListHoaDon(hd);
+                }
+            }
+
+        });
 
     }
 

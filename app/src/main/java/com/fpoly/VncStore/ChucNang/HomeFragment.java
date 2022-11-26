@@ -1,6 +1,7 @@
 package com.fpoly.VncStore.ChucNang;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,11 +16,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.fpoly.VncStore.Activity.DienThoaiActivity;
+import com.fpoly.VncStore.Activity.HistoryActivity;
+import com.fpoly.VncStore.Activity.ThongTin;
 import com.fpoly.VncStore.Adapter.DanhmucAdapter;
+import com.fpoly.VncStore.Adapter.LichsuAdapter;
 import com.fpoly.VncStore.Adapter.PhotoAdapter;
 import com.fpoly.VncStore.Adapter.SanphamAdapter;
+import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.Model.Danhmuc;
 import com.fpoly.VncStore.Model.Photo;
 import com.fpoly.VncStore.Model.Sanpham;
@@ -48,6 +54,7 @@ public class HomeFragment extends Fragment {
     FirebaseStorage mstorage;
     SanphamAdapter adaptersanpham;
     List<Sanpham> sanphamList;
+    ImageView img_thongbao;
     private ArrayList<Danhmuc>lists=new ArrayList<>();
     private List<Photo> mlist;
     private Handler handler = new Handler();
@@ -72,6 +79,7 @@ public class HomeFragment extends Fragment {
         circleIndicator3 = v.findViewById(R.id.circle);
         mlist = getList();
         PhotoAdapter adapter = new PhotoAdapter(mlist);
+        img_thongbao=v.findViewById(R.id.img_thongbao);
         viewPager2.setAdapter(adapter);
         circleIndicator3.setViewPager(viewPager2);
         recyclerView=v.findViewById(R.id.recyclerView);
@@ -91,6 +99,10 @@ public class HomeFragment extends Fragment {
                 handler.removeCallbacks(runnable);
                 handler.postDelayed(runnable,3000);
             }
+        });
+        img_thongbao.setOnClickListener(view ->{
+            startActivity(new Intent((MainActivity) getActivity(), HistoryActivity.class));
+            getActivity().overridePendingTransition(R.anim.enter_right_to_left,R.anim.exit_right_to_left);
         });
         gethienthi();
         recyclerview();

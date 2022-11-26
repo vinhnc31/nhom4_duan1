@@ -16,7 +16,14 @@
         android:theme="@style/Theme.VncStore"
         tools:targetApi="31">
         <activity
-            android:name=".HistoryActivity"
+            android:name=".Activity.ChitietActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.HistoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -24,7 +31,7 @@
         </activity>
         <activity
             android:name=".Activity.DetailedActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Activity.DienThoaiActivity"
             android:exported="true" />
