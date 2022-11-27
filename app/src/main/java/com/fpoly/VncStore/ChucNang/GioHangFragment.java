@@ -28,8 +28,13 @@ import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Date;
 import java.text.DecimalFormat;
@@ -87,6 +92,25 @@ public class GioHangFragment extends Fragment {
             }
         });
         format = new DecimalFormat("###,###,###");
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        String userId=user.getUid();
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("User");
+        reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User u=snapshot.getValue(User.class);
+                if (u!=null){
+                    ed_name.setText(user.getDisplayName());
+                    ed_phone.setText(u.getSo());
+                    ed_diachi.setText(u.getDiachi());
+                }else {
+                    return;
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     // Set trạng thái hiển thị các view
@@ -153,11 +177,9 @@ public class GioHangFragment extends Fragment {
     public void addDataOrder() {
         FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
         DatabaseReference mreference = mdatabase.getReference("Hoadon");
-
         HashMap<String, Object> hashMap = new HashMap<>();
         Date date = new Date(System.currentTimeMillis());
         hashMap.put("ngaymua", date.toString());
-        User user = new User();
         hashMap.put("tenkhachhang", ed_name.getText().toString());
         hashMap.put("diachi", ed_diachi.getText().toString());
         hashMap.put("phone", ed_phone.getText().toString());
@@ -208,5 +230,14 @@ public class GioHangFragment extends Fragment {
             listDetailOrder.add(detailOrder);
         }
         return listDetailOrder;
+    }
+    public int validate(){
+        int check=1;
+        if (ed_name.getText().length()==0){
+            Toast.makeText(mainActivity, "Tên khách hàng không được để trống", Toast.LENGTH_SHORT).show();
+            check=-1;
+
+        }
+        return check;
     }
 }

@@ -55,7 +55,6 @@ public class HistoryActivity extends AppCompatActivity {
         listOrder = new ArrayList<>();
         listDetailOrder = new ArrayList<>();
 
-
         adapter = new LichsuAdapter();
 
         ed_phone = findViewById(R.id.ed_search);
@@ -74,7 +73,7 @@ public class HistoryActivity extends AppCompatActivity {
     // set data cho HistoryProductAdapter
     private void setDataHistoryProductAdapter(){
         adapter.setData(listDetailOrder,listOrder);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HistoryActivity.this,RecyclerView.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
         rcv.setLayoutManager(linearLayoutManager);
         rcv.setAdapter(adapter);
     }
@@ -110,7 +109,6 @@ public class HistoryActivity extends AppCompatActivity {
                         }
 
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         Toast.makeText(HistoryActivity.this,"Không lấy được thông tin đơn hàng từ firebase",Toast.LENGTH_SHORT).show();
