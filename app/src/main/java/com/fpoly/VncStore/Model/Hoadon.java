@@ -6,12 +6,12 @@ public class Hoadon {
     private String imge;
     private String trangthai;
     private int soluong;
-    private String giasp;
+    private int giasp;
 
     public Hoadon() {
     }
 
-    public Hoadon(String orderNo, String namesp, String imge, String trangthai, int soluong, String giasp) {
+    public Hoadon(String orderNo, String namesp, String imge, String trangthai, int soluong, int giasp) {
         OrderNo = orderNo;
         this.namesp = namesp;
         this.imge = imge;
@@ -60,11 +60,11 @@ public class Hoadon {
         this.soluong = soluong;
     }
 
-    public String getGiasp() {
+    public int getGiasp() {
         return giasp;
     }
 
-    public void setGiasp(String giasp) {
+    public void setGiasp(int giasp) {
         this.giasp = giasp;
     }
 }

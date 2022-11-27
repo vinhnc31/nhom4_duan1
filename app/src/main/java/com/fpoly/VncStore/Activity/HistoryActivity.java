@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,69 +28,118 @@ import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private List<Hoadon> list;
-    private List<Oder> oderList;
+    private List<Hoadon> listDetailOrder;
+    private List<Oder> listOrder;
     EditText ed_phone;
     ImageView img_search;
     LichsuAdapter adapter;
     RecyclerView rcv;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (!ed_phone.getText().toString().trim().isEmpty()){
+            findOrder();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        ed_phone = findViewById(R.id.ed_search);
-        img_search = findViewById(R.id.img_search);
-        list = new ArrayList<>();
-        oderList = new ArrayList<>();
-        adapter = new LichsuAdapter();
-        rcv = findViewById(R.id.rcv_histor);
-        adapter.setData(list, oderList);
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        rcv.setLayoutManager(manager);
-        rcv.setAdapter(adapter);
-        Search();
+
+        initItem();
     }
 
-    private void Search() {
-        list.clear();
-        oderList.clear();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Hoadon");
-        reference.orderByChild("phone").equalTo(ed_phone.getText().toString()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                adapter.notifyDataSetChanged();
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    Oder oder = snapshot1.getValue(Oder.class);
-                    oder.setOrderNo(snapshot1.getKey());
-                    oderList.add(oder);
-                }
-                if (oderList.size() > 0) {
-                    // Lấy thông tin detail order
-                    findDetailOrder(reference);
-                }
-            }
+    private void initItem(){
+        listOrder = new ArrayList<>();
+        listDetailOrder = new ArrayList<>();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
+        adapter = new LichsuAdapter();
+
+        ed_phone = findViewById(R.id.ed_search);
+
+        rcv = findViewById(R.id.rcv_histor);
+        img_search =findViewById(R.id.img_search);
+        img_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findOrder();
             }
         });
+        findOrder();
     }
 
-    private void findDetailOrder(DatabaseReference reference) {
-        if (oderList.size() > 0) {
-            for (int i = 0; i < oderList.size(); i++) {
-                Oder oder = oderList.get(i);
-                reference.child(oder.getOrderNo()).child("detal").addValueEventListener(new ValueEventListener() {
+    // set data cho HistoryProductAdapter
+    private void setDataHistoryProductAdapter(){
+        adapter.setData(listDetailOrder,listOrder);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HistoryActivity.this,RecyclerView.VERTICAL,false);
+        rcv.setLayoutManager(linearLayoutManager);
+        rcv.setAdapter(adapter);
+    }
+
+    // Lấy thông tin order
+    private void findOrder(){
+
+        // Clear các list dữ liệu khi tìm kiếm
+        listOrder.clear();
+        listDetailOrder.clear();
+
+        // Kết nối tới data base
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Hoadon");
+        // Lấy thông tin order
+        myRef.orderByChild("phone").equalTo(ed_phone.getText().toString())
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        adapter.notifyDataSetChanged();
+                        for (DataSnapshot dataOrder : snapshot.getChildren()){
+                            Oder order = dataOrder.getValue(Oder.class);
+                            order.setOrderNo(dataOrder.getKey());
+                            listOrder.add(order);
+                        }
+                        if (listOrder.size() > 0){
+                            // Lấy thông tin detail order
+                            findDetailOrder(myRef);
+                        }
+                        else {
+                            Toast.makeText(HistoryActivity.this,"Không tìm thấy lịch sử đặt hàng",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(HistoryActivity.this,"Không lấy được thông tin đơn hàng từ firebase",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    // Lấy thông tin detail order
+    private void findDetailOrder( DatabaseReference myRef){
+        if (listOrder.size() > 0){
+            for (int i = 0; i<listOrder.size(); i++){
+                Oder order = listOrder.get(i);
+                myRef.child(order.getOrderNo()).child("detail").addValueEventListener(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        adapter.notifyDataSetChanged();
+                        for (DataSnapshot dataDetail : snapshot.getChildren()){
                             adapter.notifyDataSetChanged();
-                            Hoadon hoadon=snapshot1.getValue(Hoadon.class);
-                            list.add(hoadon);
+                            Hoadon detailOrder = dataDetail.getValue(Hoadon.class);
+                            listDetailOrder.add(detailOrder);
+                        }
+
+                        // set data HistoryProductAdapter
+                        if (listDetailOrder.size() > 0){
+                            setDataHistoryProductAdapter();
                         }
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         Toast.makeText(HistoryActivity.this,"Không lấy được chi tiết đơn hàng từ firebase",Toast.LENGTH_SHORT).show();

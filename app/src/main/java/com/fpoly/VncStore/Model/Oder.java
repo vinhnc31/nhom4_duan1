@@ -7,19 +7,19 @@ public class Oder {
     private String OrderNo;
     private String diachi;
     private String name;
-    private String so;
-    private String ngay;
+    private String phone;
+    private String ngaymua;
     private String trangthai;
     private int soluong;
     private int tong;
     private List<Hoadon> hoadonList;
 
-    public Oder(String orderNo, String diachi, String name, String so, String ngay, String trangthai, int soluong, int tong, List<Hoadon> hoadonList) {
+    public Oder(String orderNo, String diachi, String name, String phone, String ngaymua, String trangthai, int soluong, int tong, List<Hoadon> hoadonList) {
         OrderNo = orderNo;
         this.diachi = diachi;
         this.name = name;
-        this.so = so;
-        this.ngay = ngay;
+        this.phone = phone;
+        this.ngaymua = ngaymua;
         this.trangthai = trangthai;
         this.soluong = soluong;
         this.tong = tong;
@@ -50,20 +50,23 @@ public class Oder {
         this.name = name;
     }
 
-    public String getSo() {
-        return so;
+    public Oder() {
     }
 
-    public void setSo(String so) {
-        this.so = so;
+    public String getPhone() {
+        return phone;
     }
 
-    public String getNgay() {
-        return ngay;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setNgay(String ngay) {
-        this.ngay = ngay;
+    public String getNgaymua() {
+        return ngaymua;
+    }
+
+    public void setNgaymua(String ngaymua) {
+        this.ngaymua = ngaymua;
     }
 
     public String getTrangthai() {

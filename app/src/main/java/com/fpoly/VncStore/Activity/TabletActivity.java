@@ -1,5 +1,7 @@
 package com.fpoly.VncStore.Activity;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -104,17 +106,19 @@ public class TabletActivity extends AppCompatActivity {
     }
 
     public void gethienthi() {
-        mreference.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query query = mreference.orderByChild("loai").equalTo("Tablet");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Log.d("TAG", "onDataChange: " + dataSnapshot.toString());
+                    Log.d(TAG, "onDataChange: " + dataSnapshot.toString());
                     Sanpham sanpham = dataSnapshot.getValue(Sanpham.class);
-                    Log.d("TAG", "onDataChange: " + sanpham.getName());
+                    Log.d(TAG, "onDataChange: " + sanpham.getName());
                     list.add(sanpham);
                     adapter.notifyDataSetChanged();
                 }
+
             }
 
             @Override

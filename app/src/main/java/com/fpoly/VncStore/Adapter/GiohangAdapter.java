@@ -1,7 +1,7 @@
 package com.fpoly.VncStore.Adapter;
 
+import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.ChucNang.GioHangFragment;
-import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
 import com.squareup.picasso.Picasso;
@@ -17,10 +17,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhoder> {
-
+    private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
     private int countProduct;
     private List<Sanpham> sanphamList;
     MainActivity mainActivity;
@@ -46,7 +47,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
         Sanpham sanpham = sanphamList.get(position);
         Picasso.get().load(sanpham.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(holder.img_sanpham);
         holder.tv_ten.setText(sanpham.getName());
-        holder.tv_gia.setText(sanpham.getGia());
+        holder.tv_gia.setText(formatPrice.format(sanpham.getGia())+ " VNĐ");
         holder.img_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +56,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
                     countProduct++;
                     holder.tv_soluong.setText(String.valueOf(countProduct));
                     mainActivity.setCountForProduct(position,countProduct);
-                    gioHangFragment.setTotalPrice(1,1, Integer.parseInt(sanpham.getGia()));
+                    gioHangFragment.setTotalPrice(1,1, sanpham.getGia());
                     notifyDataSetChanged();
                 }
             }
@@ -68,7 +69,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
                     countProduct--;
                     holder.tv_soluong.setText(String.valueOf(countProduct));
                     mainActivity.setCountForProduct(position,countProduct);
-                    gioHangFragment.setTotalPrice(0,1, Integer.parseInt(sanpham.getGia()));
+                    gioHangFragment.setTotalPrice(0,1, sanpham.getGia());
                     notifyDataSetChanged();
                 }
             }
@@ -78,7 +79,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
             public void onClick(View view) {
                 countProduct = Integer.parseInt(holder.tv_soluong.getText().toString());
 
-                gioHangFragment.setTotalPrice(0,countProduct, Integer.parseInt(sanpham.getGia()));
+                gioHangFragment.setTotalPrice(0,countProduct, sanpham.getGia());
 
                 sanphamList.remove(position);
                 if (sanphamList.size() == 0){

@@ -18,14 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.fpoly.VncStore.Activity.DienThoaiActivity;
 import com.fpoly.VncStore.Activity.HistoryActivity;
-import com.fpoly.VncStore.Activity.ThongTin;
 import com.fpoly.VncStore.Adapter.DanhmucAdapter;
-import com.fpoly.VncStore.Adapter.LichsuAdapter;
 import com.fpoly.VncStore.Adapter.PhotoAdapter;
 import com.fpoly.VncStore.Adapter.SanphamAdapter;
-import com.fpoly.VncStore.MainActivity;
+import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Model.Danhmuc;
 import com.fpoly.VncStore.Model.Photo;
 import com.fpoly.VncStore.Model.Sanpham;

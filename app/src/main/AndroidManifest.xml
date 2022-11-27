@@ -72,7 +72,7 @@
             android:name=".Login.SignIn"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="true" />
 
         <service

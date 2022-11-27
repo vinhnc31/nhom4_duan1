@@ -15,9 +15,11 @@ import com.fpoly.VncStore.Model.Oder;
 import com.fpoly.VncStore.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuViewHodel> {
+    private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
     private List<Hoadon> list;
     private List<Oder> oderList;
     private Oder oder;
@@ -44,18 +46,18 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
         Picasso.get().load(hoadon.getImge()).into(holder.img_anh);
         holder.ten.setText(hoadon.getNamesp());
         holder.soluong.setText(String.valueOf(hoadon.getSoluong()));
-        holder.gia.setText(hoadon.getGiasp());
+        holder.gia.setText(formatPrice.format(hoadon.getGiasp()));
         holder.trangthai.setText(hoadon.getTrangthai());
         holder.madonhang.setText(hoadon.getOrderNo().toUpperCase());
         for (Oder oder : oderList) {
-            if (oder.getNgay().equals(hoadon.getOrderNo())) {
-                holder.ngay.setText(oder.getNgay());
+            if (oder.getOrderNo().equals(hoadon.getOrderNo())) {
+                holder.ngay.setText(oder.getNgaymua());
                 break;
             }
         }
         holder.itemView.setOnClickListener(view -> {
             for (Oder od : oderList) {
-                if (oder.getOrderNo().equals(hoadon.getOrderNo())){
+                if (od.getOrderNo().equals(hoadon.getOrderNo())){
                     oder=od;
                     break;
                 }

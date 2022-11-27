@@ -20,8 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Adapter.GiohangAdapter;
-import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.Model.Hoadon;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.Model.User;
@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -51,6 +52,7 @@ public class GioHangFragment extends Fragment {
     private RecyclerView recyclerView;
     private EditText ed_name, ed_diachi, ed_phone;
     private Button button;
+    private DecimalFormat format;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,6 +86,7 @@ public class GioHangFragment extends Fragment {
                 addDataOrder();
             }
         });
+        format = new DecimalFormat("###,###,###");
     }
 
     // Set trạng thái hiển thị các view
@@ -116,13 +119,14 @@ public class GioHangFragment extends Fragment {
     private void setVisibilityCart() {
         relativeLayout.setVisibility(View.VISIBLE);
         relativeLayout1.setVisibility(View.GONE);
-        tv_giatien.setText(getTotalPrice() + " VNĐ");
+        String total = format.format(getTotalPrice());
+        tv_giatien.setText(total + " VNĐ");
     }
 
     // lấy giá trị tổng tiền tất cả sản phẩm trong giỏ hàng
     private int getTotalPrice() {
         for (Sanpham sanpham : MainActivity.sanphamList) {
-            int priceProduct = Integer.parseInt(sanpham.getGia());
+            int priceProduct = sanpham.getGia();
             totalPrice = totalPrice + priceProduct * sanpham.getNumProduct();
         }
         return totalPrice;
@@ -138,7 +142,7 @@ public class GioHangFragment extends Fragment {
             totalPrice = totalPrice + priceProduct * count;
         }
 
-        tv_giatien.setText(totalPrice + " VNĐ");
+        tv_giatien.setText(format.format(totalPrice) + " VNĐ");
     }
 
     // Set sô lượng sản phẩm sau nhấn nút tăng giảm
