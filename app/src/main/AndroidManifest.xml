@@ -15,42 +15,75 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VncStore"
         tools:targetApi="31" >
+
         <activity
             android:name=".Search_Activity"
-            android:exported="false" >
+            android:exported="false"/>
 
-
+<!--        //chi tiet sp-->
+        <activity
+            android:name=".Activity.ChitietActivity"
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+<!--        HistoryActivity-->
+        <activity
+            android:name=".Activity.HistoryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+<!--        DetailedActivity-->
         <activity
             android:name=".Activity.DetailedActivity"
             android:exported="true" />
+
+<!--        DienThoaiActivity-->
         <activity
             android:name=".Activity.DienThoaiActivity"
             android:exported="true" />
+
+<!--        TabletActivity-->
         <activity
             android:name=".Activity.TabletActivity"
             android:exported="true" />
+
+<!--        Loading-->
         <activity
             android:name=".Activity.Loading"
             android:exported="true" />
+
+<!--        PhuKienActivity-->
         <activity
             android:name=".Activity.PhuKienActivity"
             android:exported="true" />
+
+<!--        LapTopActivity-->
         <activity
             android:name=".Activity.LapTopActivity"
             android:exported="true" />
+
+<!--        OpLungActivity-->
         <activity
             android:name=".Activity.OpLungActivity"
             android:exported="true" />
+
+<!--        DoiMatKhau-->
         <activity
             android:name=".Activity.DoiMatKhau"
             android:exported="true" />
+
+<!--        ThongTin-->
         <activity
             android:name=".Activity.ThongTin"
             android:exported="true" />
+
+<!--        Shaper-->
         <activity
             android:name=".Activity.Shaper"
             android:exported="true" >
@@ -60,20 +93,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+<!--        SignUp-->
         <activity
             android:name=".Login.SignUp"
             android:exported="true" />
+
+<!--        SignIn-->
         <activity
             android:name=".Login.SignIn"
-            android:exported="false" />
-        <activity
-
-
-            android:name=".MainActivity"
             android:exported="true" />
 
-<!--            android:name=".MainActivity"-->
-<!--            android:exported="true"></activity>-->
+<!--        MainActivity-->
+        <activity
+            android:name=".Activity.MainActivity"
+            android:exported="true" />
 
 
         <service

@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.widget.ImageView;
 
 import com.fpoly.VncStore.Login.SignIn;
-import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,8 +23,7 @@ public class Shaper extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-//                nextActivity();
-                startActivity(new Intent(Shaper.this, SignIn.class));
+                nextActivity();
             }
 
         },3120);

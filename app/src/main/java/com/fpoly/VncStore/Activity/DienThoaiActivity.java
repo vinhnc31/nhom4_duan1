@@ -1,7 +1,6 @@
 package com.fpoly.VncStore.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +19,6 @@ import com.fpoly.VncStore.Adapter.Adapter_Spinner;
 import com.fpoly.VncStore.Adapter.SanphamAdapter;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,12 +63,6 @@ public class DienThoaiActivity extends AppCompatActivity {
         spinner = findViewById(R.id.spin_sp);
         spadapter = new Adapter_Spinner(getApplicationContext(), listchucnang, listIcon);
         spinner.setAdapter(spadapter);
-//<<<<<<< HEAD
-//        img_check=findViewById(R.id.img_check);
-//        check=findViewById(R.id.tv_check);
-
-//=======
-//>>>>>>> d2a593c1ca1073b8a812036933cdf3329d9e93db
         textView = findViewById(R.id.back_tk);
         progressBar = new ProgressBar(this);
         mdatabase = FirebaseDatabase.getInstance();
@@ -118,13 +110,13 @@ public class DienThoaiActivity extends AppCompatActivity {
     }
 
     public void gethienthi() {
-        mreference.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query query = mreference.orderByChild("loai").equalTo("Điện Thoại");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Log.d(TAG, "onDataChange: " + dataSnapshot.toString());
-
                     Sanpham sanpham = dataSnapshot.getValue(Sanpham.class);
                     Log.d(TAG, "onDataChange: " + sanpham.getName());
                     list.add(sanpham);
@@ -173,7 +165,6 @@ public class DienThoaiActivity extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

@@ -86,7 +86,7 @@ public class Search_Activity extends AppCompatActivity {
                     ArrayList<String> listSanPham = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         listSanPham = new ArrayList<>();
-                        sanpham = new Sanpham(dataSnapshot.child("name").getValue(String.class), dataSnapshot.child("Gia").getValue(String.class), dataSnapshot.child("image").getValue(String.class), dataSnapshot.child("khuyenmai").getValue(String.class), dataSnapshot.child("moTa").getValue(String.class));
+                        sanpham = new Sanpham(dataSnapshot.child("name").getValue(String.class), dataSnapshot.child("Gia").getValue(String.class), dataSnapshot.child("image").getValue(int.class), dataSnapshot.child("khuyenmai").getValue(String.class), dataSnapshot.child("moTa").getValue(String.class));
                         listSanPham.add(sanpham.getName() + "\n" + sanpham.getGia() + "\n" + sanpham.getImage() + "\n" + sanpham.getKhuyenmai() + "\n" + sanpham.getMoTa());
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, listSanPham);

@@ -54,6 +54,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:drawableLeft="@drawable/ic_baseline_drive_file_rename_outline_24"
                         android:hint="Name"
                         android:paddingLeft="10dp"
                         android:paddingBottom="20dp" />
@@ -63,6 +64,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Email "
+                        android:drawableLeft="@drawable/ic_baseline_email_24"
                         android:paddingLeft="10dp"
                         android:paddingBottom="20dp" />
 
@@ -72,6 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Số điện thoại"
+                        android:drawableLeft="@drawable/ic_baseline_phone_24"
                         android:paddingLeft="10dp"
                         android:paddingBottom="20dp" />
 
@@ -80,6 +83,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Địa Chỉ"
+                        android:drawableLeft="@drawable/ic_baseline_edit_location_alt_24"
                         android:paddingLeft="10dp"
                         android:paddingBottom="20dp" />
                 </LinearLayout>

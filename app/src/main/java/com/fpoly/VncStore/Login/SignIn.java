@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 
 import com.fpoly.VncStore.Activity.Loading;
-import com.fpoly.VncStore.MainActivity;
+import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.R;
 
 import com.google.android.gms.tasks.OnCompleteListener;

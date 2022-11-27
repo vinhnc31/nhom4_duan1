@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#E8FA80"
+    android:background="#4F80FAEC"
     android:layout_height="match_parent">
     <TextView
         android:layout_marginTop="30dp"
@@ -11,6 +11,7 @@
         android:textColor="@color/black"
         android:layout_gravity="center"
         android:text="Xác Nhận Tài khoản"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <com.google.android.material.textfield.TextInputLayout
@@ -24,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="25dp"
-            android:background="@drawable/bogoc"
             android:hint="Tài Khoản, Email.."
             android:padding="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -39,8 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="25dp"
-            android:background="@drawable/bogoc"
-            android:hint="PassWord"
+            android:hint="Mật khẩu"
             android:inputType="textPassword"
             android:padding="12dp" />
 
