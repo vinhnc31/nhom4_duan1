@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
 import com.google.firebase.database.DatabaseReference;
@@ -32,18 +31,12 @@ public class DetailedActivity extends AppCompatActivity {
     MainActivity mainActivity;
     List<Sanpham> sanphamList;
 
-    public DetailedActivity(Sanpham sanpham, List<Sanpham> sanphamList) {
-        this.sanpham = sanpham;
-        this.sanphamList = sanphamList;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed);
         Anhxa();
         xulyxukien();
-
         textView.setOnClickListener(view -> {
             super.onBackPressed();
             overridePendingTransition(R.anim.enter_left_to_right, R.anim.exit_left_to_right);
@@ -101,15 +94,5 @@ public class DetailedActivity extends AppCompatActivity {
                 }
             });
         }
-
-
-        //asknsakn
-//            tv_tensp.setText(""+sanpham.getName());
-//            tv_giamsp.setText(""+sanpham.getGia()+" Vnd");
-//            tv_khuyenmai.setText(""+sanpham.getKhuyenmai()+"%");
-//             tv_mota.setText(sanpham.getMoTa());
-
     }
-
 }
-
