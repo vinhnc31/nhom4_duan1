@@ -24,6 +24,7 @@ import com.fpoly.VncStore.Adapter.GiohangAdapter;
 import com.fpoly.VncStore.MainActivity;
 import com.fpoly.VncStore.Model.Hoadon;
 import com.fpoly.VncStore.Model.Sanpham;
+import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,9 +44,9 @@ public class GioHangFragment extends Fragment {
     private Sanpham sanpham;
     private RelativeLayout relativeLayout, relativeLayout1;
     private View v;
+    private MainActivity mainActivity;
     private List<Sanpham> sanphamList;
     private TextView tv_giatien;
-    private MainActivity mainActivity;
     private GiohangAdapter giohangAdapter;
     private RecyclerView recyclerView;
     private EditText ed_name, ed_diachi, ed_phone;
@@ -148,12 +149,14 @@ public class GioHangFragment extends Fragment {
     public void addDataOrder() {
         FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
         DatabaseReference mreference = mdatabase.getReference("Hoadon");
+
         HashMap<String, Object> hashMap = new HashMap<>();
         Date date = new Date(System.currentTimeMillis());
         hashMap.put("ngaymua", date.toString());
-//        hashMap.put("tenkhachhang", ed_name.getText().toString());
-//        hashMap.put("diachi", ed_diachi.getText().toString());
-//        hashMap.put("phone", ed_phone.getText().toString());
+        User user = new User();
+        hashMap.put("tenkhachhang", ed_name.getText().toString());
+        hashMap.put("diachi", ed_diachi.getText().toString());
+        hashMap.put("phone", ed_phone.getText().toString());
         int num = 0;
         for (Sanpham sanpham : MainActivity.sanphamList) {
             num = num + sanpham.getNumProduct();
@@ -161,7 +164,6 @@ public class GioHangFragment extends Fragment {
         hashMap.put("soluong", num);
         hashMap.put("tongtien", totalPrice);
         String oderkey = mreference.push().getKey();
-
         mreference.child(oderkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -173,7 +175,7 @@ public class GioHangFragment extends Fragment {
                             .setValue(detailOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(getContext(), "Đã đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Đã đăng ký đơn hàng", Toast.LENGTH_SHORT).show();
                                     MainActivity.sanphamList.clear();
                                     setVisibilityEmptyCart();
                                 }
@@ -184,7 +186,7 @@ public class GioHangFragment extends Fragment {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(),"Đặt Hàng Thất Bại",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Đăng ký đơn hàng thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }
