@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Sanpham implements Serializable {
     private String name;
     private String image;
-    private String Gia;
+    private long Gia;
     private String khuyenmai;
     private String moTa;
 
@@ -13,10 +13,10 @@ public class Sanpham implements Serializable {
     public Sanpham() {
     }
 
-    public Sanpham(String name, String image, String gia, String khuyenmai, String moTa) {
+    public Sanpham(String name, String image, long gia, String khuyenmai, String moTa) {
         this.name = name;
         this.image = image;
-        Gia = gia;
+        this.Gia = gia;
         this.khuyenmai = khuyenmai;
         this.moTa = moTa;
     }
@@ -37,11 +37,11 @@ public class Sanpham implements Serializable {
         this.image = image;
     }
 
-    public String getGia() {
+    public long getGia() {
         return Gia;
     }
 
-    public void setGia(String  gia) {
+    public void setGia(long  gia) {
         Gia = gia;
     }
 

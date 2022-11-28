@@ -122,7 +122,7 @@ public class GioHangFragment extends Fragment {
     // lấy giá trị tổng tiền tất cả sản phẩm trong giỏ hàng
     private int getTotalPrice() {
         for (Sanpham sanpham : MainActivity.sanphamList) {
-            int priceProduct = Integer.parseInt(sanpham.getGia());
+            int priceProduct = (int) sanpham.getGia();
             totalPrice = totalPrice + priceProduct * sanpham.getNumProduct();
         }
         return totalPrice;
@@ -197,7 +197,7 @@ public class GioHangFragment extends Fragment {
             Hoadon detailOrder = new Hoadon();
             detailOrder.setOrderNo(odrNo);
             detailOrder.setNamesp(product.getName());
-            detailOrder.setGiasp(product.getGia());
+            detailOrder.setGiasp(String.valueOf(product.getGia()));
             detailOrder.setImge(product.getImage());
             detailOrder.setSoluong(product.getNumProduct());
             detailOrder.setTrangthai("Đang chờ xác nhận");
