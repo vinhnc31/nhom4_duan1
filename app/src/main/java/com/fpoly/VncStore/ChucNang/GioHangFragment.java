@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Adapter.GiohangAdapter;
+import com.fpoly.VncStore.Login.SignIn;
+import com.fpoly.VncStore.Login.SignUp;
 import com.fpoly.VncStore.Model.Hoadon;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.Model.User;
@@ -176,7 +178,10 @@ public class GioHangFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addDataOrder() {
         FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mreference = mdatabase.getReference("Hoadon");
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        String email1=user.getEmail();
+        email1=email1.replace(".","_");
+        DatabaseReference mreference = mdatabase.getReference("Hoadon/"+email1);
         HashMap<String, Object> hashMap = new HashMap<>();
         Date date = new Date(System.currentTimeMillis());
         hashMap.put("ngaymua", date.toString());
@@ -196,7 +201,6 @@ public class GioHangFragment extends Fragment {
                 List<Hoadon> listDetailOrder = makeDetailOrder(oderkey);
                 // Add thông tin detail order
                 for (Hoadon detailOrder : listDetailOrder) {
-
                     mreference.child(oderkey).child("detail").child(mreference.push().getKey())
                             .setValue(detailOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

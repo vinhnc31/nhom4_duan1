@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.fpoly.VncStore.Activity.Loading;
 import com.fpoly.VncStore.Activity.MainActivity;
+import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -108,6 +109,7 @@ public class SignIn extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             dialog.dismiss();
                             if (task.isSuccessful()) {
+
                                 startActivity(new Intent(SignIn.this, MainActivity.class));
                                 finish();
                             } else {
