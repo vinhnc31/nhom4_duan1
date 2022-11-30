@@ -195,7 +195,7 @@ public class GioHangFragment extends Fragment {
             Hoadon detailOrder = new Hoadon();
             detailOrder.setOrderNo(odrNo);
             detailOrder.setNamesp(product.getName());
-            detailOrder.setGiasp(product.getGia());
+            detailOrder.setGiasp(Integer.parseInt(product.getGia()));
             detailOrder.setImge(product.getImage());
             detailOrder.setSoluong(product.getNumProduct());
             detailOrder.setTrangthai("Đang chờ xác nhận");
