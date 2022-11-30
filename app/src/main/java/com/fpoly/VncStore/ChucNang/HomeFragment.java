@@ -14,11 +14,14 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 
+import com.fpoly.VncStore.Activity.DetailedActivity;
 import com.fpoly.VncStore.Adapter.DanhmucAdapter;
 import com.fpoly.VncStore.Adapter.PhotoAdapter;
 import com.fpoly.VncStore.Adapter.SanphamAdapter;
@@ -160,13 +163,16 @@ public class HomeFragment extends Fragment {
 
     //search sp
     private void setSanPhamSearchAdapter(List<Sanpham> sanphamList1) {
-        SearchSanPhamAdapter searchSanPhamAdapter = new SearchSanPhamAdapter(mainActivity,R.layout.item_search_sanpham, sanphamList1);
+        SearchSanPhamAdapter searchSanPhamAdapter = new SearchSanPhamAdapter(getActivity(),R.layout.item_search_sanpham, sanphamList1);
         autoCompleteTextViewSearch.setAdapter(searchSanPhamAdapter);
 
         autoCompleteTextViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+//                Intent intent = new Intent(HomeFragment.this.getActivity(), DetailedActivity.class);
+//                HomeFragment.this.startActivity(intent);
+                getActivity().getSupportFragmentManager();
+                getContext();
             }
         });
 
@@ -204,4 +210,8 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 }

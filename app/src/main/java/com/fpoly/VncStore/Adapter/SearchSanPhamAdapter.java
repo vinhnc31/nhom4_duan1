@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.fpoly.VncStore.ChucNang.HomeFragment;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
 
@@ -25,10 +26,11 @@ public class SearchSanPhamAdapter extends ArrayAdapter<Sanpham> {
     private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
     private List<Sanpham> listSearchSanPham;
 
-    public SearchSanPhamAdapter(@NonNull Context context, int resource, List<Sanpham> objects) {
+    public SearchSanPhamAdapter(@NonNull Context context, int resource, @NonNull List<Sanpham> objects) {
         super(context, resource, objects);
-        listSearchSanPham = new ArrayList<>(objects);
+        listSearchSanPham= new ArrayList<>(objects);
     }
+
 
     @NonNull
     @Override

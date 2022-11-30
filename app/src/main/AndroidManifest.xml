@@ -18,7 +18,9 @@
 
         <activity
             android:name=".Search_Activity"
-            android:exported="false"/>
+            android:exported="true">
+
+        </activity>
 
 <!--        //chi tiet sp-->
         <activity
