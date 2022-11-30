@@ -24,7 +24,6 @@ import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Adapter.GiohangAdapter;
 import com.fpoly.VncStore.Model.Hoadon;
 import com.fpoly.VncStore.Model.Sanpham;
-import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -153,7 +152,6 @@ public class GioHangFragment extends Fragment {
         HashMap<String, Object> hashMap = new HashMap<>();
         Date date = new Date(System.currentTimeMillis());
         hashMap.put("ngaymua", date.toString());
-        User user = new User();
         hashMap.put("tenkhachhang", ed_name.getText().toString());
         hashMap.put("diachi", ed_diachi.getText().toString());
         hashMap.put("phone", ed_phone.getText().toString());
@@ -197,7 +195,7 @@ public class GioHangFragment extends Fragment {
             Hoadon detailOrder = new Hoadon();
             detailOrder.setOrderNo(odrNo);
             detailOrder.setNamesp(product.getName());
-            detailOrder.setGiasp(product.getGia());
+            detailOrder.setGiasp(Integer.parseInt(product.getGia()));
             detailOrder.setImge(product.getImage());
             detailOrder.setSoluong(product.getNumProduct());
             detailOrder.setTrangthai("Đang chờ xác nhận");

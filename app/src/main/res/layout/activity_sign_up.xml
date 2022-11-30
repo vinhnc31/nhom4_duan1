@@ -39,11 +39,12 @@
         app:layout_constraintVertical_bias="0.713" />
 
     <TextView
+        android:id="@+id/tv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text=" Back"
+        android:text="Back"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

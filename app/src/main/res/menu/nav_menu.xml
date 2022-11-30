@@ -7,7 +7,8 @@
     <item
         android:id="@+id/giohang"
         android:icon="@drawable/ic_baseline_local_grocery_store_24"
-        android:title="Giở Hàng" />
+        android:title="Giở Hàng"
+       />
     <item
         android:id="@+id/taikhoan"
         android:icon="@drawable/ic_baseline_person_24"

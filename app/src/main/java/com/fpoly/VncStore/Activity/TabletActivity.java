@@ -105,7 +105,7 @@ public class TabletActivity extends AppCompatActivity {
     }
 
     public void gethienthi() {
-        Query query = mreference.orderByChild("loai").equalTo("Ipat");
+        Query query = mreference.orderByChild("loai").equalTo("Điện Thoại");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

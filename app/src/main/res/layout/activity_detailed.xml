@@ -67,7 +67,7 @@
     android:id="@+id/linear"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     app:layout_constraintTop_toBottomOf="@+id/tv_tensp">
     <TextView
         android:id="@+id/tv_gia"
@@ -78,11 +78,13 @@
         android:textSize="20sp"
         android:textColor="@color/red"/>
     <TextView
+        android:textColor="@color/red"
         android:id="@+id/tv_khuyenmai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="10%"
+        android:background="#F6A2A2"
         android:textSize="18sp" />
 
 </LinearLayout>

@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fpoly.VncStore.Activity.Loading;
-import com.fpoly.VncStore.ChucNang.TaiKhoanFragment;
 import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
@@ -30,8 +30,8 @@ public class SignUp extends AppCompatActivity {
     private Loading dialog;
     String email, pass, repass, name, diachi, sodt;
     TextView tv_dk;
+    ImageView img;
     FirebaseAuth auth;
-    TaiKhoanFragment taiKhoan;
     TextInputLayout textInputLayout1, textInputLayout2, textInputLayout3, textInputLayout4, textInputLayout5, textInputLayout6;
 
 
@@ -46,6 +46,7 @@ public class SignUp extends AppCompatActivity {
         textInputLayout5 = findViewById(R.id.TextInputLayout7);
         textInputLayout6 = findViewById(R.id.TextInputLayout8);
         tv_dk = findViewById(R.id.tvdk);
+        img=findViewById(R.id.back_signup);
         ed_tendn = findViewById(R.id.ed_userNamedk);
         ed_name = findViewById(R.id.ed_name);
         findViewById(R.id.back_signup).setOnClickListener(v -> {
@@ -53,7 +54,6 @@ public class SignUp extends AppCompatActivity {
             overridePendingTransition(R.anim.enter_left_to_right, R.anim.exit_left_to_right);
         });
         ed_sodt = findViewById(R.id.ed_sodt);
-        taiKhoan = new TaiKhoanFragment();
         ed_diachi = findViewById(R.id.ed_diachi);
         ed_mk = findViewById(R.id.ed_passWorddk);
         dialog = new Loading(this);
@@ -68,20 +68,23 @@ public class SignUp extends AppCompatActivity {
         btn_dangki.setOnClickListener(view -> {
             dangki();
         });
+        img.setOnClickListener(view -> {
+            startActivity(new Intent(SignUp.this, SignIn.class));
+            finish();
+        });
         Animation();
     }
 
     private void dangki() {
         pass = ed_mk.getText().toString();
         repass = ed_repass.getText().toString();
+        dialog.showDialog();
         if (validate() > 0) {
             name = ed_name.getText().toString();
             email = ed_tendn.getText().toString();
             sodt = ed_sodt.getText().toString();
             diachi = ed_diachi.getText().toString();
-            dialog.showDialog();
             diachi = ed_diachi.getText().toString();
-            dialog.showDialog();
             auth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
