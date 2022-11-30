@@ -40,7 +40,7 @@ import me.relex.circleindicator.CircleIndicator3;
 
 public class HomeFragment extends Fragment {
     RecyclerView.Adapter adapter;
-    RecyclerView recyclerView, rcv_sanphammoi;
+    RecyclerView recyclerView,rcv_sanphammoi;
     ViewPager2 viewPager2;
     CircleIndicator3 circleIndicator3;
     FirebaseDatabase mdatabase;
@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment {
     FirebaseStorage mstorage;
     SanphamAdapter adaptersanpham;
     List<Sanpham> sanphamList;
-    private ArrayList<Danhmuc> lists = new ArrayList<>();
+    private ArrayList<Danhmuc>lists=new ArrayList<>();
     private List<Photo> mlist;
     private Handler handler = new Handler();
     private Runnable runnable = new Runnable() {
@@ -67,21 +67,21 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        View v= inflater.inflate(R.layout.fragment_home, container, false);
         viewPager2 = v.findViewById(R.id.viewPager2);
         circleIndicator3 = v.findViewById(R.id.circle);
         mlist = getList();
         PhotoAdapter adapter = new PhotoAdapter(mlist);
         viewPager2.setAdapter(adapter);
         circleIndicator3.setViewPager(viewPager2);
-        recyclerView = v.findViewById(R.id.recyclerView);
+        recyclerView=v.findViewById(R.id.recyclerView);
         rcv_sanphammoi = v.findViewById(R.id.recyclerView1);
         sanphamList = new ArrayList<>();
         mdatabase = FirebaseDatabase.getInstance();
         mreference = mdatabase.getReference().child("SanPham");
         mstorage = FirebaseStorage.getInstance();
-        adaptersanpham = new SanphamAdapter(getContext(), sanphamList);
-        LinearLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
+        adaptersanpham = new SanphamAdapter(getContext(),sanphamList);
+        LinearLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         rcv_sanphammoi.setLayoutManager(layoutManager);
         rcv_sanphammoi.setAdapter(adaptersanpham);
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -89,27 +89,26 @@ public class HomeFragment extends Fragment {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 handler.removeCallbacks(runnable);
-                handler.postDelayed(runnable, 3000);
+                handler.postDelayed(runnable,3000);
             }
         });
         gethienthi();
         recyclerview();
         return v;
     }
-
     private void recyclerview() {
-        LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager manager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(manager);
-        ArrayList<Danhmuc> list = new ArrayList<>();
-        list.add(new Danhmuc("Laptop", R.drawable.laptop));
-        list.add(new Danhmuc("Điện Thoại", R.drawable.dienthoai));
-        list.add(new Danhmuc("Phụ Kiện", R.drawable.phukien));
-        list.add(new Danhmuc("Tablet", R.drawable.tablet));
-        list.add(new Danhmuc("Ốp lưng", R.drawable.oplung));
-        adapter = new DanhmucAdapter(list);
+        ArrayList<Danhmuc> list=new ArrayList<>();
+        list.add(new Danhmuc("Laptop",R.drawable.laptop));
+        list.add(new Danhmuc("Điện Thoại",R.drawable.dienthoai));
+        list.add(new Danhmuc("Phụ Kiện",R.drawable.phukien));
+        list.add(new Danhmuc("Tablet",R.drawable.tablet));
+        list.add(new Danhmuc("Ốp lưng",R.drawable.oplung));
+        adapter=new DanhmucAdapter(list);
         recyclerView.setAdapter(adapter);
-        lists = new ArrayList<>();
-        adapter = new DanhmucAdapter(lists);
+        lists=new ArrayList<>();
+        adapter=new DanhmucAdapter(lists);
     }
 
     private List<Photo> getList() {
@@ -134,9 +133,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        handler.postDelayed(runnable, 3000);
+        handler.postDelayed(runnable,3000);
     }
-
     public void gethienthi() {
         Query query = mreference.limitToLast(3);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -150,7 +148,6 @@ public class HomeFragment extends Fragment {
                     adaptersanpham.notifyDataSetChanged();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

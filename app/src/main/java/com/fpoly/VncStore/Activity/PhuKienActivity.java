@@ -105,7 +105,7 @@ public class PhuKienActivity extends AppCompatActivity {
     }
 
     public void gethienthi() {
-        Query query = mreference.orderByChild("loai").equalTo("Phụ Kiện");
+        Query query = mreference.orderByChild("loai").equalTo("Ốp Lưng");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -129,7 +129,7 @@ public class PhuKienActivity extends AppCompatActivity {
 
     public ArrayList<Sanpham> sapXepGiamDanTheoGia(ArrayList<Sanpham> list) {
         Collections.sort(list, (sanPham, t1) -> {
-            if (sanPham.getGia() < t1.getGia()) {
+            if (Integer.parseInt(sanPham.getGia()) < Integer.parseInt(t1.getGia())) {
                 return 1;
             } else {
                 if (sanPham.getGia() == t1.getGia()) {
@@ -142,7 +142,7 @@ public class PhuKienActivity extends AppCompatActivity {
 
     public ArrayList<Sanpham> sapXepTangDanTheoGia(ArrayList<Sanpham> list) {
         Collections.sort(list, (sanPham, t1) -> {
-            if (sanPham.getGia() < t1.getGia()) {
+            if (Integer.parseInt(sanPham.getGia()) < Integer.parseInt(t1.getGia())) {
                 return -1;
             } else {
                 if (sanPham.getGia() == t1.getGia()) {

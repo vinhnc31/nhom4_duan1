@@ -46,7 +46,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
         Sanpham sanpham = sanphamList.get(position);
         Picasso.get().load(sanpham.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(holder.img_sanpham);
         holder.tv_ten.setText(sanpham.getName());
-        holder.tv_gia.setText((int) sanpham.getGia());
+        holder.tv_gia.setText(sanpham.getGia());
         holder.img_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +55,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
                     countProduct++;
                     holder.tv_soluong.setText(String.valueOf(countProduct));
                     mainActivity.setCountForProduct(position,countProduct);
-                    gioHangFragment.setTotalPrice(1,1, (int) sanpham.getGia());
+                    gioHangFragment.setTotalPrice(1,1, Integer.parseInt(sanpham.getGia()));
                     notifyDataSetChanged();
                 }
             }
@@ -68,7 +68,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
                     countProduct--;
                     holder.tv_soluong.setText(String.valueOf(countProduct));
                     mainActivity.setCountForProduct(position,countProduct);
-                    gioHangFragment.setTotalPrice(0,1, (int) sanpham.getGia());
+                    gioHangFragment.setTotalPrice(0,1, Integer.parseInt(sanpham.getGia()));
                     notifyDataSetChanged();
                 }
             }
@@ -78,7 +78,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
             public void onClick(View view) {
                 countProduct = Integer.parseInt(holder.tv_soluong.getText().toString());
 
-                gioHangFragment.setTotalPrice(0,countProduct, (int) sanpham.getGia());
+                gioHangFragment.setTotalPrice(0,countProduct, Integer.parseInt(sanpham.getGia()));
 
                 sanphamList.remove(position);
                 if (sanphamList.size() == 0){
@@ -113,15 +113,11 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
             tv_gia = itemView.findViewById(R.id.tv_giasp);
             tv_soluong = itemView.findViewById(R.id.tv_soluong);
             img_add = itemView.findViewById(R.id.img_add);
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
             img_delete = itemView.findViewById(R.id.img_clear);
-=======
-
-            img_delete = itemView.findViewById(R.id.img_clear);
-//=======
-////            img_delete = itemView.findViewById(R.id.img_delete);
-//>>>>>>> 05f0ca922de2289b9019f8215afc67298468ad9c
->>>>>>> fd5ff751722c54f0dd13a16eefc32ffb0764c26f
+=========
+//            img_delete = itemView.findViewById(R.id.img_delete);
+>>>>>>>>> Temporary merge branch 2
             img_remove = itemView.findViewById(R.id.img_remove);
             img_sanpham = itemView.findViewById(R.id.img_giohang1);
         }

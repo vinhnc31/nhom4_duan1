@@ -129,7 +129,7 @@ public class OpLungActivity extends AppCompatActivity {
 
     public ArrayList<Sanpham> sapXepGiamDanTheoGia(ArrayList<Sanpham> list) {
         Collections.sort(list, (sanPham, t1) -> {
-            if (sanPham.getGia() < t1.getGia()) {
+            if (Integer.parseInt(sanPham.getGia()) < Integer.parseInt(t1.getGia())) {
                 return 1;
             } else {
                 if (sanPham.getGia() == t1.getGia()) {
@@ -142,7 +142,7 @@ public class OpLungActivity extends AppCompatActivity {
 
     public ArrayList<Sanpham> sapXepTangDanTheoGia(ArrayList<Sanpham> list) {
         Collections.sort(list, (sanPham, t1) -> {
-            if (sanPham.getGia() < t1.getGia()) {
+            if (Integer.parseInt(sanPham.getGia()) < Integer.parseInt(t1.getGia())) {
                 return -1;
             } else {
                 if (sanPham.getGia() == t1.getGia()) {

@@ -1,11 +1,14 @@
 package com.fpoly.VncStore.Activity;
 
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Notification;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,19 +18,22 @@ import android.widget.Button;
 import com.fpoly.VncStore.ChucNang.GioHangFragment;
 import com.fpoly.VncStore.ChucNang.HomeFragment;
 import com.fpoly.VncStore.ChucNang.TaiKhoanFragment;
+
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
-import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
     private FragmentManager fragmentManager;
-    public static List<Sanpham> sanphamList = new ArrayList<Sanpham>();
-    private int soluongsp = 0;
+   public static List<Sanpham> sanphamList = new ArrayList<Sanpham>();
+    private int countProduct;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +41,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
         navigationView = findViewById(R.id.tabLayout);
-        int soluong = 0;
-        for (Sanpham sanpham : MainActivity.sanphamList){
-           soluong += sanpham.getNumProduct();
+        if(sanphamList == null){
+            sanphamList = new ArrayList<>();
         }
-        soluongsp = soluong;
-        BadgeDrawable drawable = navigationView.getOrCreateBadge(R.id.giohang);
-        drawable.setVisible(true);
-        drawable.setNumber(soluongsp);
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, new HomeFragment()).addToBackStack(null).commit();
         navigationView.setOnNavigationItemSelectedListener(item -> {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -91,10 +92,9 @@ public class MainActivity extends AppCompatActivity {
         btnHuy.setOnClickListener(v -> alertDialog.dismiss());
     }
 
-
     // Thêm sản phẩm đã chọn vào giỏ hàng
     public void addToListCartProdct(Sanpham sanpham) {
-        MainActivity.sanphamList.add(sanpham);
+       MainActivity.sanphamList.add(sanpham);
     }
 
     // Lấy ra các sản phẩm đã thêm vào giỏ hàng
@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
     public void setCountForProduct(int possion, int countProduct) {
         sanphamList.get(possion).setNumProduct(countProduct);
     }
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -121,5 +120,4 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
-
 }
