@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fpoly.VncStore.Activity.DoiMatKhau;
+import com.fpoly.VncStore.Activity.HistoryActivity;
 import com.fpoly.VncStore.Activity.ThongTin;
 import com.fpoly.VncStore.Login.SignIn;
 import com.fpoly.VncStore.Activity.MainActivity;
@@ -26,7 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class TaiKhoanFragment extends Fragment {
     public  static final String TAG = TaiKhoanFragment.class.getName();
-    TextView user1, emailuser,logout,tttk,doimk;
+    TextView user1, emailuser,logout,tttk,doimk,tv_donhang;
     ImageView img_anh;
 
     @Override
@@ -68,6 +69,10 @@ public class TaiKhoanFragment extends Fragment {
 //                    .setCustomAnimations(R.anim.last,R.anim.pop_last,R.anim.next,R.anim.pop_next)
 //                    .replace(R.id.chuyen, fragment).addToBackStack("aa1a").commit();
         });
+        tv_donhang.setOnClickListener(v ->{
+            startActivity(new Intent((MainActivity) getActivity(), HistoryActivity.class));
+            getActivity().overridePendingTransition(R.anim.enter_right_to_left,R.anim.exit_right_to_left);
+        });
     }
 
     public void Show(){
@@ -89,5 +94,6 @@ public class TaiKhoanFragment extends Fragment {
         emailuser = v.findViewById(R.id.tv_emailuser);
         logout = v.findViewById(R.id.logout);
         doimk=v.findViewById(R.id.doimk);
+        tv_donhang=v.findViewById(R.id.tv_donhang);
     }
 }

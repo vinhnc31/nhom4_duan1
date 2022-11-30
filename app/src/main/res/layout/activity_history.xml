@@ -6,57 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".Activity.HistoryActivity">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/img_lichsu"
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:background="@drawable/img" />
 
-        <TextView
-            android:id="@+id/tv_lichsu"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img_lichsu"
-            android:gravity="center"
-            android:text="Lịch Sử Mua Hàng"
-            android:textSize="20dp" />
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:id="@+id/back_donhang"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:drawableStart="@drawable/ic_baseline_keyboard_backspace_24_2"
+               />
 
-        <EditText
-            android:id="@+id/ed_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_lichsu"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/bogocpasss"
-            android:drawableStart="@drawable/ic_baseline_phone_android_24"
-            android:hint="Tìm Kiếm Số Điện Thoại Mua Hàng"
-            android:padding="10dp"
-            android:paddingLeft="10dp"
-            android:textSize="15dp" />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/back_donhang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:textColor="@color/gray"
+                android:textSize="20dp"
+                />
+            <ImageView
+                android:layout_marginTop="50dp"
+                android:id="@+id/img_lichsu"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:background="@drawable/img" />
 
-<!--        <AutoCompleteTextView-->
-<!--            android:id="@+id/atc_sdt_search_id"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="45dp"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:layout_marginEnd="20dp"-->
-<!--            android:layout_marginBottom="20dp"-->
-<!--            android:background="@drawable/bogocpasss"-->
-<!--            android:completionThreshold="1"-->
-<!--            android:layout_below="@+id/tv_lichsu"-->
-<!--            android:drawableStart="@drawable/ic_baseline_phone_android_24"-->
-<!--            android:drawableRight="@drawable/ic_baseline_search_24"-->
-<!--            android:hint="Tìm Kiếm Số Điện Thoại Mua Hàng"-->
-<!--            android:padding="8dp"-->
-<!--            android:textSize="15dp" />-->
+
+        <Se
 
 
         <ImageView
@@ -69,12 +53,23 @@
             android:layout_marginLeft="-55dp"
             android:background="@drawable/ic_baseline_search_24" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_histor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ed_search"
-             />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_lichsu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_lichsu"
+                android:gravity="center"
+                android:text="Lịch Sử Mua Hàng"
+                android:textSize="20dp" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="20dp"
+                android:id="@+id/rcv_histor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_lichsu" />
+        </RelativeLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

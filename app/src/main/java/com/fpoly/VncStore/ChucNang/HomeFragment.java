@@ -35,6 +35,7 @@ import com.fpoly.VncStore.Model.Danhmuc;
 import com.fpoly.VncStore.Model.Photo;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -74,7 +75,11 @@ public class HomeFragment extends Fragment {
     }
 
     ImageView img_thongbao;
+<<<<<<< HEAD
 
+=======
+    FirebaseAuth auth;
+>>>>>>> Loc
     private ArrayList<Danhmuc>lists=new ArrayList<>();
     private List<Photo> mlist;
     private Handler handler = new Handler();

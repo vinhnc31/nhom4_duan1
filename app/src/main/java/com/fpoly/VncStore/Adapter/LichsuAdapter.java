@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Model.Hoadon;
 import com.fpoly.VncStore.Model.Oder;
 import com.fpoly.VncStore.R;
@@ -46,7 +47,7 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
         Picasso.get().load(hoadon.getImge()).into(holder.img_anh);
         holder.ten.setText(hoadon.getNamesp());
         holder.soluong.setText(String.valueOf(hoadon.getSoluong()));
-        holder.gia.setText(formatPrice.format(hoadon.getGiasp()));
+        holder.gia.setText(formatPrice.format(hoadon.getGiasp())+" VND");
         holder.trangthai.setText(hoadon.getTrangthai());
         holder.madonhang.setText(hoadon.getOrderNo().toUpperCase());
         for (Oder oder : oderList) {
