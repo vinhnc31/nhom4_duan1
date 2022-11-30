@@ -55,7 +55,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
                     countProduct++;
                     holder.tv_soluong.setText(String.valueOf(countProduct));
                     mainActivity.setCountForProduct(position,countProduct);
-                    gioHangFragment.setTotalPrice(1,1, Integer.parseInt(sanpham.getGia()));
+                    gioHangFragment.setTotalPrice(1,1, sanpham.getGia());
                     notifyDataSetChanged();
                 }
             }
@@ -68,7 +68,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
                     countProduct--;
                     holder.tv_soluong.setText(String.valueOf(countProduct));
                     mainActivity.setCountForProduct(position,countProduct);
-                    gioHangFragment.setTotalPrice(0,1, Integer.parseInt(sanpham.getGia()));
+                    gioHangFragment.setTotalPrice(0,1, sanpham.getGia());
                     notifyDataSetChanged();
                 }
             }
@@ -78,7 +78,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
             public void onClick(View view) {
                 countProduct = Integer.parseInt(holder.tv_soluong.getText().toString());
 
-                gioHangFragment.setTotalPrice(0,countProduct, Integer.parseInt(sanpham.getGia()));
+                gioHangFragment.setTotalPrice(0,countProduct,sanpham.getGia());
 
                 sanphamList.remove(position);
                 if (sanphamList.size() == 0){
