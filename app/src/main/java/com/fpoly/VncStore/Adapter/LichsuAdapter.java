@@ -42,6 +42,7 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
     public void onBindViewHolder(@NonNull LichsuViewHodel holder, int position) {
         Hoadon hoadon = list.get(position);
         if (hoadon == null) {
+
             return;
         }
         Picasso.get().load(hoadon.getImge()).into(holder.img_anh);
@@ -51,6 +52,7 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
         holder.trangthai.setText(hoadon.getTrangthai());
         holder.madonhang.setText(hoadon.getOrderNo().toUpperCase());
         for (Oder oder : oderList) {
+
             if (oder.getOrderNo().equals(hoadon.getOrderNo())) {
                 holder.ngay.setText(oder.getNgaymua());
                 break;
