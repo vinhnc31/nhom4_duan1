@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fpoly.VncStore.Adapter.LichsuAdapter;
@@ -17,6 +19,8 @@ import com.fpoly.VncStore.Model.Hoadon;
 import com.fpoly.VncStore.Model.Oder;
 import com.fpoly.VncStore.R;
 import com.google.android.material.badge.BadgeUtils;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,25 +34,16 @@ public class HistoryActivity extends AppCompatActivity {
 
     private List<Hoadon> listDetailOrder;
     private List<Oder> listOrder;
-    EditText ed_phone;
-    ImageView img_search;
+    TextView back_donhang;
     LichsuAdapter adapter;
     RecyclerView rcv;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (!ed_phone.getText().toString().trim().isEmpty()){
-            findOrder();
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
         initItem();
+        setDataHistoryProductAdapter();
     }
 
     private void initItem(){
@@ -56,16 +51,11 @@ public class HistoryActivity extends AppCompatActivity {
         listDetailOrder = new ArrayList<>();
 
         adapter = new LichsuAdapter();
-
-        ed_phone = findViewById(R.id.ed_search);
-
+        back_donhang = findViewById(R.id.back_donhang);
         rcv = findViewById(R.id.rcv_histor);
-        img_search =findViewById(R.id.img_search);
-        img_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                findOrder();
-            }
+        back_donhang.setOnClickListener(v ->{
+            super.onBackPressed();
+            overridePendingTransition(R.anim.enter_left_to_right,R.anim.exit_left_to_right);
         });
         findOrder();
     }
@@ -86,28 +76,28 @@ public class HistoryActivity extends AppCompatActivity {
         listDetailOrder.clear();
 
         // Kết nối tới data base
-
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        String email1=user.getEmail();
+        email1=email1.replace(".","_");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Hoadon");
+        DatabaseReference myRef = database.getReference("Hoadon/"+email1);
         // Lấy thông tin order
-        myRef.orderByChild("phone").equalTo(ed_phone.getText().toString())
-                .addValueEventListener(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        adapter.notifyDataSetChanged();
+
                         for (DataSnapshot dataOrder : snapshot.getChildren()){
+                            Log.d("TAG", "onDataChange: " + dataOrder.toString());
                             Oder order = dataOrder.getValue(Oder.class);
                             order.setOrderNo(dataOrder.getKey());
+                            Log.d("zzzzzzz", "onDataChange: " + order.getName());
                             listOrder.add(order);
                         }
+                        adapter.notifyDataSetChanged();
                         if (listOrder.size() > 0){
                             // Lấy thông tin detail order
                             findDetailOrder(myRef);
                         }
-                        else {
-                            Toast.makeText(HistoryActivity.this,"Không tìm thấy lịch sử đặt hàng",Toast.LENGTH_SHORT).show();
-                        }
-
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {

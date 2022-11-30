@@ -24,13 +24,20 @@ import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Adapter.GiohangAdapter;
 import com.fpoly.VncStore.Model.Hoadon;
 import com.fpoly.VncStore.Model.Sanpham;
+import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,6 +57,7 @@ public class GioHangFragment extends Fragment {
     private RecyclerView recyclerView;
     private EditText ed_name, ed_diachi, ed_phone;
     private Button button;
+    private DecimalFormat format;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,6 +89,26 @@ public class GioHangFragment extends Fragment {
 
                 // Thêm dữ liệu các thông tin đã order
                 addDataOrder();
+            }
+        });
+        format = new DecimalFormat("###,###,###");
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        String userId=user.getUid();
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("User");
+        reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User u=snapshot.getValue(User.class);
+                if (u!=null){
+                    ed_name.setText(user.getDisplayName());
+                    ed_phone.setText(u.getSo());
+                    ed_diachi.setText(u.getDiachi());
+                }else {
+                    return;
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
@@ -115,13 +143,14 @@ public class GioHangFragment extends Fragment {
     private void setVisibilityCart() {
         relativeLayout.setVisibility(View.VISIBLE);
         relativeLayout1.setVisibility(View.GONE);
-        tv_giatien.setText(getTotalPrice() + " VNĐ");
+        String total = format.format(getTotalPrice());
+        tv_giatien.setText(total + " VNĐ");
     }
 
     // lấy giá trị tổng tiền tất cả sản phẩm trong giỏ hàng
     private int getTotalPrice() {
         for (Sanpham sanpham : MainActivity.sanphamList) {
-            int priceProduct = Integer.parseInt(sanpham.getGia());
+            int priceProduct = sanpham.getGia();
             totalPrice = totalPrice + priceProduct * sanpham.getNumProduct();
         }
         return totalPrice;
@@ -137,7 +166,7 @@ public class GioHangFragment extends Fragment {
             totalPrice = totalPrice + priceProduct * count;
         }
 
-        tv_giatien.setText(totalPrice + " VNĐ");
+        tv_giatien.setText(format.format(totalPrice) + " VNĐ");
     }
 
     // Set sô lượng sản phẩm sau nhấn nút tăng giảm
@@ -148,7 +177,6 @@ public class GioHangFragment extends Fragment {
     public void addDataOrder() {
         FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
         DatabaseReference mreference = mdatabase.getReference("Hoadon");
-
         HashMap<String, Object> hashMap = new HashMap<>();
         Date date = new Date(System.currentTimeMillis());
         hashMap.put("ngaymua", date.toString());
@@ -195,12 +223,21 @@ public class GioHangFragment extends Fragment {
             Hoadon detailOrder = new Hoadon();
             detailOrder.setOrderNo(odrNo);
             detailOrder.setNamesp(product.getName());
-            detailOrder.setGiasp(Integer.parseInt(product.getGia()));
+            detailOrder.setGiasp(product.getGia());
             detailOrder.setImge(product.getImage());
             detailOrder.setSoluong(product.getNumProduct());
             detailOrder.setTrangthai("Đang chờ xác nhận");
             listDetailOrder.add(detailOrder);
         }
         return listDetailOrder;
+    }
+    public int validate(){
+        int check=1;
+        if (ed_name.getText().length()==0){
+            Toast.makeText(mainActivity, "Tên khách hàng không được để trống", Toast.LENGTH_SHORT).show();
+            check=-1;
+
+        }
+        return check;
     }
 }
