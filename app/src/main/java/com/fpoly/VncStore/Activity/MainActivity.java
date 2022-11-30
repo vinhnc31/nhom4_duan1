@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     public static List<Sanpham> sanphamList = new ArrayList<Sanpham>();
     private int countProduct;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

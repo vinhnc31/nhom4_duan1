@@ -181,7 +181,7 @@ public class GioHangFragment extends Fragment {
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
         String email1=user.getEmail();
         email1=email1.replace(".","_");
-        DatabaseReference mreference = mdatabase.getReference("Hoadon/"+email1);
+        DatabaseReference mreference = mdatabase.getReference("Oder/"+email1);
         HashMap<String, Object> hashMap = new HashMap<>();
         Date date = new Date(System.currentTimeMillis());
         hashMap.put("ngaymua", date.toString());

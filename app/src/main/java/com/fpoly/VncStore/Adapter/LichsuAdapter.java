@@ -1,6 +1,7 @@
 package com.fpoly.VncStore.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fpoly.VncStore.Activity.ChitietActivity;
 import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Model.Hoadon;
 import com.fpoly.VncStore.Model.Oder;
@@ -68,7 +71,10 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
                     oder.addListHoaDon(hd);
                 }
             }
-
+            Intent intent=new Intent(view.getContext(), ChitietActivity.class);
+            intent.putExtra("oder",oder);
+            intent.putExtra("hoadon",hoadon);
+            view.getContext().startActivity(intent);
         });
 
     }

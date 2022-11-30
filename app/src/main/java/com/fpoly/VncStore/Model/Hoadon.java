@@ -1,6 +1,8 @@
 package com.fpoly.VncStore.Model;
 
-public class Hoadon {
+import java.io.Serializable;
+
+public class Hoadon implements Serializable{
     private String OrderNo;
     private String namesp;
     private String imge;
