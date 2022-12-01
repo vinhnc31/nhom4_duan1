@@ -80,7 +80,7 @@ public class HistoryActivity extends AppCompatActivity {
         String email1=user.getEmail();
         email1=email1.replace(".","_");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Hoadon/"+email1);
+        DatabaseReference myRef = database.getReference("Oder/"+email1);
         // Lấy thông tin order
         myRef.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -112,7 +112,6 @@ public class HistoryActivity extends AppCompatActivity {
             for (int i = 0; i<listOrder.size(); i++){
                 Oder order = listOrder.get(i);
                 myRef.child(order.getOrderNo()).child("detail").addValueEventListener(new ValueEventListener() {
-
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         adapter.notifyDataSetChanged();

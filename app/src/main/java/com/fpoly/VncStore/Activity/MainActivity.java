@@ -10,8 +10,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.fpoly.VncStore.ChucNang.GioHangFragment;
 import com.fpoly.VncStore.ChucNang.HomeFragment;

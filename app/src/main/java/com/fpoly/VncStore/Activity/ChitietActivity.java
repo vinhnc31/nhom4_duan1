@@ -18,7 +18,6 @@ import java.text.DecimalFormat;
 public class ChitietActivity extends AppCompatActivity {
     private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
     private Oder order;
-    private Hoadon hoadon;
     TextView tv_madon,tv_ngaydat,tv_tenkhach,tv_diachi,tv_sodt,tv_sosanpham,tv_tongtien,tv_trangthai;
     RecyclerView rcv_chitiet;
     ImageView img_back;
@@ -34,7 +33,6 @@ public class ChitietActivity extends AppCompatActivity {
 
     private void setData() {
         order= (Oder) getIntent().getSerializableExtra("oder");
-        hoadon= (Hoadon) getIntent().getSerializableExtra("hoadon");
         adapter.SetData(order.getHoadonList());
         LinearLayoutManager manager=new LinearLayoutManager(this);
         rcv_chitiet.setLayoutManager(manager);
@@ -48,8 +46,8 @@ public class ChitietActivity extends AppCompatActivity {
         tv_diachi.setText(order.getDiachi());
         tv_sodt.setText(order.getPhone());
         tv_sosanpham.setText(String.valueOf(order.getSoluong()));
-        tv_tongtien.setText(String.valueOf(order.getTongtien()));
-        tv_trangthai.setText(hoadon.getTrangthai());
+        tv_tongtien.setText(formatPrice.format(order.getTongtien()) + "VNĐ");
+        tv_trangthai.setText(order.getTrangthai());
     }
 
     public void anhxa(){

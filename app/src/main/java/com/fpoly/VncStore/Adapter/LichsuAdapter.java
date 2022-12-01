@@ -67,13 +67,12 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
                 }
             }
             for (Hoadon hd :list){
-                if (hd.getOrderNo().equals(hd.getOrderNo())){
+                if (hoadon.getOrderNo().equals(hd.getOrderNo())){
                     oder.addListHoaDon(hd);
                 }
             }
             Intent intent=new Intent(view.getContext(), ChitietActivity.class);
             intent.putExtra("oder",oder);
-            intent.putExtra("hoadon",hoadon);
             view.getContext().startActivity(intent);
         });
 
