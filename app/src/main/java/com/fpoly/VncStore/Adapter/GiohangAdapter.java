@@ -85,6 +85,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
                 if (sanphamList.size() == 0){
                     gioHangFragment.setVisibilityEmptyCart();
                 }
+                MainActivity.badgeDrawable.setNumber(sanphamList.size());
                 notifyDataSetChanged();
             }
 

@@ -111,6 +111,7 @@ public class GioHangFragment extends Fragment {
                     return;
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -188,43 +189,46 @@ public class GioHangFragment extends Fragment {
         HashMap<String, Object> hashMap = new HashMap<>();
         Date date = new Date(System.currentTimeMillis());
         hashMap.put("ngaymua", date.toString());
-        if (validate()>0){
-            hashMap.put("tenkhachhang", ed_name.getText().toString());
-            hashMap.put("diachi", ed_diachi.getText().toString());
-            hashMap.put("phone", ed_phone.getText().toString());
-        }
-        int num = 0;
-        for (Sanpham sanpham : MainActivity.sanphamList) {
-            num = num + sanpham.getNumProduct();
-        }
-        hashMap.put("soluong", num);
-        hashMap.put("tongtien", totalPrice);
-        hashMap.put("trangthai","Đang chờ xác nhận");
-        String oderkey = mreference.push().getKey();
-        mreference.child(oderkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                List<Hoadon> listDetailOrder = makeDetailOrder(oderkey);
-                // Add thông tin detail order
-                for (Hoadon detailOrder : listDetailOrder) {
-                    mreference.child(oderkey).child("detail").child(mreference.push().getKey())
-                            .setValue(detailOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(getContext(), "Đã đăng ký đơn hàng", Toast.LENGTH_SHORT).show();
-                                    MainActivity.sanphamList.clear();
-                                    setVisibilityEmptyCart();
-                                }
-                            });
+        String name=  ed_name.getText().toString();
+        String diachi=  ed_diachi.getText().toString();
+        String phone=  ed_phone.getText().toString();
+        if (validate() > 0) {
+            hashMap.put("tenkhachhang", name);
+            hashMap.put("diachi", diachi);
+            hashMap.put("phone", phone);
+            int num = 0;
+            for (Sanpham sanpham : MainActivity.sanphamList) {
+                num = num + sanpham.getNumProduct();
+            }
+            hashMap.put("soluong", num);
+            hashMap.put("tongtien", totalPrice);
+            hashMap.put("trangthai", "Đang chờ xác nhận");
+            String oderkey = mreference.push().getKey();
+            mreference.child(oderkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    List<Hoadon> listDetailOrder = makeDetailOrder(oderkey);
+                    // Add thông tin detail order
+                    for (Hoadon detailOrder : listDetailOrder) {
+                        mreference.child(oderkey).child("detail").child(mreference.push().getKey())
+                                .setValue(detailOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(getContext(), "Đã đăng ký đơn hàng", Toast.LENGTH_SHORT).show();
+                                        MainActivity.sanphamList.clear();
+                                        setVisibilityEmptyCart();
+                                    }
+                                });
 
+                    }
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(), "Đăng ký đơn hàng thất bại", Toast.LENGTH_SHORT).show();
-            }
-        });
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getContext(), "Đăng ký đơn hàng thất bại", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     private List<Hoadon> makeDetailOrder(String odrNo) {
@@ -247,22 +251,22 @@ public class GioHangFragment extends Fragment {
         String phone = "(84|0[3|5|7|8|9])+([0-9]{8})";
         if (ed_name.getText().length() == 0) {
             Toast.makeText(mainActivity, "Tên khách hàng không được để trống", Toast.LENGTH_SHORT).show();
-            check = -1;
+            return check -1;
 
         }
-        if (ed_diachi.getText().length() == 0) {
+        else if (ed_diachi.getText().length() == 0) {
             Toast.makeText(mainActivity, "Địa chỉ không được để trống", Toast.LENGTH_SHORT).show();
-            check = -1;
+            return check  -1;
 
         }
-        if (ed_phone.getText().length() == 0) {
+        else if (ed_phone.getText().length() == 0) {
             Toast.makeText(mainActivity, "Số điện thoại không được để trống", Toast.LENGTH_SHORT).show();
-            check = -1;
+            return check  -1;
 
         }
-        if (!ed_phone.getText().toString().matches(phone)) {
+        else if (!ed_phone.getText().toString().matches(phone)) {
             Toast.makeText(mainActivity, "Số điện thoại không đúng định dạng", Toast.LENGTH_SHORT).show();
-            check = -1;
+            return check -1;
         }
 
         return check;

@@ -109,6 +109,7 @@ public class ThongTin extends AppCompatActivity {
         if (ed_ten.getText().length() == 0) {
             Toast.makeText(ThongTin.this, "Tên không được để trống.",
                     Toast.LENGTH_LONG).show();
+            progressDialog.dismiss();
             return check - 1;
         }  else if (ed_diachi.getText().length() == 0) {
             progressDialog.dismiss();
