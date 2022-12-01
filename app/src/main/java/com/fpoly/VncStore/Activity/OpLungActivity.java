@@ -53,7 +53,7 @@ public class OpLungActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_op_lung);
-        recyclerView = findViewById(R.id.rcv_dienthoai);
+        recyclerView = findViewById(R.id.rcv_oplung);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         spinner = findViewById(R.id.spin_sp);

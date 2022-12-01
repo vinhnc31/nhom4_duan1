@@ -261,7 +261,7 @@ public class GioHangFragment extends Fragment {
 
         }
         if (!ed_phone.getText().toString().matches(phone)) {
-            Toast.makeText(mainActivity, "Số điện thoại không được để trống", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainActivity, "Số điện thoại không đúng định dạng", Toast.LENGTH_SHORT).show();
             check = -1;
         }
 

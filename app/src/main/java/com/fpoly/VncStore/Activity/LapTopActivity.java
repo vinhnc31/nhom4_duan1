@@ -54,7 +54,7 @@ public class LapTopActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lap_top);
-        recyclerView = findViewById(R.id.rcv_dienthoai);
+        recyclerView = findViewById(R.id.rcv_laptop);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         spinner = findViewById(R.id.spin_sp);

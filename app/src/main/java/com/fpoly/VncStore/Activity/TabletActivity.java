@@ -53,7 +53,7 @@ public class TabletActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tablet);
-        recyclerView = findViewById(R.id.rcv_dienthoai);
+        recyclerView = findViewById(R.id.rcv_tablet);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         spinner = findViewById(R.id.spin_sp);
