@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         badgeDrawable= navigationView.getOrCreateBadge(R.id.giohang);
         badgeDrawable.setVisible(true);
         badgeDrawable.setVerticalOffset(dpToPx(MainActivity.this,3));
-        badgeDrawable.setBadgeTextColor(getResources().getColor(R.color.mau));
+        badgeDrawable.setBadgeTextColor(getResources().getColor(R.color.orange));
 
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, new HomeFragment()).addToBackStack(null).commit();
         navigationView.setOnNavigationItemSelectedListener(item -> {
