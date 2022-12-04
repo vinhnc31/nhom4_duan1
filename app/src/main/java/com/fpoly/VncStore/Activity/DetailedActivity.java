@@ -1,5 +1,7 @@
 package com.fpoly.VncStore.Activity;
 
+import static com.fpoly.VncStore.Activity.MainActivity.badgeDrawable;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -89,6 +91,7 @@ public class DetailedActivity extends AppCompatActivity {
                         btn_themvagiohang.setText("Đã Mua");
                         btn_themvagiohang.setBackgroundResource(R.drawable.custom_button);
                         mainActivity.addToListCartProdct(sanpham);
+                        badgeDrawable.setNumber(MainActivity.sanphamList.size());
                         Toast.makeText(DetailedActivity.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                     }
                 }

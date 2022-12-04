@@ -7,7 +7,7 @@
     tools:context=".ChucNang.GioHangFragment">
 
     <RelativeLayout
-        android:id="@+id/giohanggiong"
+        android:id="@+id/giohangrong"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">

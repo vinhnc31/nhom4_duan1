@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -70,7 +71,6 @@ public class HistoryActivity extends AppCompatActivity {
 
     // Lấy thông tin order
     private void findOrder(){
-
         // Clear các list dữ liệu khi tìm kiếm
         listOrder.clear();
         listDetailOrder.clear();
@@ -80,7 +80,7 @@ public class HistoryActivity extends AppCompatActivity {
         String email1=user.getEmail();
         email1=email1.replace(".","_");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Hoadon/"+email1);
+        DatabaseReference myRef = database.getReference("Oder/"+email1);
         // Lấy thông tin order
         myRef.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -90,7 +90,7 @@ public class HistoryActivity extends AppCompatActivity {
                             Log.d("TAG", "onDataChange: " + dataOrder.toString());
                             Oder order = dataOrder.getValue(Oder.class);
                             order.setOrderNo(dataOrder.getKey());
-                            Log.d("zzzzzzz", "onDataChange: " + order.getName());
+                            Log.d("zzzzzzz", "onDataChange: " + order.getTenkhachhang());
                             listOrder.add(order);
                         }
                         adapter.notifyDataSetChanged();
@@ -112,7 +112,6 @@ public class HistoryActivity extends AppCompatActivity {
             for (int i = 0; i<listOrder.size(); i++){
                 Oder order = listOrder.get(i);
                 myRef.child(order.getOrderNo()).child("detail").addValueEventListener(new ValueEventListener() {
-
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         adapter.notifyDataSetChanged();
@@ -135,6 +134,9 @@ public class HistoryActivity extends AppCompatActivity {
                 });
             }
         }
+    }
+    public void Chitiet(Oder oder){
+
     }
 
 }

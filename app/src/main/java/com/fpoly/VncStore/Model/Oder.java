@@ -1,28 +1,29 @@
 package com.fpoly.VncStore.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Oder {
+public class Oder implements Serializable {
     private String OrderNo;
     private String diachi;
-    private String name;
+    private String tenkhachhang;
     private String phone;
     private String ngaymua;
     private String trangthai;
     private int soluong;
-    private int tong;
+    private int tongtien;
     private List<Hoadon> hoadonList;
 
-    public Oder(String orderNo, String diachi, String name, String phone, String ngaymua, String trangthai, int soluong, int tong, List<Hoadon> hoadonList) {
+    public Oder(String orderNo, String diachi, String tenkhachhang, String phone, String ngaymua, String trangthai, int soluong, int tongtien, List<Hoadon> hoadonList) {
         OrderNo = orderNo;
         this.diachi = diachi;
-        this.name = name;
+        this.tenkhachhang = tenkhachhang;
         this.phone = phone;
         this.ngaymua = ngaymua;
         this.trangthai = trangthai;
         this.soluong = soluong;
-        this.tong = tong;
+        this.tongtien = tongtien;
         this.hoadonList = hoadonList;
     }
 
@@ -42,12 +43,12 @@ public class Oder {
         this.diachi = diachi;
     }
 
-    public String getName() {
-        return name;
+    public String getTenkhachhang() {
+        return tenkhachhang;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTenkhachhang(String tenkhachhang) {
+        this.tenkhachhang = tenkhachhang;
     }
 
     public Oder() {
@@ -85,12 +86,12 @@ public class Oder {
         this.soluong = soluong;
     }
 
-    public int getTong() {
-        return tong;
+    public int getTongtien() {
+        return tongtien;
     }
 
-    public void setTong(int tong) {
-        this.tong = tong;
+    public void setTongtien(int tongtien) {
+        this.tongtien = tongtien;
     }
 
     public List<Hoadon> getHoadonList() {
