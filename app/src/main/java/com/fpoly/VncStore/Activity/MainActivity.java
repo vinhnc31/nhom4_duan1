@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
     // Set lại số lượng của sản phẩm khi mua nhiều
     public void setCountForProduct(int possion, int countProduct) {
         sanphamList.get(possion).setNumProduct(countProduct);
-
     }
 
     @Override

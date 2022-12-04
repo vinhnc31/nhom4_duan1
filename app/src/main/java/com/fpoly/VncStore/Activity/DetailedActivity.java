@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,6 +33,7 @@ public class DetailedActivity extends AppCompatActivity {
     private Boolean isAddToCart;
     MainActivity mainActivity;
     List<Sanpham> sanphamList;
+    private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +70,7 @@ public class DetailedActivity extends AppCompatActivity {
         if (sanpham != null) {
             Picasso.get().load(sanpham.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(imageView);
             tv_tensp.setText("" + sanpham.getName());
-            tv_giamsp.setText("Giá: " + sanpham.getGia() + "VNĐ");
+            tv_giamsp.setText(formatPrice.format(sanpham.getGia())+" VND");
             tv_khuyenmai.setText(sanpham.getKhuyenmai() + "%");
             tv_mota.setText(sanpham.getMoTa());
             for (int i = 0; i < sanphamList.size(); i++) {

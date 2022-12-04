@@ -1,5 +1,7 @@
 package com.fpoly.VncStore.ChucNang;
 
+import static com.fpoly.VncStore.Activity.MainActivity.badgeDrawable;
+
 import android.os.Build;
 import android.os.Bundle;
 
@@ -214,9 +216,10 @@ public class GioHangFragment extends Fragment {
                                 .setValue(detailOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(getContext(), "Đã đăng ký đơn hàng", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
                                         MainActivity.sanphamList.clear();
                                         setVisibilityEmptyCart();
+                                        badgeDrawable.setNumber(MainActivity.sanphamList.size());
                                     }
                                 });
 
@@ -225,17 +228,17 @@ public class GioHangFragment extends Fragment {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getContext(), "Đăng ký đơn hàng thất bại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Đặt hàng thất bại ", Toast.LENGTH_SHORT).show();
                 }
             });
         }
     }
 
-    private List<Hoadon> makeDetailOrder(String odrNo) {
+    private List<Hoadon> makeDetailOrder(String idNo) {
         List<Hoadon> listDetailOrder = new ArrayList<>();
         for (Sanpham product : mainActivity.getListCartProduct()) {
             Hoadon detailOrder = new Hoadon();
-            detailOrder.setOrderNo(odrNo);
+            detailOrder.setIdOder(idNo);
             detailOrder.setNamesp(product.getName());
             detailOrder.setGiasp(product.getGia());
             detailOrder.setImge(product.getImage());
