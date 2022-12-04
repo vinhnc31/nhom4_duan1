@@ -39,8 +39,8 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="5dp"
-                    app:tint="@color/black"
-                    android:src="@drawable/order"/>
+                    app:tint="@color/black"/>
+<!--                    android:src="@drawable/order"/>-->
             </LinearLayout>
 
             <FrameLayout

@@ -17,10 +17,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhoder> {
-
+    private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
     private int countProduct;
     private List<Sanpham> sanphamList;
     MainActivity mainActivity;
@@ -46,7 +47,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
         Sanpham sanpham = sanphamList.get(position);
         Picasso.get().load(sanpham.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(holder.img_sanpham);
         holder.tv_ten.setText(sanpham.getName());
-        holder.tv_gia.setText(sanpham.getGia());
+        holder.tv_gia.setText(formatPrice.format(sanpham.getGia())+ " VNĐ");
         holder.img_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

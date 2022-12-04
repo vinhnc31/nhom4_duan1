@@ -235,7 +235,7 @@ public class GioHangFragment extends Fragment {
         List<Hoadon> listDetailOrder = new ArrayList<>();
         for (Sanpham product : mainActivity.getListCartProduct()) {
             Hoadon detailOrder = new Hoadon();
-            detailOrder.setOrderNo(odrNo);
+            detailOrder.setIdOder(odrNo);
             detailOrder.setNamesp(product.getName());
             detailOrder.setGiasp(product.getGia());
             detailOrder.setImge(product.getImage());

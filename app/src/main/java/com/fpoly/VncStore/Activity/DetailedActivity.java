@@ -1,7 +1,5 @@
 package com.fpoly.VncStore.Activity;
 
-import static com.fpoly.VncStore.Activity.MainActivity.badgeDrawable;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -18,7 +16,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,7 +30,6 @@ public class DetailedActivity extends AppCompatActivity {
     private Boolean isAddToCart;
     MainActivity mainActivity;
     List<Sanpham> sanphamList;
-    private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +66,7 @@ public class DetailedActivity extends AppCompatActivity {
         if (sanpham != null) {
             Picasso.get().load(sanpham.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(imageView);
             tv_tensp.setText("" + sanpham.getName());
-            tv_giamsp.setText(formatPrice.format(sanpham.getGia())+" VND");
+            tv_giamsp.setText("Giá: " + sanpham.getGia() + "VNĐ");
             tv_khuyenmai.setText(sanpham.getKhuyenmai() + "%");
             tv_mota.setText(sanpham.getMoTa());
             for (int i = 0; i < sanphamList.size(); i++) {
@@ -93,7 +89,7 @@ public class DetailedActivity extends AppCompatActivity {
                         btn_themvagiohang.setText("Đã Mua");
                         btn_themvagiohang.setBackgroundResource(R.drawable.custom_button);
                         mainActivity.addToListCartProdct(sanpham);
-                        badgeDrawable.setNumber(MainActivity.sanphamList.size());
+//                        badgeDrawable.setNumber(MainActivity.sanphamList.size());
                         Toast.makeText(DetailedActivity.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                     }
                 }

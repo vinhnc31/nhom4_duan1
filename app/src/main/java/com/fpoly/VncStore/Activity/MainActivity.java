@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Notification;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
+    public static Notification.Builder badgeDrawable;
     BottomNavigationView navigationView;
     private FragmentManager fragmentManager;
     public static List<Sanpham> sanphamList = new ArrayList<Sanpham>();

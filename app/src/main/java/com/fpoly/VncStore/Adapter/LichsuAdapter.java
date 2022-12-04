@@ -52,22 +52,22 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
         holder.soluong.setText(String.valueOf(hoadon.getSoluong()));
         holder.gia.setText(formatPrice.format(hoadon.getGiasp())+" VND");
         holder.trangthai.setText(hoadon.getTrangthai());
-        holder.madonhang.setText(hoadon.getOrderNo().toUpperCase());
+        holder.madonhang.setText(hoadon.getIdOder().toUpperCase());
         for (Oder oder : oderList) {
-            if (oder.getOrderNo().equals(hoadon.getOrderNo())) {
+            if (oder.getOrderNo().equals(hoadon.getIdOder())) {
                 holder.ngay.setText(oder.getNgaymua());
                 break;
             }
         }
         holder.itemView.setOnClickListener(view -> {
             for (Oder od : oderList) {
-                if (od.getOrderNo().equals(hoadon.getOrderNo())){
+                if (od.getOrderNo().equals(hoadon.getIdOder())){
                     oder=od;
                     break;
                 }
             }
             for (Hoadon hd :list){
-                if (hoadon.getOrderNo().equals(hd.getOrderNo())){
+                if (hoadon.getIdOder().equals(hd.getIdOder())){
                     oder.addListHoaDon(hd);
                 }
             }

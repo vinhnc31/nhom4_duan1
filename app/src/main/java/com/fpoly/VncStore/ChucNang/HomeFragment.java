@@ -146,7 +146,7 @@ public class HomeFragment extends Fragment {
         handler.postDelayed(runnable,3000);
     }
     public void gethienthi() {
-        Query query = mreference.limitToLast(3);
+        Query query = mreference.limitToLast(6);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -160,7 +160,6 @@ public class HomeFragment extends Fragment {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }

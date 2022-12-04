@@ -107,7 +107,7 @@ public class LapTopActivity extends AppCompatActivity {
     }
 
     public void gethienthi() {
-        Query query = mreference.orderByChild("loai").equalTo("Máy Tính");
+        Query query = mreference.orderByChild("loai").equalTo("Laptop");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
