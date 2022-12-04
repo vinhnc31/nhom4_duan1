@@ -78,7 +78,7 @@ public class DagiaoFragment extends Fragment {
                     Log.d("TAG", "onDataChange: " + dataOrder.toString());
                     Oder order = dataOrder.getValue(Oder.class);
                     order.setOrderNo(dataOrder.getKey());
-                    if (order.getTrangthai().equals("Đã nhận ")) {
+                    if (order.getTrangthai().equals("Đã nhận")) {
                         listOrder.add(0,order);
                     }
                     Log.d("zzzzzzz", "onDataChange: " + order.getTenkhachhang());

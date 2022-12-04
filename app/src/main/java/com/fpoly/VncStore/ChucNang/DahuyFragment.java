@@ -110,7 +110,7 @@ public class DahuyFragment extends Fragment {
                             listDetailOrder.add(0,detailOrder);
                         }
                         // set data HistoryProductAdapter
-                            setDataHistoryProductAdapter();
+                        setDataHistoryProductAdapter();
 
                     }
                     @Override

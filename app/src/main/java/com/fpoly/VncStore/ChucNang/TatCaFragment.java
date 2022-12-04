@@ -103,7 +103,7 @@ public class TatCaFragment extends Fragment {
                             listDetailOrder.add(detailOrder);
                         }
                         // set data HistoryProductAdapter
-                            setDataHistoryProductAdapter();
+                        setDataHistoryProductAdapter();
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
