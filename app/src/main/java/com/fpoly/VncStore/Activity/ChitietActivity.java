@@ -64,6 +64,8 @@ public class ChitietActivity extends AppCompatActivity {
         img_back=findViewById(R.id.img_backchitiet);
         img_back.setOnClickListener(v ->{
             super.onBackPressed();
+            overridePendingTransition(R.anim.enter_left_to_right,R.anim.exit_left_to_right);
+            adapter.notifyDataSetChanged();
         });
     }
 }

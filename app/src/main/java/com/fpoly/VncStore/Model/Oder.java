@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Oder implements Serializable {
-    private String OrderNo;
+    private String orderNo;
     private String diachi;
     private String tenkhachhang;
     private String phone;
@@ -16,7 +16,7 @@ public class Oder implements Serializable {
     private List<Hoadon> hoadonList;
 
     public Oder(String orderNo, String diachi, String tenkhachhang, String phone, String ngaymua, String trangthai, int soluong, int tongtien, List<Hoadon> hoadonList) {
-        OrderNo = orderNo;
+        this.orderNo = orderNo;
         this.diachi = diachi;
         this.tenkhachhang = tenkhachhang;
         this.phone = phone;
@@ -28,11 +28,11 @@ public class Oder implements Serializable {
     }
 
     public String getOrderNo() {
-        return OrderNo;
+        return orderNo;
     }
 
     public void setOrderNo(String orderNo) {
-        OrderNo = orderNo;
+        this.orderNo = orderNo;
     }
 
     public String getDiachi() {

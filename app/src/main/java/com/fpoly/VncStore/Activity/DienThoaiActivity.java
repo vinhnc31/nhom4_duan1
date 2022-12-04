@@ -1,11 +1,9 @@
 package com.fpoly.VncStore.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -21,7 +19,6 @@ import com.fpoly.VncStore.Adapter.Adapter_Spinner;
 import com.fpoly.VncStore.Adapter.SanphamAdapter;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class DienThoaiActivity extends AppCompatActivity {
@@ -91,12 +87,12 @@ public class DienThoaiActivity extends AppCompatActivity {
                         break;
                     }
                     case 1: {
-                      sapXepGiamDanTheoGia((ArrayList<Sanpham>) list);
+                        getdatatang();
                         adapter.notifyDataSetChanged();
                         break;
                     }
                     case 2: {
-                        sapXepTangDanTheoGia((ArrayList<Sanpham>) list);
+                        getdatagiam();
                         adapter.notifyDataSetChanged();
                         break;
                     }
@@ -133,29 +129,44 @@ public class DienThoaiActivity extends AppCompatActivity {
         });
     }
 
-    public ArrayList<Sanpham> sapXepGiamDanTheoGia(ArrayList<Sanpham> list) {
-        Collections.sort(list, (sanPham, t1) -> {
-            if (sanPham.getGia() < t1.getGia()) {
-                return 1;
-            } else {
-                if (sanPham.getGia() == t1.getGia()) {
-                    return 0;
-                } else return -1;
+    public void getdatatang() {
+        Query query = mreference.orderByChild("gia");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Sanpham sanpham = dataSnapshot.getValue(Sanpham.class);
+
+                    list.add(sanpham);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
-        return list;
     }
-    public ArrayList<Sanpham> sapXepTangDanTheoGia(ArrayList<Sanpham> list) {
-        Collections.sort(list, (sanPham, t1) -> {
-            if (sanPham.getGia() < t1.getGia()) {
-                return -1;
-            } else {
-                if (sanPham.getGia() == t1.getGia()) {
-                    return 0;
-                } else return 1;
+
+    public void getdatagiam() {
+        Query query = mreference.orderByChild("gia");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Sanpham sanpham = dataSnapshot.getValue(Sanpham.class);
+                    list.add(0, sanpham);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
-        return list;
     }
 
 }

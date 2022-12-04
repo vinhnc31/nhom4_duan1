@@ -3,31 +3,41 @@ package com.fpoly.VncStore.Model;
 import java.io.Serializable;
 
 public class Hoadon implements Serializable{
-    private String OrderNo;
+    private String idOder;
     private String namesp;
     private String imge;
     private String trangthai;
     private int soluong;
     private int giasp;
+    private String idHoadon;
 
     public Hoadon() {
     }
 
-    public Hoadon(String orderNo, String namesp, String imge, String trangthai, int soluong, int giasp) {
-        OrderNo = orderNo;
+    public Hoadon(String idOder, String namesp, String imge, String trangthai, int soluong, int giasp, String idHoadon) {
+        this.idOder = idOder;
         this.namesp = namesp;
         this.imge = imge;
         this.trangthai = trangthai;
         this.soluong = soluong;
         this.giasp = giasp;
+        this.idHoadon = idHoadon;
     }
 
-    public String getOrderNo() {
-        return OrderNo;
+    public String getIdOder() {
+        return idOder;
     }
 
-    public void setOrderNo(String orderNo) {
-        OrderNo = orderNo;
+    public String getIdHoadon() {
+        return idHoadon;
+    }
+
+    public void setIdHoadon(String idHoadon) {
+        this.idHoadon = idHoadon;
+    }
+
+    public void setIdOder(String idOder) {
+        this.idOder = idOder;
     }
 
     public String getNamesp() {
