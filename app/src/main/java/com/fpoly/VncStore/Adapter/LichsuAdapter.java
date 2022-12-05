@@ -88,17 +88,20 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
         holder.huydon.setOnClickListener(v -> {
             oder1.setTrangthai("Đã Hủy");
             hoadon.setTrangthai("Đã Hủy");
-            oderList.set(position, oder1);
-            list.set(position, hoadon);
+            oderList.set(position,oder1);
+            list.set(position,hoadon);
             FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String email1 = user.getEmail();
             email1 = email1.replace(".", "_");
             DatabaseReference mreference = mdatabase.getReference("Oder/" + email1);
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("trangthai", "Đã Hủy");
+            DatabaseReference mreference1 = mdatabase.getReference("OderAdmin");
+            HashMap<String,Object> hashMap=new HashMap<>();
+            hashMap.put("trangthai","Đã Hủy");
             mreference.child(oder1.getOrderNo()).updateChildren(hashMap);
             mreference.child(oder1.getOrderNo()).child("detail").child(hoadon.getIdHoadon()).updateChildren(hashMap);
+            mreference1.child(oder1.getOrderNo()).updateChildren(hashMap);
+            mreference1.child(oder1.getOrderNo()).child("detailadmin").child(hoadon.getIdHoadon()).updateChildren(hashMap);
 
         });
         if (hoadon.getTrangthai().equals("Đã Hủy")) {

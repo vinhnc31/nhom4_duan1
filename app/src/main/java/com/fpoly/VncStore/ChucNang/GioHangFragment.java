@@ -188,6 +188,7 @@ public class GioHangFragment extends Fragment {
         String email1 = user.getEmail();
         email1 = email1.replace(".", "_");
         DatabaseReference mreference = mdatabase.getReference("Oder/" + email1);
+        DatabaseReference mreference1 = mdatabase.getReference("OderAdmin");
         HashMap<String, Object> hashMap = new HashMap<>();
         Date date = new Date(System.currentTimeMillis());
         hashMap.put("ngaymua", date.toString());
@@ -206,13 +207,14 @@ public class GioHangFragment extends Fragment {
             hashMap.put("tongtien", totalPrice);
             hashMap.put("trangthai", "Đang chờ xác nhận");
             String oderkey = mreference.push().getKey();
+            String oderkey1 = mreference.push().getKey();
             mreference.child(oderkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     List<Hoadon> listDetailOrder = makeDetailOrder(oderkey);
                     // Add thông tin detail order
                     for (Hoadon detailOrder : listDetailOrder) {
-                        mreference.child(oderkey).child("detail").child(mreference.push().getKey())
+                        mreference.child(oderkey).child("detail").child(oderkey1)
                                 .setValue(detailOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
@@ -223,6 +225,27 @@ public class GioHangFragment extends Fragment {
                                     }
                                 });
 
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getContext(), "Đặt hàng thất bại ", Toast.LENGTH_SHORT).show();
+                }
+            });
+            mreference1.child(oderkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    List<Hoadon> listDetailOrder = makeDetailOrder(oderkey);
+                    // Add thông tin detail order
+                    for (Hoadon detailOrder : listDetailOrder) {
+                        mreference1.child(oderkey).child("detailadmin").child(oderkey1)
+                                .setValue(detailOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        setVisibilityEmptyCart();
+                                    }
+                                });
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
