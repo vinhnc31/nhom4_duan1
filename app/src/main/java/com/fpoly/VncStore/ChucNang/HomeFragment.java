@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,7 +60,7 @@ public class HomeFragment extends Fragment {
     FirebaseDatabase mdatabase;
     DatabaseReference mreference;
     FirebaseStorage mstorage;
-
+    FragmentTransaction fragmentTransaction;
     //Search
     AutoCompleteTextView autoCompleteTextViewSearch;
     SanphamAdapter adaptersanpham;
@@ -75,11 +77,8 @@ public class HomeFragment extends Fragment {
     }
 
     ImageView img_thongbao;
-<<<<<<< HEAD
-
-=======
     FirebaseAuth auth;
->>>>>>> Loc
+
     private ArrayList<Danhmuc>lists=new ArrayList<>();
     private List<Photo> mlist;
     private Handler handler = new Handler();
@@ -164,6 +163,13 @@ public class HomeFragment extends Fragment {
         list.add(new Photo(R.drawable.anh8));
         return list;
     }
+//        public void toDetailProductActivity(Sanpham sanpham){
+//
+//        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.replace(R.id.framelayout, );
+//        fragmentTransaction.commit();
+//    }
+
 
 
     //search sp
@@ -176,7 +182,7 @@ public class HomeFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Intent intent = new Intent(HomeFragment.this.getActivity(), DetailedActivity.class);
 //                HomeFragment.this.startActivity(intent);
-                getActivity().getSupportFragmentManager();
+
                 getContext();
             }
         });
