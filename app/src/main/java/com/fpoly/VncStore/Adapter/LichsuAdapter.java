@@ -1,24 +1,35 @@
 package com.fpoly.VncStore.Adapter;
 
+import static com.fpoly.VncStore.Activity.MainActivity.badgeDrawable;
+
+import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.fpoly.VncStore.Activity.ChitietActivity;
+import com.fpoly.VncStore.Activity.MainActivity;
+import com.fpoly.VncStore.Activity.TabletActivity;
 import com.fpoly.VncStore.Model.Hoadon;
-import com.fpoly.VncStore.Model.ChitietHoaDon;
+import com.fpoly.VncStore.Model.Oder;
 import com.fpoly.VncStore.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
+
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -26,14 +37,15 @@ import java.util.List;
 public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuViewHodel> {
     private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
     private List<Hoadon> list;
-    private List<ChitietHoaDon> chitietHoaDonList;
-    private ChitietHoaDon chitietHoaDon;
+    private List<Oder> oderList;
+    private Oder oder;
 
-    public void setData(List<Hoadon> list, List<ChitietHoaDon> chitietHoaDonList) {
+    public void setData(List<Hoadon> list, List<Oder> oderList) {
         this.list = list;
-        this.chitietHoaDonList = chitietHoaDonList;
+        this.oderList = oderList;
         notifyDataSetChanged();
     }
+
     @NonNull
     @Override
     public LichsuViewHodel onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,7 +56,7 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
     @Override
     public void onBindViewHolder(@NonNull LichsuViewHodel holder, int position) {
         Hoadon hoadon = list.get(position);
-        ChitietHoaDon chitietHoaDon1 = chitietHoaDonList.get(position);
+        Oder oder1 = oderList.get(position);
         if (hoadon == null) {
             return;
         }
@@ -54,33 +66,29 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
         holder.gia.setText(formatPrice.format(hoadon.getGiasp()) + " VND");
         holder.trangthai.setText(hoadon.getTrangthai());
         holder.madonhang.setText(hoadon.getIdOder());
-        for (ChitietHoaDon order : chitietHoaDonList){
-            if (order.getIdChitietHoaDon().equals(hoadon.getIdOder() ) ){
-                holder.ngay.setText(order.getNgaymua());
-                break;
-            }
-        }
-
+        holder.ngay.setText(oder1.getNgaymua());
         holder.itemView.setOnClickListener(view -> {
-            for (ChitietHoaDon od : chitietHoaDonList) {
-                if (od.getIdChitietHoaDon().equals(hoadon.getIdOder())) {
-                    chitietHoaDon = od;
+            for (Oder od : oderList) {
+                if (od.getOrderNo().equals(hoadon.getIdOder())) {
+                    oder = od;
                     break;
                 }
             }
             for (Hoadon hd : list) {
                 if (hoadon.getIdOder().equals(hd.getIdOder())) {
-                    chitietHoaDon.addListHoaDon(hd);
+                    oder.addListHoaDon(hd);
                 }
             }
             Intent intent = new Intent(view.getContext(), ChitietActivity.class);
-            intent.putExtra("oder", chitietHoaDon);
+            intent.putExtra("oder", oder);
             AppCompatActivity appCompatActivity = (AppCompatActivity) view.getContext();
             view.getContext().startActivity(intent);
             appCompatActivity.overridePendingTransition(R.anim.enter_right_to_left, R.anim.exit_right_to_left);
         });
         holder.huydon.setOnClickListener(v -> {
+            oder1.setTrangthai("Đã Hủy");
             hoadon.setTrangthai("Đã Hủy");
+            oderList.set(position,oder1);
             list.set(position,hoadon);
             FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -90,15 +98,17 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
             DatabaseReference mreference1 = mdatabase.getReference("OderAdmin");
             HashMap<String,Object> hashMap=new HashMap<>();
             hashMap.put("trangthai","Đã Hủy");
-            mreference.child(chitietHoaDon1.getIdChitietHoaDon()).child("detail").child(hoadon.getIdHoadon()).updateChildren(hashMap);
-            mreference1.child(chitietHoaDon1.getIdChitietHoaDon()).child("detailadmin").child(hoadon.getIdHoadon()).updateChildren(hashMap);
+            mreference.child(oder1.getOrderNo()).updateChildren(hashMap);
+            mreference.child(oder1.getOrderNo()).child("detail").child(hoadon.getIdHoadon()).updateChildren(hashMap);
+            mreference1.child(oder1.getOrderNo()).updateChildren(hashMap);
+            mreference1.child(oder1.getOrderNo()).child("detailadmin").child(hoadon.getIdHoadon()).updateChildren(hashMap);
+
         });
         if (hoadon.getTrangthai().equals("Đã Hủy")) {
             holder.huydon.setVisibility(View.GONE);
         } else {
             holder.huydon.setVisibility(View.VISIBLE);
         }
-
         if (hoadon.getTrangthai().equals("Đã Nhận")) {
             holder.huydon.setVisibility(View.GONE);
         }
@@ -106,10 +116,16 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
             holder.huydon.setVisibility(View.GONE);
         }
     }
+
     @Override
     public int getItemCount() {
+        if (list.size() != 0) {
             return list.size();
+        }
+        return 0;
+
     }
+
     public class LichsuViewHodel extends RecyclerView.ViewHolder {
         TextView madonhang, ten, ngay, soluong, gia, trangthai;
         ImageView img_anh;

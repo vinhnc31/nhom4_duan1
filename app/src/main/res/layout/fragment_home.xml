@@ -26,17 +26,16 @@
                     android:layout_margin="8dp"
                     android:orientation="horizontal">
 
-                    <AutoCompleteTextView
+                    <TextView
                         android:id="@+id/search_item"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
                         android:layout_weight="1"
                         android:background="@drawable/bogocpasss"
-                        android:completionThreshold="1"
                         android:drawableRight="@drawable/ic_baseline_search_24"
                         android:hint="Bạn muốn tìm gì ?"
-                        android:padding="8dp"
+                        android:padding="10dp"
                         android:textSize="16dp" />
 
                     <ImageView

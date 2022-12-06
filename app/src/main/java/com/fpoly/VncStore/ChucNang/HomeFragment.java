@@ -161,12 +161,10 @@ public class HomeFragment extends Fragment {
         super.onResume();
         handler.postDelayed(runnable, 3000);
     }
-String TAG ="zzzzzzzzzzzz";
+
     private List<Sanpham> getDataProduct(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("SanPham");
-
-        Log.d(TAG, "getDataProduct: 00111");
         List<Sanpham> mListProduct = new ArrayList<>();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -176,7 +174,6 @@ String TAG ="zzzzzzzzzzzz";
                     Sanpham product = data.getValue(Sanpham.class);
                     product.setIdSanPham(data.getKey());
                     mListProduct.add(product);
-                    Log.d(TAG, "onDataChange: 0022222 " + product.getName());
                 }
                 setProductSearchAdapter(mListProduct);
             }
@@ -193,14 +190,13 @@ String TAG ="zzzzzzzzzzzz";
     private void setProductSearchAdapter(List<Sanpham> listProduct ){
         Search_SanPham_Adapter adapter=new Search_SanPham_Adapter(getActivity(),R.layout.item_search,listProduct);
         search.setAdapter(adapter);
-        Log.d(TAG, "setProductSearchAdapter: 003333");
+
         // Sau khi chọn item search sẽ chuyển sang fragment detail
         search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DetailedActivity.class);
                 intent.putExtra("detail",listProduct.get(position));
-                Log.d(TAG, "onItemClick: 0044444");
                 getContext().startActivity(intent);
             }
         });

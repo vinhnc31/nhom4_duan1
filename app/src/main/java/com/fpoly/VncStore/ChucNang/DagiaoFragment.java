@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.fpoly.VncStore.Adapter.LichsuAdapter;
 import com.fpoly.VncStore.Model.Hoadon;
-import com.fpoly.VncStore.Model.ChitietHoaDon;
+import com.fpoly.VncStore.Model.Oder;
 import com.fpoly.VncStore.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,14 +33,14 @@ public class DagiaoFragment extends Fragment {
 
     RecyclerView rcv;
     private List<Hoadon> listDetailOrder;
-    private List<ChitietHoaDon> chitietHoaDonList;
+    private List<Oder> listOrder;
     LichsuAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_dagiao, container, false);
-        chitietHoaDonList = new ArrayList<>();
+        listOrder = new ArrayList<>();
         listDetailOrder = new ArrayList<>();
         adapter = new LichsuAdapter();
         rcv =v.findViewById(R.id.rcv_dagiao);
@@ -50,7 +50,7 @@ public class DagiaoFragment extends Fragment {
     }
 
     private void setDataHistoryProductAdapter(){
-        adapter.setData(listDetailOrder,chitietHoaDonList);
+        adapter.setData(listDetailOrder,listOrder);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
         rcv.setLayoutManager(linearLayoutManager);
         rcv.setAdapter(adapter);
@@ -59,7 +59,7 @@ public class DagiaoFragment extends Fragment {
     // Lấy thông tin order
     private void findOrder(){
         // Clear các list dữ liệu khi tìm kiếm
-        chitietHoaDonList.clear();
+        listOrder.clear();
         listDetailOrder.clear();
 
         // Kết nối tới data base
@@ -74,14 +74,17 @@ public class DagiaoFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for (DataSnapshot dataOrder : snapshot.getChildren()){
-                    chitietHoaDonList.clear();
+                    listOrder.clear();
                     Log.d("TAG", "onDataChange: " + dataOrder.toString());
-                    ChitietHoaDon order = dataOrder.getValue(ChitietHoaDon.class);
-                    order.setIdChitietHoaDon(dataOrder.getKey());
+                    Oder order = dataOrder.getValue(Oder.class);
+                    order.setOrderNo(dataOrder.getKey());
+                    if (order.getTrangthai().equals("Đã nhận")) {
+                        listOrder.add(0,order);
+                    }
                     Log.d("zzzzzzz", "onDataChange: " + order.getTenkhachhang());
                 }
                 adapter.notifyDataSetChanged();
-                if (chitietHoaDonList.size() > 0){
+                if (listOrder.size() > 0){
                     // Lấy thông tin detail order
                     findDetailOrder(myRef);
                 }
@@ -95,10 +98,10 @@ public class DagiaoFragment extends Fragment {
 
     // Lấy thông tin detail order
     private void findDetailOrder( DatabaseReference myRef){
-        if (chitietHoaDonList.size() > 0){
-            for (int i = 0; i<chitietHoaDonList.size(); i++){
-                ChitietHoaDon order = chitietHoaDonList.get(i);
-                myRef.child(order.getIdChitietHoaDon()).child("detail").addValueEventListener(new ValueEventListener() {
+        if (listOrder.size() > 0){
+            for (int i = 0; i<listOrder.size(); i++){
+                Oder order = listOrder.get(i);
+                myRef.child(order.getOrderNo()).child("detail").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         listDetailOrder.clear();
