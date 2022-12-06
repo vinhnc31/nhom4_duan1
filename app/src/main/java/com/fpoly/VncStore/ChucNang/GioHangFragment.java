@@ -205,7 +205,6 @@ public class GioHangFragment extends Fragment {
             }
             hashMap.put("soluong", num);
             hashMap.put("tongtien", totalPrice);
-            hashMap.put("trangthai", "Đang chờ xác nhận");
             String oderkey = mreference.push().getKey();
             String oderkey1 = mreference.push().getKey();
             mreference.child(oderkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -254,7 +253,7 @@ public class GioHangFragment extends Fragment {
                     Toast.makeText(getContext(), "Đặt hàng thất bại ", Toast.LENGTH_SHORT).show();
                 }
             });
-        }
+       }
     }
 
     private List<Hoadon> makeDetailOrder(String idNo) {

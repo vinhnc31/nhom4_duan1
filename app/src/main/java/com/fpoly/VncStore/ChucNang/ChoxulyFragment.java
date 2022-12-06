@@ -75,9 +75,7 @@ public class ChoxulyFragment extends Fragment {
                     Log.d("TAG", "onDataChange: " + dataOrder.toString());
                     Oder order = dataOrder.getValue(Oder.class);
                     order.setOrderNo(dataOrder.getKey());
-                    if (order.getTrangthai().equals("Đang chờ xác nhận")) {
-                        listOrder.add(0,order);
-                    }
+                    listOrder.add(order);
                     Log.d("zzzzzzz", "onDataChange: " + order.getTenkhachhang());
                 }
                 adapter.notifyDataSetChanged();
@@ -95,19 +93,20 @@ public class ChoxulyFragment extends Fragment {
 
     // Lấy thông tin detail order
     private void findDetailOrder( DatabaseReference myRef){
+        listDetailOrder.clear();
         if (listOrder.size() > 0){
             for (int i = 0; i<listOrder.size(); i++){
                 Oder order = listOrder.get(i);
                 myRef.child(order.getOrderNo()).child("detail").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        listDetailOrder.clear();
-                        adapter.notifyDataSetChanged();
                         for (DataSnapshot dataDetail : snapshot.getChildren()){
-                            adapter.notifyDataSetChanged();
                             Hoadon detailOrder = dataDetail.getValue(Hoadon.class);
                             detailOrder.setIdHoadon(dataDetail.getKey());
-                            listDetailOrder.add(detailOrder);
+                            if (detailOrder.getTrangthai().equals("Đang chờ xác nhận")) {
+                                listDetailOrder.add(detailOrder);
+                            }
+
                         }
                         // set data HistoryProductAdapter
                         if (listDetailOrder.size() > 0){
