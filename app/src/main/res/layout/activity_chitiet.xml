@@ -203,35 +203,14 @@
                 android:textColor="@color/red">
             </TextView>
 
-            <TextView
-                android:id="@+id/tv_order_info_text9"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/tv_order_info_text8"
-                android:text="Trạng Thái :"
-                android:textSize="15sp"
-                android:textColor="@color/black">
-            </TextView>
 
-            <TextView
-                android:id="@+id/tv_trangthaichitiet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/tv_order_info_text8"
-                android:layout_toRightOf="@+id/tv_order_info_text7"
-                android:text="Đang Chờ Xác Nhận"
-                android:textSize="15sp"
-                android:textColor="@color/teal_700">
-            </TextView>
 
             <View
                 android:id="@+id/divider2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/tv_order_info_text9"
+                android:layout_below="@+id/tv_order_info_text8"
                 android:background="@color/black">
             </View>
 
@@ -250,8 +229,6 @@
                 android:id="@+id/rcv_chitiet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
                 android:layout_below="@+id/tv_order_info_text10">
             </androidx.recyclerview.widget.RecyclerView>
         </RelativeLayout>

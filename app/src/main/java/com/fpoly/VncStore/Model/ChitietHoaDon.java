@@ -4,35 +4,33 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Oder implements Serializable {
-    private String orderNo;
+public class ChitietHoaDon implements Serializable {
+    private String idChitietHoaDon;
     private String diachi;
     private String tenkhachhang;
     private String phone;
     private String ngaymua;
-    private String trangthai;
     private int soluong;
     private int tongtien;
     private List<Hoadon> hoadonList;
 
-    public Oder(String orderNo, String diachi, String tenkhachhang, String phone, String ngaymua, String trangthai, int soluong, int tongtien, List<Hoadon> hoadonList) {
-        this.orderNo = orderNo;
+    public ChitietHoaDon(String idChitietHoaDon, String diachi, String tenkhachhang, String phone, String ngaymua, String trangthai, int soluong, int tongtien, List<Hoadon> hoadonList) {
+        this.idChitietHoaDon = idChitietHoaDon;
         this.diachi = diachi;
         this.tenkhachhang = tenkhachhang;
         this.phone = phone;
         this.ngaymua = ngaymua;
-        this.trangthai = trangthai;
         this.soluong = soluong;
         this.tongtien = tongtien;
         this.hoadonList = hoadonList;
     }
 
-    public String getOrderNo() {
-        return orderNo;
+    public String getIdChitietHoaDon() {
+        return idChitietHoaDon;
     }
 
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
+    public void setIdChitietHoaDon(String idChitietHoaDon) {
+        this.idChitietHoaDon = idChitietHoaDon;
     }
 
     public String getDiachi() {
@@ -51,7 +49,7 @@ public class Oder implements Serializable {
         this.tenkhachhang = tenkhachhang;
     }
 
-    public Oder() {
+    public ChitietHoaDon() {
     }
 
     public String getPhone() {
@@ -68,14 +66,6 @@ public class Oder implements Serializable {
 
     public void setNgaymua(String ngaymua) {
         this.ngaymua = ngaymua;
-    }
-
-    public String getTrangthai() {
-        return trangthai;
-    }
-
-    public void setTrangthai(String trangthai) {
-        this.trangthai = trangthai;
     }
 
     public int getSoluong() {

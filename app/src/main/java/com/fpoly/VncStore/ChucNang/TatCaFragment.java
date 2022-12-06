@@ -13,11 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.fpoly.VncStore.Activity.HistoryActivity;
 import com.fpoly.VncStore.Adapter.LichsuAdapter;
-import com.fpoly.VncStore.Adapter.ViewPageAdapter;
 import com.fpoly.VncStore.Model.Hoadon;
-import com.fpoly.VncStore.Model.Oder;
+import com.fpoly.VncStore.Model.ChitietHoaDon;
 import com.fpoly.VncStore.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,14 +32,14 @@ import java.util.List;
 public class TatCaFragment extends Fragment {
     RecyclerView rcv;
     private List<Hoadon> listDetailOrder;
-    private List<Oder> listOrder;
+    private List<ChitietHoaDon> chitietHoaDonList;
     LichsuAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_tat_ca, container, false);
-        listOrder = new ArrayList<>();
+        chitietHoaDonList = new ArrayList<>();
         listDetailOrder = new ArrayList<>();
         rcv =v.findViewById(R.id.rcv_tatca);
         findOrder();
@@ -50,7 +48,7 @@ public class TatCaFragment extends Fragment {
 
     private void setDataHistoryProductAdapter(){
         adapter=new LichsuAdapter();
-        adapter.setData(listDetailOrder,listOrder);
+        adapter.setData(listDetailOrder,chitietHoaDonList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
         rcv.setLayoutManager(linearLayoutManager);
         rcv.setAdapter(adapter);
@@ -68,16 +66,16 @@ public class TatCaFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listOrder.clear();
+                chitietHoaDonList.clear();
                 for (DataSnapshot dataOrder : snapshot.getChildren()){
                     Log.d("TAG", "onDataChange: " + dataOrder.toString());
-                    Oder order = dataOrder.getValue(Oder.class);
-                    order.setOrderNo(dataOrder.getKey());
+                    ChitietHoaDon order = dataOrder.getValue(ChitietHoaDon.class);
+                    order.setIdChitietHoaDon(dataOrder.getKey());
                     Log.e("ssssssss",dataOrder.getKey());
                     Log.d("zzzzzzz", "onDataChange: " + order.getTenkhachhang());
-                    listOrder.add(0,order);
+                    chitietHoaDonList.add(0,order);
                 }
-                if (listOrder.size() > 0){
+                if (chitietHoaDonList.size() > 0){
                     // Lấy thông tin detail order
                     findDetailOrder(myRef);
                 }
@@ -91,10 +89,10 @@ public class TatCaFragment extends Fragment {
     // Lấy thông tin detail order
     private void findDetailOrder( DatabaseReference myRef){
         listDetailOrder.clear();
-        if (listOrder.size() > 0){
-            for (int i = 0; i<listOrder.size(); i++){
-                Oder order = listOrder.get(i);
-                myRef.child(order.getOrderNo()).child("detail").addValueEventListener(new ValueEventListener() {
+        if (chitietHoaDonList.size() > 0){
+            for (int i = 0; i<chitietHoaDonList.size(); i++){
+                ChitietHoaDon order = chitietHoaDonList.get(i);
+                myRef.child(order.getIdChitietHoaDon()).child("detail").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataDetail : snapshot.getChildren()){
@@ -103,7 +101,7 @@ public class TatCaFragment extends Fragment {
                             listDetailOrder.add(detailOrder);
                         }
                         // set data HistoryProductAdapter
-                            setDataHistoryProductAdapter();
+                        setDataHistoryProductAdapter();
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
