@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.SearchView;
+import android.widget.AbsListView;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +23,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
     TextView tv_back;
     RecyclerView rcv_search;
-    SearchView searchView;
+    AutoCompleteTextView searchView;
     Search_SanPham_Adapter adapter;
     List<Sanpham> sanphamList;
     @Override
@@ -42,13 +44,18 @@ public class SearchActivity extends AppCompatActivity {
         findViewById(R.id.back_sea).setOnClickListener(view -> {super.onBackPressed();});
         searchView=findViewById(R.id.search_view);
         rcv_search=findViewById(R.id.search_hienthi);
-        sanphamList= getDataProduct("iphone");
+        String ed=searchView.getText().toString().trim();
+        sanphamList= getDataProduct("");
+
+
+    }
+    private void Adapter(){
         adapter=new Search_SanPham_Adapter(sanphamList,this);
         LinearLayoutManager  manager=new LinearLayoutManager(this);
         rcv_search.setLayoutManager(manager);
         rcv_search.setAdapter(adapter);
-
     }
+
     private List<Sanpham> getDataProduct(String name){
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("SanPham");
         List<Sanpham> mListProduct = new ArrayList<>();

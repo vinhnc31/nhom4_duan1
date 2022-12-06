@@ -180,7 +180,6 @@ public class GioHangFragment extends Fragment {
     public void setCountForProduct(int possion, int countProduct) {
         MainActivity.sanphamList.get(possion).setNumProduct(countProduct);
     }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addDataOrder() {
         FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
@@ -223,7 +222,6 @@ public class GioHangFragment extends Fragment {
                                         badgeDrawable.setNumber(MainActivity.sanphamList.size());
                                     }
                                 });
-
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {

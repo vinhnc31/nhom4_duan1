@@ -39,17 +39,15 @@ public class DangGiaoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_dang_giao, container, false);
+        View v= inflater.inflate(R.layout.fragment_dahuy, container, false);
         listOrder = new ArrayList<>();
         listDetailOrder = new ArrayList<>();
-        adapter = new LichsuAdapter();
-        rcv =v.findViewById(R.id.rcv_danggiao);
+        rcv =v.findViewById(R.id.rcv_dahuy);
         findOrder();
-        setDataHistoryProductAdapter();
         return v;
     }
-
     private void setDataHistoryProductAdapter(){
+        adapter = new LichsuAdapter();
         adapter.setData(listDetailOrder,listOrder);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
         rcv.setLayoutManager(linearLayoutManager);
@@ -58,9 +56,7 @@ public class DangGiaoFragment extends Fragment {
 
     // Lấy thông tin order
     private void findOrder(){
-        // Clear các list dữ liệu khi tìm kiếm
         listDetailOrder.clear();
-
         // Kết nối tới data base
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
         String email1=user.getEmail();
@@ -73,11 +69,10 @@ public class DangGiaoFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listOrder.clear();
                 for (DataSnapshot dataOrder : snapshot.getChildren()){
-                    Log.d("TAG", "onDataChange: " + dataOrder.toString());
                     Oder order = dataOrder.getValue(Oder.class);
                     order.setOrderNo(dataOrder.getKey());
-                    listOrder.add(order);
-                    Log.d("zzzzzzz", "onDataChange: " + order.getTenkhachhang());
+                    listOrder.add(0,order);
+                    Log.e("w111www",""+listOrder.size());
                 }
                 findDetailOrder(myRef);
             }
@@ -87,13 +82,12 @@ public class DangGiaoFragment extends Fragment {
             }
         });
     }
-
-    // Lấy thông tin detail order
     private void findDetailOrder( DatabaseReference myRef){
         listDetailOrder.clear();
         if (listOrder.size() > 0){
             for (int i = 0; i<listOrder.size(); i++){
                 Oder order = listOrder.get(i);
+                Log.e("dakjfhlas",order.getOrderNo());
                 myRef.child(order.getOrderNo()).child("detail").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -104,6 +98,7 @@ public class DangGiaoFragment extends Fragment {
                                 listDetailOrder.add(detailOrder);
                             }
                         }
+                        Log.e("2dadad",""+listDetailOrder.size());
                         // set data HistoryProductAdapter
                         if (listDetailOrder.size() > 0){
                             setDataHistoryProductAdapter();
