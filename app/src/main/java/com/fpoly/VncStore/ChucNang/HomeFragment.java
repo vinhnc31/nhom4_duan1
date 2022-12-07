@@ -1,11 +1,9 @@
 package com.fpoly.VncStore.ChucNang;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,16 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fpoly.VncStore.Activity.DetailedActivity;
 import com.fpoly.VncStore.Activity.HistoryActivity;
-import com.fpoly.VncStore.Activity.SearchActivity;
 import com.fpoly.VncStore.Adapter.DanhmucAdapter;
 import com.fpoly.VncStore.Adapter.PhotoAdapter;
 import com.fpoly.VncStore.Adapter.SanphamAdapter;
@@ -37,13 +31,10 @@ import com.fpoly.VncStore.Model.Danhmuc;
 import com.fpoly.VncStore.Model.Photo;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -64,7 +55,7 @@ public class HomeFragment extends Fragment {
     SanphamAdapter adaptersanpham;
     List<Sanpham> sanphamList;
     ImageView img_thongbao;
-    TextView search;
+    AutoCompleteTextView search;
 
     private ArrayList<Danhmuc> lists = new ArrayList<>();
     private List<Photo> mlist;
@@ -90,16 +81,14 @@ public class HomeFragment extends Fragment {
         mlist = getList();
         PhotoAdapter adapter = new PhotoAdapter(mlist);
         img_thongbao = v.findViewById(R.id.img_thongbao);
-        search = v.findViewById(R.id.search_item);
-        search.setOnClickListener(view -> {
-            startActivity(new Intent((MainActivity) getActivity(), SearchActivity.class));
-        });
         viewPager2.setAdapter(adapter);
         circleIndicator3.setViewPager(viewPager2);
         recyclerView = v.findViewById(R.id.recyclerView);
         rcv_sanphammoi = v.findViewById(R.id.recyclerView1);
 
         sanphamList=getDataProduct();
+        search=v.findViewById(R.id.search_view);
+        sanphamList= getDataProduct1();
 
         mdatabase = FirebaseDatabase.getInstance();
         mreference = mdatabase.getReference().child("SanPham");
@@ -189,5 +178,46 @@ public class HomeFragment extends Fragment {
             }
         });
         return mListProduct;
+    }
+    private List<Sanpham> getDataProduct1(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("SanPham");
+
+        List<Sanpham> mListProduct = new ArrayList<>();
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot data : snapshot.getChildren()){
+                    Sanpham product = data.getValue(Sanpham.class);
+                    product.setIdSanPham(data.getKey());
+                    mListProduct.add(product);
+                }
+                setProductSearchAdapter(mListProduct);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(),"Không tải được dữ liệu từ firebase"
+                        +error.toString(),Toast.LENGTH_LONG).show();
+                Log.d("MYTAG","onCancelled"+ error.toString());
+            }
+        });
+        return mListProduct;
+    }
+    private void setProductSearchAdapter(List<Sanpham> listProduct ){
+        Search_SanPham_Adapter productSearchAdapter = new Search_SanPham_Adapter(getActivity(),R.layout.item_search, listProduct);
+        search.setAdapter(productSearchAdapter);
+
+        // Sau khi chọn item search sẽ chuyển sang fragment detail
+        search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), DetailedActivity.class);
+                intent.putExtra("detail",listProduct.get(position));
+                getContext().startActivity(intent);
+            }
+        });
     }
 }

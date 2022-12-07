@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.fpoly.VncStore.Activity.ChitietActivity;
 import com.fpoly.VncStore.Activity.DetailedActivity;
 import com.fpoly.VncStore.Model.Hoadon;
@@ -33,59 +34,76 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Search_SanPham_Adapter extends RecyclerView.Adapter<Search_SanPham_Adapter.SanPhamViewHolde> {
+public class Search_SanPham_Adapter extends ArrayAdapter<Sanpham> {
     private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
-    private List<Sanpham> list;
-    private Context context;
+    private List<Sanpham> listSearchProduct;
 
-    public Search_SanPham_Adapter(List<Sanpham> list, Context context) {
-        this.list = list;
-        this.context = context;
+    public Search_SanPham_Adapter(@NonNull Context context, int resource, @NonNull List<Sanpham> objects) {
+        super(context, resource, objects);
+        listSearchProduct= new ArrayList<>(objects);
     }
 
     @NonNull
     @Override
-    public SanPhamViewHolde onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search,parent,false);
-        return new SanPhamViewHolde(v);
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+        if (convertView == null){
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search,parent,false);
+        }
+
+        ImageView imgSearch = convertView.findViewById(R.id.img_search);
+        TextView tvSearchName = convertView.findViewById(R.id.tv_search_name);
+        TextView tvSearchPrice = convertView.findViewById(R.id.tv_search_price);
+
+        Sanpham product = getItem(position);
+
+        Picasso.get().load(product.getImage()).into(imgSearch);
+        tvSearchName.setText(product.getName());
+        tvSearchPrice.setText(formatPrice.format(product.getGia()) + " VNĐ");
+
+        return convertView;
     }
 
+    @NonNull
     @Override
-    public void onBindViewHolder(@NonNull SanPhamViewHolde holder, int position) {
-        Sanpham item=list.get(position);
-        if (item == null){
-            return;
-        }
-        Picasso.get().load(item.getImage()).into(holder.img_anh);
-        holder.tv_ten.setText(item.getName());
-        holder.tv_gia.setText(formatPrice.format(item.getGia()) + " VNĐ");
-        holder.itemView.setOnClickListener(v ->{
-            Intent intent = new Intent(context, DetailedActivity.class);
-            intent.putExtra("detail",list.get(position));
-            context.startActivity(intent);
-        });
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<Sanpham> listSuggest = new ArrayList<>();
 
+                if (constraint == null || constraint.length() == 0){
+                    listSuggest.addAll(listSearchProduct);
+                }
+                else {
+                    String filter = constraint.toString().toLowerCase().trim();
+                    for (Sanpham p : listSearchProduct){
+                        if (p.getName().toLowerCase().contains(filter)){
+                            Log.e("3333333",p.getName());
+                            listSuggest.add(p);
+                        }
+                    }
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = listSuggest;
+                filterResults.count = listSuggest.size();
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                clear();
+                addAll( (List<Sanpham>) results.values);
+                notifyDataSetInvalidated();
+            }
+
+            @Override
+            public CharSequence convertResultToString(Object resultValue) {
+                return ( (Sanpham) resultValue).getName();
+            }
+        };
     }
 
-
-    @Override
-    public int getItemCount() {
-        if (list.size()!=0){
-            return list.size();
-        }
-        return 0;
-    }
-
-    public class SanPhamViewHolde extends RecyclerView.ViewHolder{
-
-        ImageView img_anh;
-        TextView tv_ten,tv_gia;
-
-        public SanPhamViewHolde(@NonNull View itemView) {
-            super(itemView);
-            img_anh = itemView.findViewById(R.id.img_search);
-            tv_ten = itemView.findViewById(R.id.tv_search_name);
-            tv_gia = itemView.findViewById(R.id.tv_search_price);
-        }
-    }
 }

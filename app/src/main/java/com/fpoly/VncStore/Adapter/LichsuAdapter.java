@@ -101,9 +101,7 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
             DatabaseReference mreference1 = mdatabase.getReference("OderAdmin");
             HashMap<String,Object> hashMap=new HashMap<>();
             hashMap.put("trangthai","Đã Hủy");
-            Log.e("7639287984",hoadon.getIdHoadon());
             mreference.child(oder1.getOrderNo()).child("detail").child(hoadon.getIdHoadon()).updateChildren(hashMap);
-
             mreference1.child(oder1.getOrderNo()).child("detailadmin").child(hoadon.getIdHoadon()).updateChildren(hashMap);
 
         });
