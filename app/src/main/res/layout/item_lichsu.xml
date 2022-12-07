@@ -43,7 +43,6 @@
         </View>
 
         <ImageView
-            android:background="@drawable/iphone12promax"
             android:id="@+id/img_anhls"
             android:layout_width="70dp"
             android:layout_height="70dp"

@@ -86,7 +86,6 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), ChitietActivity.class);
             intent.putExtra("oder", oder1);
-            Log.e("iuhafaflaj",""+oder1.getHoadonList().size());
             AppCompatActivity appCompatActivity = (AppCompatActivity) view.getContext();
             view.getContext().startActivity(intent);
             appCompatActivity.overridePendingTransition(R.anim.enter_right_to_left, R.anim.exit_right_to_left);
@@ -111,7 +110,7 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
         } else {
             holder.huydon.setVisibility(View.VISIBLE);
         }
-        if (hoadon.getTrangthai().equals("Đã Nhận")) {
+        if (hoadon.getTrangthai().equals("Đã nhận")) {
             holder.huydon.setVisibility(View.GONE);
         }
         if (hoadon.getTrangthai().equals("Đang vận chuyển")) {

@@ -73,7 +73,7 @@ public class DahuyFragment extends Fragment {
                 for (DataSnapshot dataOrder : snapshot.getChildren()){
                     Oder order = dataOrder.getValue(Oder.class);
                     order.setOrderNo(dataOrder.getKey());
-                    listOrder.add(order);
+                    listOrder.add(0,order);
                     Log.e("w111www",""+listOrder.size());
                 }
                 findDetailOrder(myRef);

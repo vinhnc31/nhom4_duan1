@@ -57,8 +57,6 @@ public class ChoxulyFragment extends Fragment {
     // Lấy thông tin order
     private void findOrder(){
         // Clear các list dữ liệu khi tìm kiếm
-        listOrder.clear();
-        listDetailOrder.clear();
 
         // Kết nối tới data base
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
@@ -75,7 +73,7 @@ public class ChoxulyFragment extends Fragment {
                     Log.d("TAG", "onDataChange: " + dataOrder.toString());
                     Oder order = dataOrder.getValue(Oder.class);
                     order.setOrderNo(dataOrder.getKey());
-                    listOrder.add(order);
+                    listOrder.add(0,order);
                     Log.d("zzzzzzz", "onDataChange: " + order.getTenkhachhang());
                 }
                 adapter.notifyDataSetChanged();
@@ -103,10 +101,10 @@ public class ChoxulyFragment extends Fragment {
                         for (DataSnapshot dataDetail : snapshot.getChildren()){
                             Hoadon detailOrder = dataDetail.getValue(Hoadon.class);
                             detailOrder.setIdHoadon(dataDetail.getKey());
+                            Log.e("ydyeyedye",detailOrder.getIdHoadon());
                             if (detailOrder.getTrangthai().equals("Đang chờ xác nhận")) {
                                 listDetailOrder.add(detailOrder);
                             }
-
                         }
                         // set data HistoryProductAdapter
                         if (listDetailOrder.size() > 0){

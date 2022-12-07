@@ -30,7 +30,6 @@ public class ChitietActivity extends AppCompatActivity {
     RecyclerView rcv_chitiet;
     ImageView img_back;
     ChitietAdapter adapter;
-    Button btn_xacnhan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,26 +40,10 @@ public class ChitietActivity extends AppCompatActivity {
     }
     private void setData() {
         order= (Oder) getIntent().getSerializableExtra("oder");
-        Log.e("hdkasdjlka",""+order.getHoadonList().size());
         adapter.SetData(order.getHoadonList());
         LinearLayoutManager manager=new LinearLayoutManager(this);
         rcv_chitiet.setLayoutManager(manager);
         rcv_chitiet.setAdapter(adapter);
-        if (order.getHoadonList().get(0).getTrangthai().equalsIgnoreCase("Đang vận chuyển")){
-            btn_xacnhan.setVisibility(View.VISIBLE);
-            btn_xacnhan.setOnClickListener(v ->{
-                FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                String email1 = user.getEmail();
-                email1 = email1.replace(".", "_");
-                DatabaseReference mreference = mdatabase.getReference("Oder/" + email1);
-                DatabaseReference mreference1 = mdatabase.getReference("OderAdmin");
-                HashMap<String,Object> hashMap=new HashMap<>();
-                hashMap.put("trangthai","Đã Nhận");
-                mreference.child(order.getOrderNo()).child("detail").child(order.getHoadonList().get(0).getIdHoadon()).updateChildren(hashMap);
-                mreference1.child(order.getOrderNo()).child("detailadmin").child(order.getHoadonList().get(0).getIdHoadon()).updateChildren(hashMap);
-            });
-        }
     }
 
     private void getView() {
@@ -74,7 +57,6 @@ public class ChitietActivity extends AppCompatActivity {
     }
 
     public void anhxa(){
-        btn_xacnhan=findViewById(R.id.btn_xacnhan);
         rcv_chitiet=findViewById(R.id.rcv_chitiet);
         adapter=new ChitietAdapter();
         tv_madon=findViewById(R.id.tv_madonhangct);
