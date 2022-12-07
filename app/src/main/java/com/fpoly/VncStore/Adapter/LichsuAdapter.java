@@ -56,7 +56,7 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
     @Override
     public void onBindViewHolder(@NonNull LichsuViewHodel holder, int position) {
         Hoadon hoadon = list.get(position);
-        Oder oder1 = oderList.get(position);
+        Oder oder1= oderList.get(position);
         if (hoadon == null) {
             return;
         }
@@ -66,29 +66,33 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
         holder.gia.setText(formatPrice.format(hoadon.getGiasp()) + " VND");
         holder.trangthai.setText(hoadon.getTrangthai());
         holder.madonhang.setText(hoadon.getIdOder());
-        holder.ngay.setText(oder1.getNgaymua());
+        for (Oder order : oderList){
+            if (order.getOrderNo().equals(hoadon.getIdOder()) ){
+                holder.ngay.setText(order.getNgaymua());
+                break;
+            }
+        }
+        for (Oder od : oderList) {
+            if (od.getOrderNo().equals(hoadon.getIdOder())) {
+                oder = od;
+                break;
+            }
+        }
+        for (Hoadon hd : list) {
+            if (hoadon.getIdOder().equals(hd.getIdOder())) {
+                oder.addListHoaDon(hd);
+            }
+        }
         holder.itemView.setOnClickListener(view -> {
-            for (Oder od : oderList) {
-                if (od.getOrderNo().equals(hoadon.getIdOder())) {
-                    oder = od;
-                    break;
-                }
-            }
-            for (Hoadon hd : list) {
-                if (hoadon.getIdOder().equals(hd.getIdOder())) {
-                    oder.addListHoaDon(hd);
-                }
-            }
             Intent intent = new Intent(view.getContext(), ChitietActivity.class);
-            intent.putExtra("oder", oder);
+            intent.putExtra("oder", oder1);
+            Log.e("iuhafaflaj",""+oder1.getHoadonList().size());
             AppCompatActivity appCompatActivity = (AppCompatActivity) view.getContext();
             view.getContext().startActivity(intent);
             appCompatActivity.overridePendingTransition(R.anim.enter_right_to_left, R.anim.exit_right_to_left);
         });
         holder.huydon.setOnClickListener(v -> {
-            oder1.setTrangthai("Đã Hủy");
             hoadon.setTrangthai("Đã Hủy");
-            oderList.set(position,oder1);
             list.set(position,hoadon);
             FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -98,9 +102,7 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
             DatabaseReference mreference1 = mdatabase.getReference("OderAdmin");
             HashMap<String,Object> hashMap=new HashMap<>();
             hashMap.put("trangthai","Đã Hủy");
-            mreference.child(oder1.getOrderNo()).updateChildren(hashMap);
             mreference.child(oder1.getOrderNo()).child("detail").child(hoadon.getIdHoadon()).updateChildren(hashMap);
-            mreference1.child(oder1.getOrderNo()).updateChildren(hashMap);
             mreference1.child(oder1.getOrderNo()).child("detailadmin").child(hoadon.getIdHoadon()).updateChildren(hashMap);
 
         });

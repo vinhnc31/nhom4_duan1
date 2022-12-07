@@ -77,14 +77,10 @@ public class DangGiaoFragment extends Fragment {
                     Log.d("TAG", "onDataChange: " + dataOrder.toString());
                     Oder order = dataOrder.getValue(Oder.class);
                     order.setOrderNo(dataOrder.getKey());
-                    if (order.getTrangthai().equals("Đang vận chuyển")) {
-                        listOrder.add(0,order);
-                    }
                     Log.d("zzzzzzz", "onDataChange: " + order.getTenkhachhang());
                 }
                 adapter.notifyDataSetChanged();
                 if (listOrder.size() > 0){
-                    // Lấy thông tin detail order
                     findDetailOrder(myRef);
                 }
             }

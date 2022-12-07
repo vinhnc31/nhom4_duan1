@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.fpoly.VncStore.Adapter.LichsuAdapter;
 import com.fpoly.VncStore.Model.Hoadon;
-import com.fpoly.VncStore.Model.ChitietHoaDon;
+import com.fpoly.VncStore.Model.Oder;
 import com.fpoly.VncStore.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,14 +32,14 @@ import java.util.List;
 public class TatCaFragment extends Fragment {
     RecyclerView rcv;
     private List<Hoadon> listDetailOrder;
-    private List<ChitietHoaDon> chitietHoaDonList;
+    private List<Oder> oderList;
     LichsuAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_tat_ca, container, false);
-        chitietHoaDonList = new ArrayList<>();
+        oderList = new ArrayList<>();
         listDetailOrder = new ArrayList<>();
         rcv =v.findViewById(R.id.rcv_tatca);
         findOrder();
@@ -48,7 +48,7 @@ public class TatCaFragment extends Fragment {
 
     private void setDataHistoryProductAdapter(){
         adapter=new LichsuAdapter();
-        adapter.setData(listDetailOrder,chitietHoaDonList);
+        adapter.setData(listDetailOrder,oderList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
         rcv.setLayoutManager(linearLayoutManager);
         rcv.setAdapter(adapter);
@@ -66,16 +66,16 @@ public class TatCaFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                chitietHoaDonList.clear();
+                oderList.clear();
                 for (DataSnapshot dataOrder : snapshot.getChildren()){
                     Log.d("TAG", "onDataChange: " + dataOrder.toString());
-                    ChitietHoaDon order = dataOrder.getValue(ChitietHoaDon.class);
-                    order.setIdChitietHoaDon(dataOrder.getKey());
+                    Oder order = dataOrder.getValue(Oder.class);
+                    order.setOrderNo(dataOrder.getKey());
                     Log.e("ssssssss",dataOrder.getKey());
                     Log.d("zzzzzzz", "onDataChange: " + order.getTenkhachhang());
-                    chitietHoaDonList.add(0,order);
+                    oderList.add(0,order);
                 }
-                if (chitietHoaDonList.size() > 0){
+                if (oderList.size() > 0){
                     // Lấy thông tin detail order
                     findDetailOrder(myRef);
                 }
@@ -89,10 +89,10 @@ public class TatCaFragment extends Fragment {
     // Lấy thông tin detail order
     private void findDetailOrder( DatabaseReference myRef){
         listDetailOrder.clear();
-        if (chitietHoaDonList.size() > 0){
-            for (int i = 0; i<chitietHoaDonList.size(); i++){
-                ChitietHoaDon order = chitietHoaDonList.get(i);
-                myRef.child(order.getIdChitietHoaDon()).child("detail").addValueEventListener(new ValueEventListener() {
+        if (oderList.size() > 0){
+            for (int i = 0; i<oderList.size(); i++){
+                Oder order = oderList.get(i);
+                myRef.child(order.getOrderNo()).child("detail").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataDetail : snapshot.getChildren()){

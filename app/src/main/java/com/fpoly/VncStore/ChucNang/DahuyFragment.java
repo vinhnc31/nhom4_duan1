@@ -58,10 +58,7 @@ public class DahuyFragment extends Fragment {
 
     // Lấy thông tin order
     private void findOrder(){
-        // Clear các list dữ liệu khi tìm kiếm
-        listOrder.clear();
         listDetailOrder.clear();
-
         // Kết nối tới data base
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
         String email1=user.getEmail();
@@ -74,19 +71,12 @@ public class DahuyFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listOrder.clear();
                 for (DataSnapshot dataOrder : snapshot.getChildren()){
-                    Log.d("TAG", "onDataChange: " + dataOrder.toString());
                     Oder order = dataOrder.getValue(Oder.class);
                     order.setOrderNo(dataOrder.getKey());
-                    if (order.getTrangthai().equals("Đã Hủy")) {
-                        listOrder.add(order);
-                    }
+                    listOrder.add(order);
                     Log.e("w111www",""+listOrder.size());
-                    Log.d("zzzzzzz", "onDataChange: " + order.getTenkhachhang());
                 }
-                if (listOrder.size() > 0){
-                    // Lấy thông tin detail order
-                    findDetailOrder(myRef);
-                }
+                findDetailOrder(myRef);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -94,24 +84,27 @@ public class DahuyFragment extends Fragment {
             }
         });
     }
-
-    // Lấy thông tin detail order
     private void findDetailOrder( DatabaseReference myRef){
         listDetailOrder.clear();
         if (listOrder.size() > 0){
             for (int i = 0; i<listOrder.size(); i++){
                 Oder order = listOrder.get(i);
+                Log.e("dakjfhlas",order.getOrderNo());
                 myRef.child(order.getOrderNo()).child("detail").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataDetail : snapshot.getChildren()){
                             Hoadon detailOrder = dataDetail.getValue(Hoadon.class);
                             detailOrder.setIdHoadon(dataDetail.getKey());
-                            listDetailOrder.add(0,detailOrder);
+                            if (detailOrder.getTrangthai().equals("Đã Hủy")) {
+                                listDetailOrder.add(detailOrder);
+                            }
                         }
+                        Log.e("2dadad",""+listDetailOrder.size());
                         // set data HistoryProductAdapter
-                        setDataHistoryProductAdapter();
-
+                        if (listDetailOrder.size() > 0){
+                            setDataHistoryProductAdapter();
+                        }
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {

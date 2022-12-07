@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.fpoly.VncStore.Activity.DetailedActivity;
 import com.fpoly.VncStore.Activity.HistoryActivity;
+import com.fpoly.VncStore.Activity.SearchActivity;
 import com.fpoly.VncStore.Adapter.DanhmucAdapter;
 import com.fpoly.VncStore.Adapter.PhotoAdapter;
 import com.fpoly.VncStore.Adapter.SanphamAdapter;
@@ -63,7 +64,7 @@ public class HomeFragment extends Fragment {
     SanphamAdapter adaptersanpham;
     List<Sanpham> sanphamList;
     ImageView img_thongbao;
-    AutoCompleteTextView search;
+    TextView search;
 
     private ArrayList<Danhmuc> lists = new ArrayList<>();
     private List<Photo> mlist;
@@ -90,6 +91,9 @@ public class HomeFragment extends Fragment {
         PhotoAdapter adapter = new PhotoAdapter(mlist);
         img_thongbao = v.findViewById(R.id.img_thongbao);
         search = v.findViewById(R.id.search_item);
+        search.setOnClickListener(view -> {
+            startActivity(new Intent((MainActivity) getActivity(), SearchActivity.class));
+        });
         viewPager2.setAdapter(adapter);
         circleIndicator3.setViewPager(viewPager2);
         recyclerView = v.findViewById(R.id.recyclerView);
@@ -175,7 +179,6 @@ public class HomeFragment extends Fragment {
                     product.setIdSanPham(data.getKey());
                     mListProduct.add(product);
                 }
-                setProductSearchAdapter(mListProduct);
             }
 
             @Override
@@ -186,19 +189,5 @@ public class HomeFragment extends Fragment {
             }
         });
         return mListProduct;
-    }
-    private void setProductSearchAdapter(List<Sanpham> listProduct ){
-        Search_SanPham_Adapter adapter=new Search_SanPham_Adapter(getActivity(),R.layout.item_search,listProduct);
-        search.setAdapter(adapter);
-
-        // Sau khi chọn item search sẽ chuyển sang fragment detail
-        search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), DetailedActivity.class);
-                intent.putExtra("detail",listProduct.get(position));
-                getContext().startActivity(intent);
-            }
-        });
     }
 }

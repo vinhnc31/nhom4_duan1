@@ -10,18 +10,16 @@ public class Oder implements Serializable {
     private String tenkhachhang;
     private String phone;
     private String ngaymua;
-    private String trangthai;
     private int soluong;
     private int tongtien;
     private List<Hoadon> hoadonList;
 
-    public Oder(String orderNo, String diachi, String tenkhachhang, String phone, String ngaymua, String trangthai, int soluong, int tongtien, List<Hoadon> hoadonList) {
+    public Oder(String orderNo, String diachi, String tenkhachhang, String phone, String ngaymua, int soluong, int tongtien, List<Hoadon> hoadonList) {
         this.orderNo = orderNo;
         this.diachi = diachi;
         this.tenkhachhang = tenkhachhang;
         this.phone = phone;
         this.ngaymua = ngaymua;
-        this.trangthai = trangthai;
         this.soluong = soluong;
         this.tongtien = tongtien;
         this.hoadonList = hoadonList;
@@ -70,14 +68,6 @@ public class Oder implements Serializable {
         this.ngaymua = ngaymua;
     }
 
-    public String getTrangthai() {
-        return trangthai;
-    }
-
-    public void setTrangthai(String trangthai) {
-        this.trangthai = trangthai;
-    }
-
     public int getSoluong() {
         return soluong;
     }
@@ -95,7 +85,7 @@ public class Oder implements Serializable {
     }
 
     public List<Hoadon> getHoadonList() {
-        return hoadonList;
+        return this.hoadonList;
     }
 
     public void setHoadonList(List<Hoadon> hoadonList) {
