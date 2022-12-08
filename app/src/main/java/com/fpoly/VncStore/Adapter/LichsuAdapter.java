@@ -1,29 +1,20 @@
 package com.fpoly.VncStore.Adapter;
 
-import static com.fpoly.VncStore.Activity.MainActivity.badgeDrawable;
-
-import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fpoly.VncStore.Activity.ChitietActivity;
-import com.fpoly.VncStore.Activity.MainActivity;
-import com.fpoly.VncStore.Activity.TabletActivity;
-import com.fpoly.VncStore.Model.Hoadon;
-import com.fpoly.VncStore.Model.Oder;
+import com.fpoly.VncStore.Model.Order;
 import com.fpoly.VncStore.R;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -36,12 +27,9 @@ import java.util.List;
 
 public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuViewHodel> {
     private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
-    private List<Hoadon> list;
-    private List<Oder> oderList;
-    private Oder oder;
+    private List<Order> oderList;
 
-    public void setData(List<Hoadon> list, List<Oder> oderList) {
-        this.list = list;
+    public void setData( List<Order> oderList) {
         this.oderList = oderList;
         notifyDataSetChanged();
     }
@@ -55,75 +43,48 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
 
     @Override
     public void onBindViewHolder(@NonNull LichsuViewHodel holder, int position) {
-        Hoadon hoadon = list.get(position);
-        Oder oder1= oderList.get(position);
-        if (hoadon == null) {
+        Order oder1= oderList.get(position);
+        if (oder1 ==null){
             return;
         }
-        Picasso.get().load(hoadon.getImge()).into(holder.img_anh);
-        holder.ten.setText(hoadon.getNamesp());
-        holder.soluong.setText(String.valueOf(hoadon.getSoluong()));
-        holder.gia.setText(formatPrice.format(hoadon.getGiasp()) + " VND");
-        holder.trangthai.setText(hoadon.getTrangthai());
-        holder.madonhang.setText(hoadon.getIdOder());
-        for (Oder order : oderList){
-            if (order.getOrderNo().equals(hoadon.getIdOder()) ){
-                holder.ngay.setText(order.getNgaymua());
-                break;
-            }
-        }
-        for (Oder od : oderList) {
-            if (od.getOrderNo().equals(hoadon.getIdOder())) {
-                oder = od;
-                break;
-            }
-        }
-        for (Hoadon hd : list) {
-            if (hoadon.getIdOder().equals(hd.getIdOder())) {
-                oder.addListHoaDon(hd);
-            }
-        }
+        Picasso.get().load(oder1.getSanphamList().get(0).getImage()).into(holder.img_anh);
+        holder.ten.setText(oder1.getSanphamList().get(0).getName());
+        holder.soluong.setText(String.valueOf(oder1.getSoluong()));
+        holder.gia.setText(formatPrice.format(oder1.getSanphamList().get(0).getGia()) + " VND");
+        holder.trangthai.setText(oder1.getTrangthai());
+        holder.madonhang.setText(oder1.getOrderNo());
+        holder.ngay.setText(oder1.getNgaymua());
+
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), ChitietActivity.class);
-            intent.putExtra("oder", oder1);
+            intent.putExtra("order", oder1);
             AppCompatActivity appCompatActivity = (AppCompatActivity) view.getContext();
             view.getContext().startActivity(intent);
             appCompatActivity.overridePendingTransition(R.anim.enter_right_to_left, R.anim.exit_right_to_left);
         });
         holder.huydon.setOnClickListener(v -> {
-            hoadon.setTrangthai("Đã Hủy");
-            list.set(position,hoadon);
-            FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            String email1 = user.getEmail();
-            email1 = email1.replace(".", "_");
-            DatabaseReference mreference = mdatabase.getReference("Oder/" + email1);
-            DatabaseReference mreference1 = mdatabase.getReference("OderAdmin");
-            HashMap<String,Object> hashMap=new HashMap<>();
+            oder1.setTrangthai("Đã Hủy");
+            DatabaseReference mReference=FirebaseDatabase.getInstance().getReference("Order");
+            HashMap<String,Object> hashMap =new HashMap<>();
             hashMap.put("trangthai","Đã Hủy");
-            mreference.child(oder1.getOrderNo()).child("detail").child(hoadon.getIdHoadon()).updateChildren(hashMap);
-            mreference1.child(oder1.getOrderNo()).child("detailadmin").child(hoadon.getIdHoadon()).updateChildren(hashMap);
-
+            mReference.child(oder1.getOrderNo()).updateChildren(hashMap);
         });
-        if (hoadon.getTrangthai().equals("Đã Hủy")) {
+        if (oder1.getTrangthai().equals("Đã Hủy")) {
             holder.huydon.setVisibility(View.GONE);
         } else {
             holder.huydon.setVisibility(View.VISIBLE);
         }
-        if (hoadon.getTrangthai().equals("Đã nhận")) {
+        if (oder1.getTrangthai().equals("Đã Nhận")) {
             holder.huydon.setVisibility(View.GONE);
         }
-        if (hoadon.getTrangthai().equals("Đang vận chuyển")) {
+        if (oder1.getTrangthai().equals("Đang vận chuyển")) {
             holder.huydon.setVisibility(View.GONE);
         }
     }
 
     @Override
     public int getItemCount() {
-        if (list.size() != 0) {
-            return list.size();
-        }
-        return 0;
+            return oderList.size();
 
     }
 

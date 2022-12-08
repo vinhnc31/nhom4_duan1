@@ -2,36 +2,24 @@ package com.fpoly.VncStore.Adapter;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.database.DataSetObserver;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.fpoly.VncStore.Activity.ChitietActivity;
-import com.fpoly.VncStore.Activity.DetailedActivity;
-import com.fpoly.VncStore.Model.Hoadon;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Search_SanPham_Adapter extends ArrayAdapter<Sanpham> {

@@ -52,7 +52,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
             @Override
             public void onClick(View view) {
                 countProduct = Integer.parseInt(holder.tv_soluong.getText().toString());
-                if (countProduct < 10){
+                if (countProduct < 100){
                     countProduct++;
                     holder.tv_soluong.setText(String.valueOf(countProduct));
                     mainActivity.setCountForProduct(position,countProduct);

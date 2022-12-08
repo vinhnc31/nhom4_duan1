@@ -78,20 +78,6 @@
             android:textSize="10sp"
             >
         </TextView>
-
-        <TextView
-            android:id="@+id/tv_trangthaict"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_toRightOf="@+id/tv_tenspct"
-            android:layout_below="@+id/divider"
-            android:text="Đang Chờ Xác Nhận"
-            android:textSize="10sp"
-            android:textColor="@color/teal_700"
-            android:gravity="right">
-        </TextView>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

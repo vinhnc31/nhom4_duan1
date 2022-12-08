@@ -14,8 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.fpoly.VncStore.Adapter.LichsuAdapter;
-import com.fpoly.VncStore.Model.Hoadon;
-import com.fpoly.VncStore.Model.Oder;
+import com.fpoly.VncStore.Model.Order;
 import com.fpoly.VncStore.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,8 +31,7 @@ import java.util.List;
 public class DangGiaoFragment extends Fragment {
 
     RecyclerView rcv;
-    private List<Hoadon> listDetailOrder;
-    private List<Oder> listOrder;
+    private List<Order> listOrder;
     LichsuAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,14 +39,13 @@ public class DangGiaoFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_dahuy, container, false);
         listOrder = new ArrayList<>();
-        listDetailOrder = new ArrayList<>();
         rcv =v.findViewById(R.id.rcv_dahuy);
         findOrder();
         return v;
     }
     private void setDataHistoryProductAdapter(){
         adapter = new LichsuAdapter();
-        adapter.setData(listDetailOrder,listOrder);
+        adapter.setData(listOrder);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
         rcv.setLayoutManager(linearLayoutManager);
         rcv.setAdapter(adapter);
@@ -56,60 +53,30 @@ public class DangGiaoFragment extends Fragment {
 
     // Lấy thông tin order
     private void findOrder(){
-        listDetailOrder.clear();
         // Kết nối tới data base
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
         String email1=user.getEmail();
         email1=email1.replace(".","_");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Oder/"+email1);
+        DatabaseReference myRef = database.getReference("Order");
         // Lấy thông tin order
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.orderByChild("idemail").equalTo(email1).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listOrder.clear();
                 for (DataSnapshot dataOrder : snapshot.getChildren()){
-                    Oder order = dataOrder.getValue(Oder.class);
+                    Order order = dataOrder.getValue(Order.class);
                     order.setOrderNo(dataOrder.getKey());
-                    listOrder.add(0,order);
-                    Log.e("w111www",""+listOrder.size());
+                    if (order.getTrangthai().equalsIgnoreCase("Đang vận chuyển")){
+                        listOrder.add(0,order);
+                    }
                 }
-                findDetailOrder(myRef);
+                setDataHistoryProductAdapter();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getContext(),"Không lấy được thông tin đơn hàng từ firebase",Toast.LENGTH_SHORT).show();
             }
         });
-    }
-    private void findDetailOrder( DatabaseReference myRef){
-        listDetailOrder.clear();
-        if (listOrder.size() > 0){
-            for (int i = 0; i<listOrder.size(); i++){
-                Oder order = listOrder.get(i);
-                Log.e("dakjfhlas",order.getOrderNo());
-                myRef.child(order.getOrderNo()).child("detail").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dataDetail : snapshot.getChildren()){
-                            Hoadon detailOrder = dataDetail.getValue(Hoadon.class);
-                            detailOrder.setIdHoadon(dataDetail.getKey());
-                            if (detailOrder.getTrangthai().equals("Đang vận chuyển")) {
-                                listDetailOrder.add(detailOrder);
-                            }
-                        }
-                        Log.e("2dadad",""+listDetailOrder.size());
-                        // set data HistoryProductAdapter
-                        if (listDetailOrder.size() > 0){
-                            setDataHistoryProductAdapter();
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(getContext(),"Không lấy được chi tiết đơn hàng từ firebase",Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        }
     }
 }

@@ -1,39 +1,15 @@
 package com.fpoly.VncStore.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.fpoly.VncStore.Adapter.LichsuAdapter;
 import com.fpoly.VncStore.Adapter.ViewPageAdapter;
-import com.fpoly.VncStore.Model.Hoadon;
-import com.fpoly.VncStore.Model.Oder;
 import com.fpoly.VncStore.R;
-import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
     TextView back_donhang;
@@ -46,7 +22,6 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         initItem();
-
     }
     private void initItem(){
         pageAdapter =new ViewPageAdapter(this);
@@ -55,7 +30,7 @@ public class HistoryActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.view_pager);
         viewPager2.setAdapter(pageAdapter);
         back_donhang.setOnClickListener(v ->{
-            super.onBackPressed();
+            finish();
             overridePendingTransition(R.anim.enter_left_to_right,R.anim.exit_left_to_right);
         });
 
