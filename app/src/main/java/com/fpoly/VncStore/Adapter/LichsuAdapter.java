@@ -97,7 +97,7 @@ public class LichsuAdapter extends RecyclerView.Adapter<LichsuAdapter.LichsuView
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String email1 = user.getEmail();
             email1 = email1.replace(".", "_");
-            DatabaseReference mreference = mdatabase.getReference("Oder/" + email1);
+            DatabaseReference mreference = mdatabase.getReference("Order/" + email1);
             DatabaseReference mreference1 = mdatabase.getReference("OderAdmin");
             HashMap<String,Object> hashMap=new HashMap<>();
             hashMap.put("trangthai","Đã Hủy");

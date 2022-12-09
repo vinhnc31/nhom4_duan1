@@ -1,3 +1,4 @@
+
 package com.fpoly.VncStore.ChucNang;
 
 import android.content.Intent;
@@ -86,9 +87,9 @@ public class HomeFragment extends Fragment {
         recyclerView = v.findViewById(R.id.recyclerView);
         rcv_sanphammoi = v.findViewById(R.id.recyclerView1);
 
-        sanphamList=getDataProduct();
-        search=v.findViewById(R.id.search_view);
-        sanphamList= getDataProduct1();
+        sanphamList = getDataProduct();
+        search = v.findViewById(R.id.search_view);
+        sanphamList = getDataProduct1();
 
         mdatabase = FirebaseDatabase.getInstance();
         mreference = mdatabase.getReference().child("SanPham");
@@ -155,7 +156,7 @@ public class HomeFragment extends Fragment {
         handler.postDelayed(runnable, 3000);
     }
 
-    private List<Sanpham> getDataProduct(){
+    private List<Sanpham> getDataProduct() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("SanPham");
         List<Sanpham> mListProduct = new ArrayList<>();
@@ -163,7 +164,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 adaptersanpham.notifyDataSetChanged();
-                for (DataSnapshot data : snapshot.getChildren()){
+                for (DataSnapshot data : snapshot.getChildren()) {
                     Sanpham product = data.getValue(Sanpham.class);
                     product.setIdSanPham(data.getKey());
                     mListProduct.add(product);
@@ -172,14 +173,15 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getActivity(),"Không tải được dữ liệu từ firebase"
-                        +error.toString(),Toast.LENGTH_LONG).show();
-                Log.d("MYTAG","onCancelled"+ error.toString());
+                Toast.makeText(getActivity(), "Không tải được dữ liệu từ firebase"
+                        + error.toString(), Toast.LENGTH_LONG).show();
+                Log.d("MYTAG", "onCancelled" + error.toString());
             }
         });
         return mListProduct;
     }
-    private List<Sanpham> getDataProduct1(){
+
+    private List<Sanpham> getDataProduct1() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("SanPham");
 
@@ -189,7 +191,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                for (DataSnapshot data : snapshot.getChildren()){
+                for (DataSnapshot data : snapshot.getChildren()) {
                     Sanpham product = data.getValue(Sanpham.class);
                     product.setIdSanPham(data.getKey());
                     mListProduct.add(product);
@@ -199,23 +201,24 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(),"Không tải được dữ liệu từ firebase"
-                        +error.toString(),Toast.LENGTH_LONG).show();
-                Log.d("MYTAG","onCancelled"+ error.toString());
+                Toast.makeText(getContext(), "Không tải được dữ liệu từ firebase"
+                        + error.toString(), Toast.LENGTH_LONG).show();
+                Log.d("MYTAG", "onCancelled" + error.toString());
             }
         });
         return mListProduct;
     }
-    private void setProductSearchAdapter(List<Sanpham> listProduct ){
-        Search_SanPham_Adapter productSearchAdapter = new Search_SanPham_Adapter(getActivity(),R.layout.item_search, listProduct);
-        search.setAdapter(productSearchAdapter);
+
+    private void setProductSearchAdapter(List<Sanpham> listProduct) {
+        Search_SanPham_Adapter searchSanPhamAdapter = new Search_SanPham_Adapter(getActivity(),R.layout.item_search,listProduct);
+        search.setAdapter(searchSanPhamAdapter);
 
         // Sau khi chọn item search sẽ chuyển sang fragment detail
         search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DetailedActivity.class);
-                intent.putExtra("detail",listProduct.get(position));
+                intent.putExtra("detail", listProduct.get(position));
                 getContext().startActivity(intent);
             }
         });

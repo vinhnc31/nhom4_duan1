@@ -62,7 +62,7 @@ public class DagiaoFragment extends Fragment {
         String email1=user.getEmail();
         email1=email1.replace(".","_");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Oder/"+email1);
+        DatabaseReference myRef = database.getReference("Order/"+email1);
         // Lấy thông tin order
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
