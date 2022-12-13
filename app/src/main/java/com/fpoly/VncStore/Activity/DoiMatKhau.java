@@ -127,7 +127,7 @@ public class DoiMatKhau extends AppCompatActivity {
                         } else {
                             Toast.makeText(DoiMatKhau.this, "Vui lòng nhập lại Email hoặc Password của bạn", Toast.LENGTH_SHORT).show();
                         }
-                    }//
+                    }
                 });
     }
 }
