@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.fpoly.VncStore.Model.Hoadon;
+import com.fpoly.VncStore.Model.Order;
+import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
 import com.squareup.picasso.Picasso;
 
@@ -19,9 +19,9 @@ import java.util.List;
 
 public class ChitietAdapter extends RecyclerView.Adapter<ChitietAdapter.ChiTietViewHolder>{
     private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
-    private List<Hoadon> list;
+    private List<Sanpham> list;
 
-    public void SetData(List<Hoadon> list) {
+    public void SetData(List<Sanpham> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -35,15 +35,14 @@ public class ChitietAdapter extends RecyclerView.Adapter<ChitietAdapter.ChiTietV
 
     @Override
     public void onBindViewHolder(@NonNull ChiTietViewHolder holder, int position) {
-        Hoadon item=list.get(position);
+        Sanpham item=list.get(position);
         if (item == null){
             return;
         }
-            Picasso.get().load(item.getImge()).into(holder.img_anh);
-            holder.tv_ten.setText(item.getNamesp());
-            holder.tv_so.setText(String.valueOf(item.getSoluong()));
-            holder.tv_gia.setText(formatPrice.format(item.getGiasp()) + " VNĐ");
-            holder.tv_trangthai.setText(item.getTrangthai());
+            Picasso.get().load(item.getImage()).into(holder.img_anh);
+            holder.tv_ten.setText(item.getName());
+            holder.tv_so.setText(String.valueOf(item.getNumProduct()));
+            holder.tv_gia.setText(formatPrice.format(item.getGia()) + " VNĐ");
     }
 
     @Override
@@ -65,7 +64,6 @@ public class ChitietAdapter extends RecyclerView.Adapter<ChitietAdapter.ChiTietV
             tv_ten = itemView.findViewById(R.id.tv_tenspct);
             tv_so = itemView.findViewById(R.id.tv_soluongct1);
             tv_gia = itemView.findViewById(R.id.tv_giact);
-            tv_trangthai = itemView.findViewById(R.id.tv_trangthaict);
         }
     }
 }

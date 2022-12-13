@@ -1,10 +1,9 @@
 package com.fpoly.VncStore.Model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-public class Oder implements Serializable {
+public class Order implements Serializable {
     private String orderNo;
     private String diachi;
     private String tenkhachhang;
@@ -12,17 +11,23 @@ public class Oder implements Serializable {
     private String ngaymua;
     private int soluong;
     private int tongtien;
-    private List<Hoadon> hoadonList;
+    private String trangthai;
+    private String idemail;
+    private List<Sanpham> sanphamList;
 
-    public Oder(String orderNo, String diachi, String tenkhachhang, String phone, String ngaymua, int soluong, int tongtien, List<Hoadon> hoadonList) {
-        this.orderNo = orderNo;
+    public Order() {
+    }
+
+    public Order( String diachi, String tenkhachhang, String phone, String ngaymua, int soluong, int tongtien, String trangthai, String idemail, List<Sanpham> sanphamList) {
         this.diachi = diachi;
         this.tenkhachhang = tenkhachhang;
         this.phone = phone;
         this.ngaymua = ngaymua;
         this.soluong = soluong;
         this.tongtien = tongtien;
-        this.hoadonList = hoadonList;
+        this.trangthai = trangthai;
+        this.idemail = idemail;
+        this.sanphamList = sanphamList;
     }
 
     public String getOrderNo() {
@@ -47,9 +52,6 @@ public class Oder implements Serializable {
 
     public void setTenkhachhang(String tenkhachhang) {
         this.tenkhachhang = tenkhachhang;
-    }
-
-    public Oder() {
     }
 
     public String getPhone() {
@@ -84,18 +86,27 @@ public class Oder implements Serializable {
         this.tongtien = tongtien;
     }
 
-    public List<Hoadon> getHoadonList() {
-        return this.hoadonList;
+    public String getTrangthai() {
+        return trangthai;
     }
 
-    public void setHoadonList(List<Hoadon> hoadonList) {
-        this.hoadonList = hoadonList;
+    public void setTrangthai(String trangthai) {
+        this.trangthai = trangthai;
     }
 
-    public void addListHoaDon(Hoadon hoadon) {
-        if (this.hoadonList == null) {
-            this.hoadonList = new ArrayList<>();
-        }
-        this.hoadonList.add(hoadon);
+    public String getIdemail() {
+        return idemail;
+    }
+
+    public void setIdemail(String idemail) {
+        this.idemail = idemail;
+    }
+
+    public List<Sanpham> getSanphamList() {
+        return sanphamList;
+    }
+
+    public void setSanphamList(List<Sanpham> sanphamList) {
+        this.sanphamList = sanphamList;
     }
 }

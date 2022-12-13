@@ -5,27 +5,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fpoly.VncStore.Adapter.ChitietAdapter;
-import com.fpoly.VncStore.Model.Hoadon;
-import com.fpoly.VncStore.Model.Oder;
+import com.fpoly.VncStore.Model.Order;
 import com.fpoly.VncStore.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DecimalFormat;
-import java.util.HashMap;
 
 public class ChitietActivity extends AppCompatActivity {
     private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
-    private Oder order;
+    private Order order;
     TextView tv_madon,tv_ngaydat,tv_tenkhach,tv_diachi,tv_sodt,tv_sosanpham,tv_tongtien,tv_trangthai;
     RecyclerView rcv_chitiet;
     ImageView img_back;
@@ -39,8 +30,8 @@ public class ChitietActivity extends AppCompatActivity {
         getView();
     }
     private void setData() {
-        order= (Oder) getIntent().getSerializableExtra("oder");
-        adapter.SetData(order.getHoadonList());
+        order= (Order) getIntent().getSerializableExtra("order");
+        adapter.SetData(order.getSanphamList());
         LinearLayoutManager manager=new LinearLayoutManager(this);
         rcv_chitiet.setLayoutManager(manager);
         rcv_chitiet.setAdapter(adapter);
@@ -54,6 +45,7 @@ public class ChitietActivity extends AppCompatActivity {
         tv_sodt.setText(order.getPhone());
         tv_sosanpham.setText(String.valueOf(order.getSoluong()));
         tv_tongtien.setText(formatPrice.format(order.getTongtien()) + "VNĐ");
+        tv_trangthai.setText(order.getTrangthai());
     }
 
     public void anhxa(){
@@ -67,6 +59,7 @@ public class ChitietActivity extends AppCompatActivity {
         tv_sosanpham=findViewById(R.id.tv_sospct);
         tv_tongtien=findViewById(R.id.tv_tongtienct);
         img_back=findViewById(R.id.img_backchitiet);
+        tv_trangthai=findViewById(R.id.tv_trangthai);
         img_back.setOnClickListener(v ->{
             super.onBackPressed();
             overridePendingTransition(R.anim.enter_left_to_right,R.anim.exit_left_to_right);

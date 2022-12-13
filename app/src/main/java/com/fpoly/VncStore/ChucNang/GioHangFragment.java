@@ -2,12 +2,12 @@ package com.fpoly.VncStore.ChucNang;
 
 import static com.fpoly.VncStore.Activity.MainActivity.badgeDrawable;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,23 +17,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fpoly.VncStore.Activity.HistoryActivity;
 import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.Adapter.GiohangAdapter;
-import com.fpoly.VncStore.Login.SignIn;
-import com.fpoly.VncStore.Login.SignUp;
-import com.fpoly.VncStore.Model.Hoadon;
+import com.fpoly.VncStore.Model.Order;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.Model.User;
 import com.fpoly.VncStore.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -44,9 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Date;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,7 +51,6 @@ public class GioHangFragment extends Fragment {
     private RelativeLayout relativeLayout, relativeLayout1;
     private View v;
     private MainActivity mainActivity;
-    private List<Sanpham> sanphamList;
     private TextView tv_giatien;
     private GiohangAdapter giohangAdapter;
     private RecyclerView recyclerView;
@@ -77,7 +70,6 @@ public class GioHangFragment extends Fragment {
 
     public void Anhxa() {
         sanpham = new Sanpham();
-        sanphamList = new ArrayList<>();
         mainActivity = (MainActivity) getActivity();
         giohangAdapter = new GiohangAdapter();
         tv_giatien = v.findViewById(R.id.tv_tongtien);
@@ -156,6 +148,7 @@ public class GioHangFragment extends Fragment {
 
     // lấy giá trị tổng tiền tất cả sản phẩm trong giỏ hàng
     private int getTotalPrice() {
+        totalPrice=0;
         for (Sanpham sanpham : MainActivity.sanphamList) {
             int priceProduct = sanpham.getGia();
             totalPrice = totalPrice + priceProduct * sanpham.getNumProduct();
@@ -182,93 +175,33 @@ public class GioHangFragment extends Fragment {
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addDataOrder() {
-        FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email1 = user.getEmail();
         email1 = email1.replace(".", "_");
-        DatabaseReference mreference = mdatabase.getReference("Order/" + email1);
-        DatabaseReference mreference1 = mdatabase.getReference("OrderAdmin");
-        HashMap<String, Object> hashMap = new HashMap<>();
         Date date = new Date(System.currentTimeMillis());
-        hashMap.put("ngaymua", date.toString());
-        String name=  ed_name.getText().toString();
-        String diachi=  ed_diachi.getText().toString();
-        String phone=  ed_phone.getText().toString();
-        if (validate() > 0) {
-            hashMap.put("tenkhachhang", name);
-            hashMap.put("diachi", diachi);
-            hashMap.put("phone", phone);
-            int num = 0;
-            for (Sanpham sanpham : MainActivity.sanphamList) {
-                num = num + sanpham.getNumProduct();
-            }
-            hashMap.put("soluong", num);
-            hashMap.put("tongtien", totalPrice);
-            String oderkey = mreference.push().getKey();
-            String oderkey1 = mreference.push().getKey();
-            mreference.child(oderkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    List<Hoadon> listDetailOrder = makeDetailOrder(oderkey);
-                    // Add thông tin detail order
-                    for (Hoadon detailOrder : listDetailOrder) {
-                        mreference.child(oderkey).child("detail").child(oderkey1)
-                                .setValue(detailOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast.makeText(getContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-                                        MainActivity.sanphamList.clear();
-                                        setVisibilityEmptyCart();
-                                        badgeDrawable.setNumber(MainActivity.sanphamList.size());
-                                    }
-                                });
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getContext(), "Đặt hàng thất bại ", Toast.LENGTH_SHORT).show();
-                }
-            });
-            mreference1.child(oderkey).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    List<Hoadon> listDetailOrder = makeDetailOrder(oderkey);
-                    // Add thông tin detail order
-                    for (Hoadon detailOrder : listDetailOrder) {
-                        mreference1.child(oderkey).child("detailadmin").child(oderkey1)
-                                .setValue(detailOrder).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        setVisibilityEmptyCart();
-                                    }
-                                });
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getContext(), "Đặt hàng thất bại ", Toast.LENGTH_SHORT).show();
-                }
-            });
-       }
-    }
-
-    private List<Hoadon> makeDetailOrder(String idNo) {
-        List<Hoadon> listDetailOrder = new ArrayList<>();
-        for (Sanpham product : mainActivity.getListCartProduct()) {
-            Hoadon detailOrder = new Hoadon();
-            detailOrder.setIdOder(idNo);
-            detailOrder.setNamesp(product.getName());
-            detailOrder.setGiasp(product.getGia());
-            detailOrder.setImge(product.getImage());
-            detailOrder.setSoluong(product.getNumProduct());
-            detailOrder.setTrangthai("Đang chờ xác nhận");
-            listDetailOrder.add(detailOrder);
+        int num = 0;
+        for (Sanpham sanpham : MainActivity.sanphamList) {
+            num = num + sanpham.getNumProduct();
         }
-        return listDetailOrder;
+        if (validate()>0) {
+            Order order = new Order(ed_diachi.getText().toString(), ed_name.getText().toString(), ed_phone.getText().toString(), date.toString(), num, totalPrice, "Đang chờ xác nhận", email1, MainActivity.sanphamList);
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Order");
+            reference.child(reference.push().getKey()).setValue(order).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    MainActivity.sanphamList.clear();
+                    badgeDrawable.setNumber(MainActivity.sanphamList.size());
+                    Toast.makeText(mainActivity, "Đã đạt hàng thành công", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent((MainActivity) getActivity(), HistoryActivity.class));
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(mainActivity, "Đã đạt hàng không thành công", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
-
     public int validate() {
         int check = 1;
         String phone = "(84|0[3|5|7|8|9])+([0-9]{8})";
@@ -293,5 +226,13 @@ public class GioHangFragment extends Fragment {
         }
 
         return check;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setDataProductCartAdapter();
+        setVisibilityCart();
+        setVisibilityView();
     }
 }

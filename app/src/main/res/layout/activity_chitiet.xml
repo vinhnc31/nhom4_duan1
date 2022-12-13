@@ -202,12 +202,35 @@
                 android:textSize="15sp"
                 android:textColor="@color/red">
             </TextView>
+            <TextView
+                android:id="@+id/tv_order_info_text9"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/tv_order_info_text8"
+                android:text="Trạng thái :"
+                android:textSize="15sp"
+                android:textColor="@color/black">
+            </TextView>
+
+            <TextView
+                android:textColor="@color/teal_700"
+                android:id="@+id/tv_trangthai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/tv_order_info_text8"
+                android:layout_toRightOf="@+id/tv_order_info_text6"
+                android:text="Đang chờ xác nhận"
+                android:textSize="15sp"
+                >
+            </TextView>
             <View
                 android:id="@+id/divider2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/tv_order_info_text8"
+                android:layout_below="@+id/tv_order_info_text9"
                 android:background="@color/black">
             </View>
 

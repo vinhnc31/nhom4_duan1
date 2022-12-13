@@ -22,7 +22,6 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         initItem();
-
     }
     private void initItem(){
         pageAdapter =new ViewPageAdapter(this);
@@ -31,7 +30,7 @@ public class HistoryActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.view_pager);
         viewPager2.setAdapter(pageAdapter);
         back_donhang.setOnClickListener(v ->{
-            super.onBackPressed();
+            finish();
             overridePendingTransition(R.anim.enter_left_to_right,R.anim.exit_left_to_right);
         });
 
