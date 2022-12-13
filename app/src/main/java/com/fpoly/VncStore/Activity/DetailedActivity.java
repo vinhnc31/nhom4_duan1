@@ -32,7 +32,6 @@ public class DetailedActivity extends AppCompatActivity {
     private Sanpham sanpham;
     private Boolean isAddToCart;
     MainActivity mainActivity;
-    List<Sanpham> sanphamList;
     private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
 
     @Override
@@ -61,9 +60,6 @@ public class DetailedActivity extends AppCompatActivity {
         btn_themvagiohang = findViewById(R.id.btn_addtocart);
         tv_mota = findViewById(R.id.tv_thongtinsanpham);
         textView = findViewById(R.id.back_tk);
-        if (sanphamList == null) {
-            sanphamList = new ArrayList<>();
-        }
     }
 
     public void xulyxukien() {
@@ -73,9 +69,9 @@ public class DetailedActivity extends AppCompatActivity {
             tv_giamsp.setText(formatPrice.format(sanpham.getGia())+" VND");
             tv_khuyenmai.setText(sanpham.getKhuyenmai() + "%");
             tv_mota.setText(sanpham.getMoTa());
-            for (int i = 0; i < sanphamList.size(); i++) {
+            for (int i = 0; i < mainActivity.sanphamList.size(); i++) {
                 // Nếu sản  phẩm đã dc add
-                if (sanphamList.get(i).getName().equals(sanpham.getName())) {
+                if (mainActivity.sanphamList.get(i).getName().equals(sanpham.getName())) {
                     isAddToCart = true;
                     btn_themvagiohang.setText("Đã Mua");
                     btn_themvagiohang.setBackgroundResource(R.drawable.custom_button);
