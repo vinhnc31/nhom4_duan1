@@ -186,18 +186,21 @@ public class GioHangFragment extends Fragment {
         if (validate()>0) {
             Order order = new Order(ed_diachi.getText().toString(), ed_name.getText().toString(), ed_phone.getText().toString(), date.toString(), num, totalPrice, "Đang chờ xác nhận", email1, MainActivity.sanphamList);
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Order");
+            String finalEmail = email1;
             reference.child(reference.push().getKey()).setValue(order).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     MainActivity.sanphamList.clear();
                     badgeDrawable.setNumber(MainActivity.sanphamList.size());
-                    Toast.makeText(mainActivity, "Đã đạt hàng thành công", Toast.LENGTH_SHORT).show();
+                    DatabaseReference reference2= FirebaseDatabase.getInstance().getReference("Cart").child(finalEmail);
+                    reference2.removeValue();
+                    Toast.makeText(mainActivity, "Đã đặt hàng thành công", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent((MainActivity) getActivity(), HistoryActivity.class));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(mainActivity, "Đã đạt hàng không thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mainActivity, "Đã đặt hàng không thành công", Toast.LENGTH_SHORT).show();
                 }
             });
         }

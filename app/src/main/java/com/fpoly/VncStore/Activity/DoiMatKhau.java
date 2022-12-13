@@ -88,8 +88,6 @@ public class DoiMatKhau extends AppCompatActivity {
                                             dialog.dismiss();
                                             Toast.makeText(DoiMatKhau.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
                                             FirebaseAuth.getInstance().signOut();
-                                            startActivity(new Intent(DoiMatKhau.this,SignIn.class));
-                                            finishAffinity();
                                         } else {
                                             Dialog dialog = new Dialog(DoiMatKhau.this);
                                             dialog.setContentView(R.layout.dialog_xacnhan);
@@ -120,7 +118,6 @@ public class DoiMatKhau extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         AuthCredential credential = EmailAuthProvider
                 .getCredential(email, Pass);
-
         user.reauthenticate(credential)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

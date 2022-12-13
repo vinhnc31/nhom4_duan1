@@ -4,6 +4,8 @@ import com.fpoly.VncStore.Activity.MainActivity;
 import com.fpoly.VncStore.ChucNang.GioHangFragment;
 import com.fpoly.VncStore.Model.Sanpham;
 import com.fpoly.VncStore.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import android.annotation.SuppressLint;
@@ -41,54 +43,46 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_giohang, parent, false);
         return new Viewhoder(view);
     }
-    @SuppressLint("RecyclerView")
+
     @Override
-    public void onBindViewHolder(@NonNull Viewhoder holder,int position) {
+    public void onBindViewHolder(@NonNull Viewhoder holder, int position) {
         Sanpham sanpham = sanphamList.get(position);
         Picasso.get().load(sanpham.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(holder.img_sanpham);
         holder.tv_ten.setText(sanpham.getName());
-        holder.tv_gia.setText(formatPrice.format(sanpham.getGia())+ " VNĐ");
-        holder.img_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                countProduct = Integer.parseInt(holder.tv_soluong.getText().toString());
-                if (countProduct < 100){
-                    countProduct++;
-                    holder.tv_soluong.setText(String.valueOf(countProduct));
-                    mainActivity.setCountForProduct(position,countProduct);
-                    gioHangFragment.setTotalPrice(1,1, sanpham.getGia());
-                    notifyDataSetChanged();
-                }
-            }
-        });
-        holder.img_remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                countProduct = Integer.parseInt(holder.tv_soluong.getText().toString());
-                if (countProduct > 1){
-                    countProduct--;
-                    holder.tv_soluong.setText(String.valueOf(countProduct));
-                    mainActivity.setCountForProduct(position,countProduct);
-                    gioHangFragment.setTotalPrice(0,1, sanpham.getGia());
-                    notifyDataSetChanged();
-                }
-            }
-        });
-        holder.img_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                countProduct = Integer.parseInt(holder.tv_soluong.getText().toString());
-
-                gioHangFragment.setTotalPrice(0,countProduct, sanpham.getGia());
-
-                sanphamList.remove(position);
-                if (sanphamList.size() == 0){
-                    gioHangFragment.setVisibilityEmptyCart();
-                }
-                MainActivity.badgeDrawable.setNumber(sanphamList.size());
+        holder.tv_gia.setText(formatPrice.format(sanpham.getGia()) + " VNĐ");
+        holder.tv_soluong.setText(String.valueOf(sanpham.getNumProduct()));
+        holder.img_add.setOnClickListener(view -> {
+            countProduct = Integer.parseInt(holder.tv_soluong.getText().toString());
+            if (countProduct < 100) {
+                countProduct++;
+                holder.tv_soluong.setText(String.valueOf(countProduct));
+                mainActivity.setCountForProduct(position, countProduct);
+                gioHangFragment.setTotalPrice(1, 1, sanpham.getGia());
                 notifyDataSetChanged();
             }
+        });
+        holder.img_remove.setOnClickListener(view -> {
+            countProduct = Integer.parseInt(holder.tv_soluong.getText().toString());
+            if (countProduct > 1) {
+                countProduct--;
+                holder.tv_soluong.setText(String.valueOf(countProduct));
+                mainActivity.setCountForProduct(position, countProduct);
+                gioHangFragment.setTotalPrice(0, 1, sanpham.getGia());
+                notifyDataSetChanged();
+            }
+        });
+        holder.img_delete.setOnClickListener(view -> {
+            countProduct = Integer.parseInt(holder.tv_soluong.getText().toString());
 
+            gioHangFragment.setTotalPrice(0, countProduct, sanpham.getGia());
+
+            sanphamList.remove(position);
+            if (sanphamList.size() == 0) {
+                gioHangFragment.setVisibilityEmptyCart();
+            }
+            MainActivity.badgeDrawable.setNumber(sanphamList.size());
+            mainActivity.Remove(position);
+            notifyDataSetChanged();
         });
     }
 

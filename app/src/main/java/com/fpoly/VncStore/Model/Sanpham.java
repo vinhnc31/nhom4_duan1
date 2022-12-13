@@ -9,7 +9,6 @@ public class Sanpham implements Serializable {
     private int Gia;
     private String khuyenmai;
     private String moTa;
-
     private int numProduct = 1;
     public Sanpham() {
     }
