@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class GioHangFragment extends Fragment {
     private EditText ed_name, ed_diachi, ed_phone;
     private Button button;
     private DecimalFormat format;
+    Toast toast;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +73,7 @@ public class GioHangFragment extends Fragment {
     public void Anhxa() {
         sanpham = new Sanpham();
         mainActivity = (MainActivity) getActivity();
-        giohangAdapter = new GiohangAdapter();
+        giohangAdapter = new GiohangAdapter(getContext());
         tv_giatien = v.findViewById(R.id.tv_tongtien);
         relativeLayout = v.findViewById(R.id.giohang1);
         relativeLayout1 = v.findViewById(R.id.giohangrong);
@@ -80,6 +82,7 @@ public class GioHangFragment extends Fragment {
         ed_diachi = v.findViewById(R.id.edt_home);
         ed_phone = v.findViewById(R.id.edt_phone);
         button = v.findViewById(R.id.btn_dathang);
+        toast = new Toast(getContext());
         button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -148,7 +151,7 @@ public class GioHangFragment extends Fragment {
 
     // lấy giá trị tổng tiền tất cả sản phẩm trong giỏ hàng
     private int getTotalPrice() {
-        totalPrice=0;
+        totalPrice = 0;
         for (Sanpham sanpham : MainActivity.sanphamList) {
             int priceProduct = sanpham.getGia();
             totalPrice = totalPrice + priceProduct * sanpham.getNumProduct();
@@ -173,6 +176,7 @@ public class GioHangFragment extends Fragment {
     public void setCountForProduct(int possion, int countProduct) {
         MainActivity.sanphamList.get(possion).setNumProduct(countProduct);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addDataOrder() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -183,7 +187,9 @@ public class GioHangFragment extends Fragment {
         for (Sanpham sanpham : MainActivity.sanphamList) {
             num = num + sanpham.getNumProduct();
         }
-        if (validate()>0) {
+        View view_true = LayoutInflater.from(getContext()).inflate(R.layout.dialog_dathang_true,null);
+        View view_fail = LayoutInflater.from(getContext()).inflate(R.layout.dialog_them_fail,null);
+        if (validate() > 0) {
             Order order = new Order(ed_diachi.getText().toString(), ed_name.getText().toString(), ed_phone.getText().toString(), date.toString(), num, totalPrice, "Đang chờ xác nhận", email1, MainActivity.sanphamList);
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Order");
             String finalEmail = email1;
@@ -192,40 +198,44 @@ public class GioHangFragment extends Fragment {
                 public void onSuccess(Void unused) {
                     MainActivity.sanphamList.clear();
                     badgeDrawable.setNumber(MainActivity.sanphamList.size());
-                    DatabaseReference reference2= FirebaseDatabase.getInstance().getReference("Cart").child(finalEmail);
+                    DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Cart").child(finalEmail);
                     reference2.removeValue();
-                    Toast.makeText(mainActivity, "Đã đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(view_true);
+                    toast.setGravity(Gravity.CENTER,0,0);
+                    toast.show();
                     startActivity(new Intent((MainActivity) getActivity(), HistoryActivity.class));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(mainActivity, "Đã đặt hàng không thành công", Toast.LENGTH_SHORT).show();
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(view_fail);
+                    toast.setGravity(Gravity.CENTER,0,0);
+                    toast.show();
                 }
             });
         }
     }
+
     public int validate() {
         int check = 1;
         String phone = "(84|0[3|5|7|8|9])+([0-9]{8})";
         if (ed_name.getText().length() == 0) {
             Toast.makeText(mainActivity, "Tên khách hàng không được để trống", Toast.LENGTH_SHORT).show();
-            return check -1;
+            return check - 1;
 
-        }
-        else if (ed_diachi.getText().length() == 0) {
+        } else if (ed_diachi.getText().length() == 0) {
             Toast.makeText(mainActivity, "Địa chỉ không được để trống", Toast.LENGTH_SHORT).show();
-            return check  -1;
+            return check - 1;
 
-        }
-        else if (ed_phone.getText().length() == 0) {
+        } else if (ed_phone.getText().length() == 0) {
             Toast.makeText(mainActivity, "Số điện thoại không được để trống", Toast.LENGTH_SHORT).show();
-            return check  -1;
+            return check - 1;
 
-        }
-        else if (!ed_phone.getText().toString().matches(phone)) {
+        } else if (!ed_phone.getText().toString().matches(phone)) {
             Toast.makeText(mainActivity, "Số điện thoại không đúng định dạng", Toast.LENGTH_SHORT).show();
-            return check -1;
+            return check - 1;
         }
 
         return check;

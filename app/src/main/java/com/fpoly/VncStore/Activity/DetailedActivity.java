@@ -5,6 +5,8 @@ import static com.fpoly.VncStore.Activity.MainActivity.badgeDrawable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,7 +35,7 @@ public class DetailedActivity extends AppCompatActivity {
     private Boolean isAddToCart;
     MainActivity mainActivity;
     private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
-
+    Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,7 @@ public class DetailedActivity extends AppCompatActivity {
         btn_themvagiohang = findViewById(R.id.btn_addtocart);
         tv_mota = findViewById(R.id.tv_thongtinsanpham);
         textView = findViewById(R.id.back_tk);
+        toast = new Toast(this);
     }
 
     public void xulyxukien() {
@@ -69,6 +72,7 @@ public class DetailedActivity extends AppCompatActivity {
             tv_giamsp.setText(formatPrice.format(sanpham.getGia())+" VND");
             tv_khuyenmai.setText(sanpham.getKhuyenmai() + "%");
             tv_mota.setText(sanpham.getMoTa());
+            View view = LayoutInflater.from(this).inflate(R.layout.dialog_them_true,null);
             for (int i = 0; i < mainActivity.sanphamList.size(); i++) {
                 // Nếu sản  phẩm đã dc add
                 if (mainActivity.sanphamList.get(i).getName().equals(sanpham.getName())) {
@@ -90,7 +94,10 @@ public class DetailedActivity extends AppCompatActivity {
                         btn_themvagiohang.setBackgroundResource(R.drawable.custom_button);
                         mainActivity.addToListCartProdct(sanpham);
                         badgeDrawable.setNumber(MainActivity.sanphamList.size());
-                        Toast.makeText(DetailedActivity.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(view);
+                        toast.setGravity(Gravity.CENTER,0,1);
+                        toast.show();
                     }
                 }
             });

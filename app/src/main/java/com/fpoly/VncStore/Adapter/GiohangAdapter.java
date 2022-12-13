@@ -9,10 +9,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +29,11 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
     private int countProduct;
     private List<Sanpham> sanphamList;
     MainActivity mainActivity;
+    Context context;
+
+    public GiohangAdapter(Context context) {
+        this.context = context;
+    }
 
     public void setData(List<Sanpham> sanphamList, MainActivity mainActivity, GioHangFragment gioHangFragment) {
         this.sanphamList = sanphamList;
@@ -72,21 +79,27 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.Viewhode
             }
         });
         holder.img_delete.setOnClickListener(view -> {
-            countProduct = Integer.parseInt(holder.tv_soluong.getText().toString());
+            final Dialog dialog = new Dialog(context, com.airbnb.lottie.R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+            dialog.setContentView(R.layout.dialog_delete);
+            dialog.show();
+            Button btn_ok = dialog.findViewById(R.id.btn_ok_delete);
+            btn_ok.setOnClickListener(view1 -> {
+                countProduct = Integer.parseInt(holder.tv_soluong.getText().toString());
+                gioHangFragment.setTotalPrice(0, countProduct, sanpham.getGia());
 
-<<<<<<< HEAD
-                gioHangFragment.setTotalPrice(0,countProduct,sanpham.getGia());
-=======
-            gioHangFragment.setTotalPrice(0, countProduct, sanpham.getGia());
->>>>>>> Loc
-
-            sanphamList.remove(position);
-            if (sanphamList.size() == 0) {
-                gioHangFragment.setVisibilityEmptyCart();
-            }
-            MainActivity.badgeDrawable.setNumber(sanphamList.size());
-            mainActivity.Remove(position);
-            notifyDataSetChanged();
+                sanphamList.remove(position);
+                if (sanphamList.size() == 0) {
+                    gioHangFragment.setVisibilityEmptyCart();
+                }
+                MainActivity.badgeDrawable.setNumber(sanphamList.size());
+                mainActivity.Remove(position);
+                notifyDataSetChanged();
+                dialog.dismiss();
+            });
+           Button btn_calcle = dialog.findViewById(R.id.btn_calcle_delete);
+           btn_calcle.setOnClickListener(view1 -> {
+               dialog.dismiss();
+           });
         });
     }
 
