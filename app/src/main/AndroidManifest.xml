@@ -9,9 +9,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/vncstor1"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/vncstor1"
         android:supportsRtl="true"
         android:theme="@style/Theme.VncStore"
         tools:targetApi="31" >
@@ -25,7 +25,7 @@
 <!--        //chi tiet sp-->
         <activity
             android:name=".Activity.ChitietActivity"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -34,7 +34,7 @@
 <!--        HistoryActivity-->
         <activity
             android:name=".Activity.HistoryActivity"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

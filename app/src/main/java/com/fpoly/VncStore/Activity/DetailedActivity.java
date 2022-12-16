@@ -1,8 +1,12 @@
 package com.fpoly.VncStore.Activity;
 
+import static com.fpoly.VncStore.Activity.MainActivity.badgeDrawable;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,8 +34,8 @@ public class DetailedActivity extends AppCompatActivity {
     private Sanpham sanpham;
     private Boolean isAddToCart;
     MainActivity mainActivity;
-    List<Sanpham> sanphamList;
-
+    private DecimalFormat formatPrice = new DecimalFormat("###,###,###");
+    Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,21 +62,20 @@ public class DetailedActivity extends AppCompatActivity {
         btn_themvagiohang = findViewById(R.id.btn_addtocart);
         tv_mota = findViewById(R.id.tv_thongtinsanpham);
         textView = findViewById(R.id.back_tk);
-        if (sanphamList == null) {
-            sanphamList = new ArrayList<>();
-        }
+        toast = new Toast(this);
     }
 
     public void xulyxukien() {
         if (sanpham != null) {
             Picasso.get().load(sanpham.getImage()).placeholder(R.drawable.dienthoai).fit().centerCrop().into(imageView);
             tv_tensp.setText("" + sanpham.getName());
-            tv_giamsp.setText("Giá: " + sanpham.getGia() + "VNĐ");
+            tv_giamsp.setText(formatPrice.format(sanpham.getGia())+" VND");
             tv_khuyenmai.setText(sanpham.getKhuyenmai() + "%");
             tv_mota.setText(sanpham.getMoTa());
-            for (int i = 0; i < sanphamList.size(); i++) {
+            View view = LayoutInflater.from(this).inflate(R.layout.dialog_them_true,null);
+            for (int i = 0; i < mainActivity.sanphamList.size(); i++) {
                 // Nếu sản  phẩm đã dc add
-                if (sanphamList.get(i).getName().equals(sanpham.getName())) {
+                if (mainActivity.sanphamList.get(i).getName().equals(sanpham.getName())) {
                     isAddToCart = true;
                     btn_themvagiohang.setText("Đã Mua");
                     btn_themvagiohang.setBackgroundResource(R.drawable.custom_button);
@@ -89,7 +93,11 @@ public class DetailedActivity extends AppCompatActivity {
                         btn_themvagiohang.setText("Đã Mua");
                         btn_themvagiohang.setBackgroundResource(R.drawable.custom_button);
                         mainActivity.addToListCartProdct(sanpham);
-                        Toast.makeText(DetailedActivity.this, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        badgeDrawable.setNumber(MainActivity.sanphamList.size());
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(view);
+                        toast.setGravity(Gravity.CENTER,0,1);
+                        toast.show();
                     }
                 }
             });

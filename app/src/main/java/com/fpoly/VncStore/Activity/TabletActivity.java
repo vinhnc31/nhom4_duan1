@@ -29,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TabletActivity extends AppCompatActivity {
@@ -56,7 +57,7 @@ public class TabletActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tablet);
-        recyclerView = findViewById(R.id.rcv_dienthoai);
+        recyclerView = findViewById(R.id.rcv_tablet);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         spinner = findViewById(R.id.spin_sp);
@@ -89,12 +90,12 @@ public class TabletActivity extends AppCompatActivity {
                         break;
                     }
                     case 1: {
-                        getdatatang();
+                        sapXepGiamDanTheoGia((ArrayList<Sanpham>) list);
                         adapter.notifyDataSetChanged();
                         break;
                     }
                     case 2: {
-                        getdatagiam();
+                        sapXepTangDanTheoGia((ArrayList<Sanpham>) list);
                         adapter.notifyDataSetChanged();
                         break;
                     }
@@ -109,7 +110,9 @@ public class TabletActivity extends AppCompatActivity {
     }
 
     public void gethienthi() {
+
         Query query = mreference.orderByChild("loai").equalTo("Tablet");
+
         query.addListenerForSingleValueEvent(new ValueEventListener() {
 
 
@@ -133,44 +136,30 @@ public class TabletActivity extends AppCompatActivity {
         });
     }
 
-    public void getdatatang() {
-        Query query = mreference.orderByChild("gia");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Sanpham sanpham = dataSnapshot.getValue(Sanpham.class);
-                    list.add(sanpham);
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+    public ArrayList<Sanpham> sapXepGiamDanTheoGia(ArrayList<Sanpham> list) {
+        Collections.sort(list, (sanPham, t1) -> {
+            if (sanPham.getGia() < t1.getGia()) {
+                return 1;
+            } else {
+                if (sanPham.getGia() == t1.getGia()) {
+                    return 0;
+                } else return -1;
             }
         });
+        return list;
     }
 
-    public void getdatagiam() {
-        Query query = mreference.orderByChild("gia");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Sanpham sanpham = dataSnapshot.getValue(Sanpham.class);
-                    list.add(0, sanpham);
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+    public ArrayList<Sanpham> sapXepTangDanTheoGia(ArrayList<Sanpham> list) {
+        Collections.sort(list, (sanPham, t1) -> {
+            if (sanPham.getGia() < t1.getGia()) {
+                return -1;
+            } else {
+                if (sanPham.getGia() == t1.getGia()) {
+                    return 0;
+                } else return 1;
             }
         });
+        return list;
     }
 
 }

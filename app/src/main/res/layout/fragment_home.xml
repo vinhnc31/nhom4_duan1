@@ -9,19 +9,25 @@
 
     <ScrollView
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="wrap_content">
 
 
         <LinearLayout
+=======
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+        <RelativeLayout
+>>>>>>> main
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+<<<<<<< HEAD
                 <AutoCompleteTextView
                     android:id="@+id/atc_sanpham_search"
                     android:layout_width="wrap_content"
@@ -54,69 +60,113 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
-
+=======
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:cardCornerRadius="20dp">
+                    <AutoCompleteTextView
+                        android:layout_weight="1"
+                        android:inputType="textAutoComplete"
+                        android:padding="10dp"
+                        android:layout_margin="5dp"
+                        android:id="@+id/search_view"
+                        android:completionThreshold="1"
+                        android:iconifiedByDefault="false"
+                        android:hint="Bạn muốn tìm gì "
+                        android:background="@drawable/bogocpasss"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
 
-                        <androidx.viewpager2.widget.ViewPager2
-                            android:id="@+id/viewPager2"
-                            android:layout_width="match_parent"
-                            android:layout_height="220dp" />
+                    <ImageView
+                        android:id="@+id/img_thongbao"
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:layout_alignRight="@+id/search_item"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="3dp"
+                        android:src="@drawable/ic_baseline_content_paste_24"
+                        app:tint="@color/black" />
+                </LinearLayout>
+>>>>>>> main
 
-                        <me.relex.circleindicator.CircleIndicator3
-                            android:id="@+id/circle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:layout_gravity="center|bottom"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center"
-                            app:ci_drawable="@drawable/bg__idicator_3" />
-                    </androidx.cardview.widget.CardView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Danh mục nổi bật"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Gợi ý hôm nay"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#EDEDED">
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            app:cardCornerRadius="20dp">
+
+                            <androidx.viewpager2.widget.ViewPager2
+                                android:id="@+id/viewPager2"
+                                android:layout_width="match_parent"
+                                android:layout_height="220dp" />
+
+                            <me.relex.circleindicator.CircleIndicator3
+                                android:id="@+id/circle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center|bottom"
+                                android:layout_marginBottom="10dp"
+                                android:gravity="center"
+                                app:ci_drawable="@drawable/bg__idicator_3" />
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="Danh mục nổi bật"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerView1"
+                            android:id="@+id/recyclerView"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_margin="10dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="Gợi ý hôm nay"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#EDEDED">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerView1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="10dp" />
+                        </LinearLayout>
                     </LinearLayout>
+<<<<<<< HEAD
 
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>
+=======
+                </FrameLayout>
+            </LinearLayout>
+        </RelativeLayout>
+>>>>>>> main
     </ScrollView>
 </FrameLayout>

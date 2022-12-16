@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChucNang.GioHangFragment">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
 
+</ScrollView>
     <RelativeLayout
-        android:id="@+id/giohanggiong"
+        android:id="@+id/giohangrong"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
@@ -19,62 +25,19 @@
             android:src="@drawable/cartnull" />
     </RelativeLayout>
 
-
     <RelativeLayout
         android:id="@+id/giohang1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_giohang"
+        <TextView
+            android:id="@+id/tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp" />
-
-        <LinearLayout
-            android:id="@+id/ln"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rcv_giohang"
-            android:layout_margin="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tổng Tiền: "
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/tv_tongtien"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="500.000 VNĐ"
-                android:textColor="@color/red"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <View
-            android:id="@+id/spacer"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/ln"
-            android:layout_marginTop="10dp"
-            android:background="@color/gray" />
-
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/spacer"
-            android:layout_margin="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="Thông Tin Khách Hàng"
             android:textColor="@color/black"
             android:textSize="25sp" />
@@ -127,20 +90,69 @@
             android:drawablePadding="10dp"
             android:fontFamily="sans-serif-light"
             android:hint="Điện Thoại"
+            android:maxLength="10"
             android:padding="10dp"
             android:textSize="17sp" />
+        <LinearLayout
+            android:id="@+id/ln"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rcv_giohang"
+            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng Tiền: "
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_tongtien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="500.000 VNĐ"
+                android:textColor="@color/red"
+                android:textSize="20sp" />
+        </LinearLayout>
+        <View
+            android:id="@+id/spacer"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/edt_phone"
+            android:layout_marginTop="10dp"
+            android:background="@color/gray" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/spacer"
+            android:id="@+id/rcv_giohang"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center|top"
+        android:layout_height="wrap_content">
         <Button
+            android:layout_marginTop="10dp"
             android:id="@+id/btn_dathang"
             android:layout_width="160dp"
             android:layout_height="60dp"
-            android:layout_below="@+id/edt_phone"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bogoc"
             android:text="ĐẶT HÀNG"
-            android:textColor="@color/white" />
-    </RelativeLayout>
-
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+    </LinearLayout>
 
 </LinearLayout>

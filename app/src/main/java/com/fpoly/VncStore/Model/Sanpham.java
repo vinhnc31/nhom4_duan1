@@ -3,22 +3,32 @@ package com.fpoly.VncStore.Model;
 import java.io.Serializable;
 
 public class Sanpham implements Serializable {
+    private String idSanPham;
     private String name;
     private String image;
     private int Gia;
     private String khuyenmai;
     private String moTa;
-
     private int numProduct = 1;
     public Sanpham() {
     }
 
-    public Sanpham(String name, String image, int gia, String khuyenmai, String moTa) {
+    public Sanpham(String idSanPham, String name, String image, int gia, String khuyenmai, String moTa, int numProduct) {
+        this.idSanPham = idSanPham;
         this.name = name;
         this.image = image;
-        this.Gia = gia;
+        Gia = gia;
         this.khuyenmai = khuyenmai;
         this.moTa = moTa;
+        this.numProduct = numProduct;
+    }
+
+    public String getIdSanPham() {
+        return idSanPham;
+    }
+
+    public void setIdSanPham(String idSanPham) {
+        this.idSanPham = idSanPham;
     }
 
     public String getName() {
@@ -41,7 +51,7 @@ public class Sanpham implements Serializable {
         return Gia;
     }
 
-    public void setGia(int gia) {
+    public void setGia(int  gia) {
         Gia = gia;
     }
 
@@ -60,7 +70,6 @@ public class Sanpham implements Serializable {
     public void setMoTa(String moTa) {
         this.moTa = moTa;
     }
-
     public int getNumProduct() {
         return numProduct;
     }

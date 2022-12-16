@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="10dp"
-    android:layout_marginStart="10dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
     app:cardCornerRadius="15dp">
 
     <RelativeLayout
@@ -26,12 +27,11 @@
             android:id="@+id/tv_madathang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
             android:layout_toRightOf="@+id/tv_hitory_product_text_order"
             android:text="12341aaa"
-            android:layout_marginLeft="3dp"
             android:textColor="@color/teal_200"
-            android:textSize="10sp">
-        </TextView>
+            android:textSize="10sp"></TextView>
 
         <View
             android:background="#E1E1E1"
@@ -43,7 +43,6 @@
         </View>
 
         <ImageView
-            android:background="@drawable/iphone12promax"
             android:id="@+id/img_anhls"
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -136,6 +135,21 @@
             android:text="null"
             android:textSize="10sp">
         </TextView>
+        <View
+            android:id="@+id/view"
+            android:background="#E1E1E1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/tv_ngay1">
+        </View>
+        <Button
+            android:backgroundTint="@color/red"
+            android:text="Hủy"
+            android:layout_below="@id/view"
+            android:id="@+id/btn_huy"
+            android:layout_width="70dp"
+            android:layout_height="40dp"/>
 
     </RelativeLayout>
 

@@ -29,7 +29,6 @@ public class SanphamAdapter extends RecyclerView.Adapter<SanphamAdapter.Spviewho
     public SanphamAdapter(Context context, List<Sanpham> sanphamList) {
         this.sanphamList = sanphamList;
         this.context = context;
-        Log.d("zzzz", "SanphamAdapter: size= " +sanphamList.size() );
         for(int i =0; i<sanphamList.size(); i++)
             Log.d("zzzzz", "SanphamAdapter: "+ sanphamList.get(i).getName());
     }

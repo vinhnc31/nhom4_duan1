@@ -44,15 +44,14 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cart"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="450dp"
         android:layout_margin="20dp"
         app:cardCornerRadius="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.744">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,14 +79,19 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputLayout1"
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:layout_marginLeft="25dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="15dp"
+<<<<<<< HEAD
                 android:hint="Email"
                 style="@style/TextInputLayout"
+=======
+                android:hint="Email..."
+>>>>>>> main
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_userName"
@@ -99,14 +103,19 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputLayout2"
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:hint="Mật khẩu"
+=======
+>>>>>>> main
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="15dp"
-                style="@style/TextInputLayout"
+                android:hint="PassWord"
                 app:passwordToggleEnabled="true">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_pasWord"
                     android:layout_width="match_parent"
